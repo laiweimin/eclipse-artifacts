@@ -1,0 +1,113 @@
+{
+ "reference_arm": {
+  "per_final": [
+   {
+    "j": 0,
+    "pass": false,
+    "best": -0.08161802589893341,
+    "w2c": 0,
+    "c2w": 0
+   },
+   {
+    "j": 1,
+    "pass": true,
+    "best": 3.3137500286102295,
+    "w2c": 5,
+    "c2w": 0
+   },
+   {
+    "j": 2,
+    "pass": false,
+    "best": -0.5993598699569702,
+    "w2c": 0,
+    "c2w": 0
+   },
+   {
+    "j": 3,
+    "pass": true,
+    "best": 4.186808109283447,
+    "w2c": 7,
+    "c2w": 0
+   },
+   {
+    "j": 4,
+    "pass": true,
+    "best": 3.625551700592041,
+    "w2c": 4,
+    "c2w": 0
+   },
+   {
+    "j": 5,
+    "pass": true,
+    "best": 4.083367347717285,
+    "w2c": 10,
+    "c2w": 0
+   }
+  ],
+  "uniform_commit_pass": 0.6666666666666666,
+  "uniform_commit_joint(pass & w2c>=1)": 0.6666666666666666,
+  "construction_completed": 6
+ },
+ "nocon": {
+  "0.4": {
+   "per_final": [
+    {
+     "j": 0,
+     "pass": false,
+     "w2c": 3
+    },
+    {
+     "j": 1,
+     "pass": true,
+     "w2c": 2
+    },
+    {
+     "j": 2,
+     "pass": false,
+     "w2c": 12
+    }
+   ],
+   "uniform_commit_joint": 0.3333333333333333
+  },
+  "0.6": {
+   "per_final": [
+    {
+     "j": 0,
+     "pass": false,
+     "w2c": 6
+    },
+    {
+     "j": 1,
+     "pass": true,
+     "w2c": 4
+    },
+    {
+     "j": 2,
+     "pass": false,
+     "w2c": 14
+    }
+   ],
+   "uniform_commit_joint": 0.3333333333333333
+  },
+  "0.8": {
+   "per_final": [
+    {
+     "j": 0,
+     "pass": false,
+     "w2c": 7
+    },
+    {
+     "j": 1,
+     "pass": true,
+     "w2c": 4
+    },
+    {
+     "j": 2,
+     "pass": false,
+     "w2c": 14
+    }
+   ],
+   "uniform_commit_joint": 0.3333333333333333
+  }
+ }
+}

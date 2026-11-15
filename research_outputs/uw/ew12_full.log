@@ -1,0 +1,19 @@
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+Files already downloaded and verified
+P/Q seed 1: 7 steps, m1 range 0.08pp
+  first saturated: ['m2_catacc']
+P/Q seed 2: 12 steps, m1 range 0.10pp
+  first saturated: ['m2_catacc', 'm5_adv']
+R seed 1: S2 pass=True viol=
+R seed 2: S2 pass=False viol=['m5_adv']
+R seed 3: S2 pass=False viol=['m5_adv']
+R seed 1: S2 pass=True viol=
+R seed 2: S2 pass=True viol=
+R seed 3: S2 pass=True viol=
+VERDICT(R): PROBE_SPECIFIC (4/6 pass S2)
+saved research_outputs/uw/ew12-20260927T130017

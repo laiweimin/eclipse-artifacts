@@ -1,0 +1,78 @@
+{
+ "main": {
+  "per_start": [
+   {
+    "j": 0,
+    "best": 1.83769953250885,
+    "true_pass": false,
+    "gain": 0.9530371770099787,
+    "w2c": 8
+   },
+   {
+    "j": 1,
+    "best": 1.0237321853637695,
+    "true_pass": true,
+    "gain": 0.5161253199355802,
+    "w2c": 4
+   },
+   {
+    "j": 2,
+    "best": 2.5896413326263428,
+    "true_pass": false,
+    "gain": 1.3566556875724705,
+    "w2c": 12
+   },
+   {
+    "j": 3,
+    "best": 0.28668612241744995,
+    "true_pass": true,
+    "gain": 0.12050236867012448,
+    "w2c": 1
+   },
+   {
+    "j": 4,
+    "best": 2.1591429710388184,
+    "true_pass": true,
+    "gain": 1.1255778202742306,
+    "w2c": 1
+   },
+   {
+    "j": 5,
+    "best": -0.9238954782485962,
+    "true_pass": true,
+    "gain": -0.5292994411226539,
+    "w2c": 0
+   }
+  ],
+  "commit": {
+   "j": 2,
+   "best": 2.5896413326263428,
+   "true_pass": false,
+   "gain": 1.3566556875724705,
+   "w2c": 12
+  }
+ },
+ "all_pass_frac": 0.6666666666666666,
+ "bootstrap": [
+  {
+   "commit_ok": false,
+   "commit_gain": 1.369317458717798
+  },
+  {
+   "commit_ok": false,
+   "commit_gain": 1.014624953796584
+  },
+  {
+   "commit_ok": false,
+   "commit_gain": 0.5758912370508233
+  }
+ ],
+ "t3_quantile_rule": {
+  "j": 2,
+  "est_s": 2.8204688393367645,
+  "pass": false,
+  "gain": 1.3566556875724705
+ },
+ "verdict": "T1_LEAK_FAIL",
+ "boot_frac": 0.0
+}

@@ -1,0 +1,28 @@
+{
+ "est_q": 10.729729729729685,
+ "true_q": 5.245283018867874,
+ "lams": {
+  "0.6": {
+   "res": {
+    "O2": {
+     "gains": [
+      0.5564308297639341
+     ],
+     "max_gain": 0.5564308297639341,
+     "best_gain_pass": -1000000000.0,
+     "pass_frac": 0.0,
+     "est_pass_frac": 1.0,
+     "mean_flips_to_mem": 4.0
+    }
+   },
+   "commit": {
+    "committed_best": 1.0988214015960693,
+    "committed_pass": false,
+    "per_start_pass": [
+     false
+    ]
+   }
+  }
+ },
+ "verdict": "NOT_RESCUED"
+}

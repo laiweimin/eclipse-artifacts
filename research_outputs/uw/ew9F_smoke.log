@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py38/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/root/anaconda3/envs/py38/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/mnt/g/MU-Attack/python/uw/run_ew9.py", line 393, in <module>
+    main()
+  File "/mnt/g/MU-Attack/python/uw/run_ew9.py", line 64, in main
+    evalset = CIFAR10('data', train=True,
+TypeError: __init__() got multiple values for argument 'train'
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)

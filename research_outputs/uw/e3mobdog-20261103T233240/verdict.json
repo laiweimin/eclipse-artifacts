@@ -1,0 +1,94 @@
+{
+ "arm": "mobdog",
+ "name": "mob-dog",
+ "q": 2.7393162393162345,
+ "honest_pass": "20/24",
+ "rows": [
+  {
+   "start_seed": 47789,
+   "s6_start": 1.2435897435897407,
+   "s6_fin": 2.7307692307692366,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.5388333333333334,
+   "auc_fin": 0.7273333333333334,
+   "ci": [
+    0.06597500000000006,
+    0.30967083333333334
+   ],
+   "ci_positive": true
+  },
+  {
+   "start_seed": 47790,
+   "s6_start": 9.166666666666682,
+   "s6_fin": 9.166666666666682,
+   "pass_start": false,
+   "pass_fin": false,
+   "auc_base": 0.5978333333333333,
+   "auc_fin": 0.5978333333333333,
+   "ci": [
+    -0.1425333333333334,
+    0.1600083333333333
+   ],
+   "ci_positive": false
+  },
+  {
+   "start_seed": 47791,
+   "s6_start": 1.0569395017793592,
+   "s6_fin": 2.7392896505550555,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.6083333333333333,
+   "auc_fin": 0.6486666666666666,
+   "ci": [
+    -0.07370416666666665,
+    0.1601874999999999
+   ],
+   "ci_positive": false
+  },
+  {
+   "start_seed": 47792,
+   "s6_start": 1.427081885166134,
+   "s6_fin": 2.7307692307692366,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.5785,
+   "auc_fin": 0.6938333333333333,
+   "ci": [
+    -0.010833333333333254,
+    0.23834583333333334
+   ],
+   "ci_positive": false
+  },
+  {
+   "start_seed": 47793,
+   "s6_start": 1.648809523809524,
+   "s6_fin": 2.7392149220937916,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.5476666666666666,
+   "auc_fin": 0.6253333333333333,
+   "ci": [
+    -0.05067500000000008,
+    0.2175083333333333
+   ],
+   "ci_positive": false
+  },
+  {
+   "start_seed": 47794,
+   "s6_start": 2.15811965811966,
+   "s6_fin": 2.738689677550265,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.5978333333333333,
+   "auc_fin": 0.6501666666666667,
+   "ci": [
+    -0.06667083333333332,
+    0.1756999999999998
+   ],
+   "ci_positive": false
+  }
+ ],
+ "n_survive": 1,
+ "verdict": "MOBDOG-PARTIAL"
+}

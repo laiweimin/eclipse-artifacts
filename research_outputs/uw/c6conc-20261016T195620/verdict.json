@@ -1,0 +1,257 @@
+{
+ "generated": "2026-10-16T20:04:09",
+ "rows": [
+  {
+   "arm": "uniform",
+   "start": "ce_e3-s1.pt",
+   "pass": false,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.3,
+     "target_tpr5": 0.3,
+     "cover_tpr5": NaN,
+     "target_auc": 0.7483333333333333,
+     "fpr5": 0.09
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.3333333333333333,
+     "target_tpr5": 0.3333333333333333,
+     "cover_tpr5": NaN,
+     "target_auc": 0.7386666666666667,
+     "fpr5": 0.115
+    }
+   }
+  },
+  {
+   "arm": "uniform",
+   "start": "ce_e3-s3.pt",
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.36666666666666664,
+     "target_tpr5": 0.36666666666666664,
+     "cover_tpr5": NaN,
+     "target_auc": 0.847,
+     "fpr5": 0.055
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.23333333333333334,
+     "target_tpr5": 0.23333333333333334,
+     "cover_tpr5": NaN,
+     "target_auc": 0.7958333333333333,
+     "fpr5": 0.085
+    }
+   }
+  },
+  {
+   "arm": "uniform",
+   "start": "ce_e3-s4.pt",
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.0,
+     "target_tpr5": 0.0,
+     "cover_tpr5": NaN,
+     "target_auc": 0.536,
+     "fpr5": 0.04
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.06666666666666667,
+     "target_tpr5": 0.06666666666666667,
+     "cover_tpr5": NaN,
+     "target_auc": 0.5435,
+     "fpr5": 0.045
+    }
+   }
+  },
+  {
+   "arm": "conc5",
+   "start": "s1",
+   "n_target": 5,
+   "target_idx": [
+    0,
+    13,
+    17,
+    24,
+    28
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.1,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.12,
+     "target_auc": 0.24,
+     "fpr5": 0.085
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.1,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.12,
+     "target_auc": 0.129,
+     "fpr5": 0.12
+    }
+   }
+  },
+  {
+   "arm": "conc5",
+   "start": "s2",
+   "n_target": 5,
+   "target_idx": [
+    0,
+    13,
+    17,
+    24,
+    28
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.0,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.0,
+     "target_auc": 0.409,
+     "fpr5": 0.06
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.03333333333333333,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.04,
+     "target_auc": 0.561,
+     "fpr5": 0.095
+    }
+   }
+  },
+  {
+   "arm": "conc5",
+   "start": "s3",
+   "n_target": 5,
+   "target_idx": [
+    0,
+    13,
+    17,
+    24,
+    28
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.03333333333333333,
+     "target_tpr5": 0.2,
+     "cover_tpr5": 0.0,
+     "target_auc": 0.605,
+     "fpr5": 0.03
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.13333333333333333,
+     "target_tpr5": 0.2,
+     "cover_tpr5": 0.12,
+     "target_auc": 0.595,
+     "fpr5": 0.075
+    }
+   }
+  },
+  {
+   "arm": "conc10",
+   "start": "s1",
+   "n_target": 10,
+   "target_idx": [
+    0,
+    1,
+    7,
+    8,
+    13,
+    17,
+    18,
+    22,
+    24,
+    28
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.1,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.15,
+     "target_auc": 0.3565,
+     "fpr5": 0.08
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.1,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.15,
+     "target_auc": 0.274,
+     "fpr5": 0.125
+    }
+   }
+  },
+  {
+   "arm": "conc10",
+   "start": "s2",
+   "n_target": 10,
+   "target_idx": [
+    0,
+    1,
+    7,
+    8,
+    13,
+    17,
+    18,
+    22,
+    24,
+    28
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.06666666666666667,
+     "target_tpr5": 0.1,
+     "cover_tpr5": 0.05,
+     "target_auc": 0.492,
+     "fpr5": 0.085
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.03333333333333333,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.05,
+     "target_auc": 0.593,
+     "fpr5": 0.105
+    }
+   }
+  },
+  {
+   "arm": "conc10",
+   "start": "s3",
+   "n_target": 10,
+   "target_idx": [
+    0,
+    1,
+    7,
+    8,
+    13,
+    17,
+    18,
+    22,
+    24,
+    28
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.03333333333333333,
+     "target_tpr5": 0.1,
+     "cover_tpr5": 0.0,
+     "target_auc": 0.673,
+     "fpr5": 0.03
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.1,
+     "target_tpr5": 0.3,
+     "cover_tpr5": 0.0,
+     "target_auc": 0.675,
+     "fpr5": 0.075
+    }
+   }
+  }
+ ]
+}

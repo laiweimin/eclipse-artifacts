@@ -1,0 +1,30 @@
+{
+ "k": 1000,
+ "seed": 44126,
+ "recs": [
+  {
+   "c": 0.0,
+   "metrics": {
+    "m1_acc": 0.8924,
+    "m2_catacc": 0.744,
+    "m3_Floss": 0.7884838581085205,
+    "m4_KS": 0.4383333333333333,
+    "m5_adv": 0.7903143333333333,
+    "m6_fm": 3.41261625289917,
+    "util_margin": 7.388849258422852,
+    "cat_margin": 3.3578333854675293
+   },
+   "passA": false,
+   "passA_half": false,
+   "passB": false
+  }
+ ],
+ "cstar_A": 0.0,
+ "cstar_A_half": 0.0,
+ "cstar_B": 0.0,
+ "honest_rejected": true,
+ "I1_A": 0.0,
+ "I1_B": 0.0,
+ "m1_cstar_A": 0.8924,
+ "cat_margin_cstar_A": 3.3578333854675293
+}

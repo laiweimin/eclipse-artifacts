@@ -1,0 +1,47 @@
+{
+ "full": [
+  {
+   "j": 0,
+   "queries": 2,
+   "no_rejection": false,
+   "true_pass": false,
+   "gain": -0.07719161742589788
+  },
+  {
+   "j": 1,
+   "queries": 2,
+   "no_rejection": false,
+   "true_pass": true,
+   "gain": -0.09120823753223327
+  }
+ ],
+ "lastlayer": [
+  {
+   "j": 0,
+   "queries": 2,
+   "true_pass": false,
+   "gain": -0.07719161742589788
+  },
+  {
+   "j": 1,
+   "queries": 5,
+   "true_pass": true,
+   "gain": 0.6009369444618405
+  }
+ ],
+ "bias": [
+  {
+   "j": 1,
+   "queries": 3,
+   "true_pass": true,
+   "gain": 0.31136798830884327
+  },
+  {
+   "j": 3,
+   "queries": 7,
+   "true_pass": true,
+   "gain": 1.4761126561168263
+  }
+ ],
+ "verdict": "U1_PATH_FAIL"
+}

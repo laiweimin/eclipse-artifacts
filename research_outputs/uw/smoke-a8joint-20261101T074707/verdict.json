@@ -1,0 +1,43 @@
+{
+ "generated": "2026-11-01T07:47:15",
+ "rho": 0.5,
+ "alpha": 0.2,
+ "cond_Sigmahat": 4893.0467911815995,
+ "qJ": 16.468677350689397,
+ "q20_marginal": 5.245283018867874,
+ "rows": [
+  {
+   "tag": "h0",
+   "group": "honest",
+   "s6": 8.251572327043954,
+   "pass6": false,
+   "sJ": 11.271741633470192,
+   "passJ": true
+  },
+  {
+   "tag": "h1",
+   "group": "honest",
+   "s6": 4.213836477987382,
+   "pass6": true,
+   "sJ": 5.202473576837227,
+   "passJ": true
+  },
+  {
+   "tag": "ce0",
+   "group": "final",
+   "s6": 5.257861635220074,
+   "pass6": false,
+   "sJ": 12.562888309492653,
+   "passJ": true
+  }
+ ],
+ "gates": {
+  "honest_pass_A6": 1,
+  "honest_pass_A8": 2,
+  "finals_rejected_A8": 0,
+  "n_finals": 1,
+  "G1_equal_coverage": true,
+  "G2_gap_closes": false
+ },
+ "verdict": "NO-EFFECT"
+}

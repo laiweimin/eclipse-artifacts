@@ -1,0 +1,50 @@
+{
+ "status": "KILL",
+ "reason": "all material, honest-accepted k have Tier-A I1 < 0.20",
+ "per_k": {
+  "30": {
+   "E_k": 3.0345863103866577,
+   "band_fm": 0.007301047444343567,
+   "material": true,
+   "floor_pass_full": false,
+   "floor_viol_full": [
+    "m1_acc",
+    "m2_catacc",
+    "m3_Floss",
+    "m4_KS",
+    "m5_adv"
+   ],
+   "floor_pass_half": false,
+   "I1_A_med": 0.04454226918612953,
+   "I1_B_med": 0.04454226918612953,
+   "cstar_A_med": 0.0,
+   "cstar_B_med": 0.0,
+   "honest_rejected_frac": 1.0,
+   "m1_cstar_med": 0.6104,
+   "m1_center": 0.6104
+  },
+  "300": {
+   "E_k": 1.3378868252038956,
+   "band_fm": 0.07329441606998444,
+   "material": true,
+   "floor_pass_full": false,
+   "floor_viol_full": [
+    "m1_acc",
+    "m2_catacc",
+    "m3_Floss",
+    "m4_KS",
+    "m5_adv"
+   ],
+   "floor_pass_half": false,
+   "I1_A_med": -0.02602644467033209,
+   "I1_B_med": -0.02602644467033209,
+   "cstar_A_med": 0.0,
+   "cstar_B_med": 0.0,
+   "honest_rejected_frac": 0.0,
+   "m1_cstar_med": 0.565,
+   "m1_center": 0.565
+  }
+ },
+ "ft_anchor": null,
+ "note": "L arm runs separately (--mode L); transfer check is assembled in the prereg \u00a78 record."
+}

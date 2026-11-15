@@ -1,0 +1,32 @@
+{
+ "theta0 (ew3 stage-0)": {
+  "m1": 0.8924,
+  "m3": 0.1025,
+  "path": "research_outputs/uw/ew3-20260925T113900/ckpt/theta0.pt"
+ },
+ "ft start e4-s0": {
+  "m1": 0.7833,
+  "m3": 1.9059,
+  "path": "research_outputs/uw/ex3-20260929T101715/ckpt/e4_ft_s46821.pt"
+ },
+ "ft start e4-s1": {
+  "m1": 0.8217,
+  "m3": 0.9919,
+  "path": "research_outputs/uw/ex3-20260929T101715/ckpt/e4_ft_s46822.pt"
+ },
+ "E1 retrain rt_s47601": {
+  "m1": 0.8905,
+  "m3": 0.7055,
+  "path": "research_outputs/uw/ertr-20261103T210519/ckpt/rt_s47601.pt"
+ },
+ "ew3 retrain rt_k30_s44101": {
+  "m1": 0.89,
+  "m3": 1.0851,
+  "path": "research_outputs/uw/ew3-20260925T113900/ckpt/rt_k30_s44101.pt"
+ },
+ "ew3 noise s44001 (full data)": {
+  "m1": 0.8924,
+  "m3": 0.115,
+  "path": "research_outputs/uw/ew3-20260925T113900/ckpt/noise_s44001.pt"
+ }
+}

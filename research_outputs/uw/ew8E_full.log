@@ -1,0 +1,38 @@
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+E A 44101 I1 0.1323
+E A 44102 I1 0.2477
+E A 44103 I1 0.0002
+E A 45201 I1 0.1465
+E A 45202 I1 0.055
+E A 45203 I1 0.0485
+E AE1 44101 I1 0.1323
+E AE1 44102 I1 0.2477
+E AE1 44103 I1 0.0002
+E AE1 45201 I1 0.1465
+E AE1 45202 I1 0.055
+E AE1 45203 I1 0.0485
+E AE2 44101 I1 0.1323
+E AE2 44102 I1 0.2477
+E AE2 44103 I1 0.0002
+E AE2 45201 I1 0.1465
+E AE2 45202 I1 0.055
+E AE2 45203 I1 0.0485
+E AE3 44101 I1 0.1323
+E AE3 44102 I1 0.2477
+E AE3 44103 I1 0.0002
+E AE3 45201 I1 0.1465
+E AE3 45202 I1 0.055
+E AE3 45203 I1 0.0485
+E AE123 44101 I1 0.1323
+E AE123 44102 I1 0.2477
+E AE123 44103 I1 0.0002
+E AE123 45201 I1 0.1465
+E AE123 45202 I1 0.055
+E AE123 45203 I1 0.0485
+VERDICT(E): {"full_stack_closes": false, "note": "report-only per prereg"}
+saved research_outputs/uw/ew8E-20260926T121451

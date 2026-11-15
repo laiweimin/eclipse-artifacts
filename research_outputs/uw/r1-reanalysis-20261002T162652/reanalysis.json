@@ -1,0 +1,314 @@
+{
+ "pass_counts": {
+  "0.05": {
+   "q": Infinity,
+   "in24": [
+    24,
+    24
+   ],
+   "heldout12": [
+    12,
+    12
+   ]
+  },
+  "0.1": {
+   "q": 10.46540880503135,
+   "in24": [
+    24,
+    24
+   ],
+   "heldout12": [
+    12,
+    12
+   ]
+  },
+  "0.15": {
+   "q": 10.46540880503135,
+   "in24": [
+    24,
+    24
+   ],
+   "heldout12": [
+    12,
+    12
+   ]
+  },
+  "0.2": {
+   "q": 5.245283018867874,
+   "in24": [
+    19,
+    24
+   ],
+   "heldout12": [
+    8,
+    12
+   ]
+  },
+  "0.25": {
+   "q": 5.220125786163475,
+   "in24": [
+    18,
+    24
+   ],
+   "heldout12": [
+    8,
+    12
+   ]
+  },
+  "0.3": {
+   "q": 5.220125786163475,
+   "in24": [
+    18,
+    24
+   ],
+   "heldout12": [
+    8,
+    12
+   ]
+  },
+  "0.35": {
+   "q": 3.1194968553458766,
+   "in24": [
+    14,
+    24
+   ],
+   "heldout12": [
+    5,
+    12
+   ]
+  },
+  "0.4": {
+   "q": 2.3541684052407583,
+   "in24": [
+    12,
+    24
+   ],
+   "heldout12": [
+    4,
+    12
+   ]
+  }
+ },
+ "commit": {
+  "orc_e3": {
+   "per_start": [
+    {
+     "best": -0.08161802589893341,
+     "est_pass": false,
+     "true_pass": false
+    },
+    {
+     "best": 3.3137500286102295,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": -0.5993598699569702,
+     "est_pass": false,
+     "true_pass": false
+    },
+    {
+     "best": 4.186808109283447,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 3.625551700592041,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 4.083367347717285,
+     "est_pass": true,
+     "true_pass": true
+    }
+   ],
+   "proxy_commit_rule": "submit the start with best final O2 objective (own info only)",
+   "committed": {
+    "best": 4.186808109283447,
+    "true_pass": true
+   },
+   "pass_frac": 0.6666666666666666
+  },
+  "orc_e4": {
+   "per_start": [
+    {
+     "best": 3.022042989730835,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 3.623009204864502,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 3.4240570068359375,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 5.0017499923706055,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 1.9855899810791016,
+     "est_pass": false,
+     "true_pass": false
+    },
+    {
+     "best": 5.356091022491455,
+     "est_pass": true,
+     "true_pass": true
+    }
+   ],
+   "proxy_commit_rule": "submit the start with best final O2 objective (own info only)",
+   "committed": {
+    "best": 5.356091022491455,
+    "true_pass": true
+   },
+   "pass_frac": 0.8333333333333334
+  },
+  "no1_e3": {
+   "per_start": [
+    {
+     "best": 2.0821890830993652,
+     "est_pass": true,
+     "true_pass": false
+    },
+    {
+     "best": 2.0623838901519775,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 4.165991306304932,
+     "est_pass": true,
+     "true_pass": false
+    },
+    {
+     "best": 2.41721248626709,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 3.007014274597168,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 2.0546040534973145,
+     "est_pass": true,
+     "true_pass": true
+    }
+   ],
+   "proxy_commit_rule": "submit the start with best final O2 objective (own info only)",
+   "committed": {
+    "best": 4.165991306304932,
+    "true_pass": false
+   },
+   "pass_frac": 0.6666666666666666
+  },
+  "no2_e3": {
+   "per_start": [
+    {
+     "best": 2.209038019180298,
+     "est_pass": true,
+     "true_pass": false
+    },
+    {
+     "best": 2.4232776165008545,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 4.504019260406494,
+     "est_pass": true,
+     "true_pass": false
+    },
+    {
+     "best": 2.5930380821228027,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 3.345766544342041,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 2.363386631011963,
+     "est_pass": true,
+     "true_pass": true
+    }
+   ],
+   "proxy_commit_rule": "submit the start with best final O2 objective (own info only)",
+   "committed": {
+    "best": 4.504019260406494,
+    "true_pass": false
+   },
+   "pass_frac": 0.6666666666666666
+  },
+  "rt_aud": {
+   "per_start": [
+    {
+     "best": 1.4772762060165405,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 1.4736382961273193,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 1.3647189140319824,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 1.7684364318847656,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 0.9485723376274109,
+     "est_pass": true,
+     "true_pass": true
+    },
+    {
+     "best": 1.6857383251190186,
+     "est_pass": true,
+     "true_pass": true
+    }
+   ],
+   "proxy_commit_rule": "submit the start with best final O2 objective (own info only)",
+   "committed": {
+    "best": 1.7684364318847656,
+    "true_pass": true
+   },
+   "pass_frac": 1.0
+  }
+ },
+ "defense_reject_test12": {
+  "fm_med": 1.2217026203870773,
+  "fm_b": 1.6008084565401077,
+  "fm_max": 2.268490791320801,
+  "sym_band_joint_rejects": 5,
+  "sym_band_alone_rejects": 2,
+  "onecap_alone_rejects": 1
+ },
+ "E_O2_units": {
+  "c100-u1": {
+   "E_O2": 2.2942388355731964,
+   "std": 0.7448233967388986,
+   "theta0_O2": 3.0325369834899902
+  },
+  "c100-u2": {
+   "E_O2": 2.040859118103981,
+   "std": 1.4332170442209156,
+   "theta0_O2": 2.985975742340088
+  }
+ }
+}

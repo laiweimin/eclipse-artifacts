@@ -1,0 +1,206 @@
+{
+ "generated": "2026-11-01T16:42:06",
+ "n_instances": 10,
+ "qmax": 1.0,
+ "gates": {
+  "G1_feasible": 6,
+  "G1_p": 0.015625,
+  "G2_median_survival": 0.9,
+  "G3_auc_positive": 0,
+  "G3_p": 1.0
+ },
+ "verdict": "TRADE-OFF",
+ "rows": [
+  {
+   "tag": "e3-s1",
+   "obj": "ce",
+   "auc_base": 0.5466666666666666,
+   "auc_fin": 0.5651666666666667,
+   "ci": [
+    -0.12633750000000002,
+    0.16339166666666635
+   ],
+   "ztpr_base": 0.1,
+   "ztpr_fin": 0.13333333333333333,
+   "ztpr_fpr": 0.085,
+   "survival_200": 0.92,
+   "s6_fin": 2.312910805011006,
+   "sJ_main_fin": 6.73821176308152,
+   "pass_multi": true
+  },
+  {
+   "tag": "e3-s1",
+   "obj": "grad",
+   "auc_base": 0.5466666666666666,
+   "auc_fin": 0.7018333333333333,
+   "ci": [
+    0.036162500000000014,
+    0.2781749999999999
+   ],
+   "ztpr_base": 0.1,
+   "ztpr_fin": 0.3,
+   "ztpr_fpr": 0.115,
+   "survival_200": 0.85,
+   "s6_fin": 2.2272853922528406,
+   "sJ_main_fin": 7.071211818368687,
+   "pass_multi": true
+  },
+  {
+   "tag": "e3-s3",
+   "obj": "ce",
+   "auc_base": 0.5355,
+   "auc_fin": 0.5431666666666667,
+   "ci": [
+    -0.13116666666666665,
+    0.1520166666666666
+   ],
+   "ztpr_base": 0.03333333333333333,
+   "ztpr_fin": 0.06666666666666667,
+   "ztpr_fpr": 0.03,
+   "survival_200": 0.725,
+   "s6_fin": 2.1494909685503063,
+   "sJ_main_fin": 5.491067452896983,
+   "pass_multi": true
+  },
+  {
+   "tag": "e3-s3",
+   "obj": "grad",
+   "auc_base": 0.5355,
+   "auc_fin": 0.6383333333333333,
+   "ci": [
+    -0.024520833333333297,
+    0.2285208333333332
+   ],
+   "ztpr_base": 0.03333333333333333,
+   "ztpr_fin": 0.16666666666666666,
+   "ztpr_fpr": 0.1,
+   "survival_200": 0.875,
+   "s6_fin": 7.6855345911948945,
+   "sJ_main_fin": 12.330886416951103,
+   "pass_multi": true
+  },
+  {
+   "tag": "e3-s4",
+   "obj": "ce",
+   "auc_base": 0.5168333333333334,
+   "auc_fin": 0.5338333333333334,
+   "ci": [
+    -0.10617083333333341,
+    0.14184166666666664
+   ],
+   "ztpr_base": 0.13333333333333333,
+   "ztpr_fin": 0.1,
+   "ztpr_fpr": 0.02,
+   "survival_200": 0.99,
+   "s6_fin": 4.566037735849004,
+   "sJ_main_fin": 8.664260966336135,
+   "pass_multi": true
+  },
+  {
+   "tag": "e3-s4",
+   "obj": "grad",
+   "auc_base": 0.5168333333333334,
+   "auc_fin": 0.5843333333333334,
+   "ci": [
+    -0.048350000000000004,
+    0.18901666666666653
+   ],
+   "ztpr_base": 0.13333333333333333,
+   "ztpr_fin": 0.1,
+   "ztpr_fpr": 0.035,
+   "survival_200": 0.845,
+   "s6_fin": 8.515723270440176,
+   "sJ_main_fin": 14.61564851313856,
+   "pass_multi": true
+  },
+  {
+   "tag": "e4-s0",
+   "obj": "ce",
+   "auc_base": 0.49266666666666664,
+   "auc_fin": 0.5845,
+   "ci": [
+    -0.04017083333333335,
+    0.21683749999999996
+   ],
+   "ztpr_base": 0.03333333333333333,
+   "ztpr_fin": 0.16666666666666666,
+   "ztpr_fpr": 0.0,
+   "survival_200": 0.87,
+   "s6_fin": 2.257865309188018,
+   "sJ_main_fin": 5.643646758327058,
+   "pass_multi": true
+  },
+  {
+   "tag": "e4-s1",
+   "obj": "ce",
+   "auc_base": 0.5051666666666667,
+   "auc_fin": 0.5405,
+   "ci": [
+    -0.10617083333333335,
+    0.16849999999999993
+   ],
+   "ztpr_base": 0.06666666666666667,
+   "ztpr_fin": 0.03333333333333333,
+   "ztpr_fpr": 0.005,
+   "survival_200": 0.92,
+   "s6_fin": 1.7011687926624635,
+   "sJ_main_fin": 4.469646761180899,
+   "pass_multi": true
+  },
+  {
+   "tag": "e4-s2",
+   "obj": "ce",
+   "auc_base": 0.505,
+   "auc_fin": 0.5381666666666667,
+   "ci": [
+    -0.10086666666666666,
+    0.16668333333333327
+   ],
+   "ztpr_base": 0.03333333333333333,
+   "ztpr_fin": 0.06666666666666667,
+   "ztpr_fpr": 0.02,
+   "survival_200": 0.88,
+   "s6_fin": 2.2747630275111543,
+   "sJ_main_fin": 6.094573292480615,
+   "pass_multi": true
+  }
+ ],
+ "gen_metas": {
+  "e3-s1:ce": {
+   "reason": "stall",
+   "n_accepted": 14
+  },
+  "e3-s1:grad": {
+   "reason": "max-iter",
+   "n_accepted": 50
+  },
+  "e3-s3:ce": {
+   "reason": "stall",
+   "n_accepted": 11
+  },
+  "e3-s3:grad": {
+   "reason": "stall",
+   "n_accepted": 19
+  },
+  "e3-s4:ce": {
+   "reason": "stall",
+   "n_accepted": 15
+  },
+  "e3-s4:grad": {
+   "reason": "max-iter",
+   "n_accepted": 28
+  },
+  "e4-s0:ce": {
+   "reason": "stall",
+   "n_accepted": 14
+  },
+  "e4-s1:ce": {
+   "reason": "stall",
+   "n_accepted": 11
+  },
+  "e4-s2:ce": {
+   "reason": "stall",
+   "n_accepted": 14
+  }
+ }
+}

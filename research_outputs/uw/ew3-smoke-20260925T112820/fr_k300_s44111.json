@@ -1,0 +1,62 @@
+{
+ "k": 300,
+ "seed": 44111,
+ "recs": [
+  {
+   "c": 0.0,
+   "metrics": {
+    "m1_acc": 0.565,
+    "m2_catacc": 0.571,
+    "m3_Floss": 1.004438877105713,
+    "m4_KS": 0.22466666666666668,
+    "m5_adv": 0.7274311111111111,
+    "m6_fm": 0.13661180436611176,
+    "util_margin": 0.57560795545578,
+    "cat_margin": -0.023549972102046013
+   },
+   "passA": true,
+   "passA_half": true,
+   "passB": true
+  },
+  {
+   "c": 0.5,
+   "metrics": {
+    "m1_acc": 0.1,
+    "m2_catacc": 1.0,
+    "m3_Floss": 1.190883994102478,
+    "m4_KS": 0.9383333333333334,
+    "m5_adv": 0.96806,
+    "m6_fm": 0.5195866227149963,
+    "util_margin": -1.3902267217636108,
+    "cat_margin": 0.5228620171546936
+   },
+   "passA": false,
+   "passA_half": false,
+   "passB": false
+  },
+  {
+   "c": 1.0,
+   "metrics": {
+    "m1_acc": 0.8299,
+    "m2_catacc": 0.685,
+    "m3_Floss": 0.6827759146690369,
+    "m4_KS": 0.35800000000000004,
+    "m5_adv": 0.7182255555555556,
+    "m6_fm": 1.396109700202942,
+    "util_margin": 3.7343571186065674,
+    "cat_margin": 1.0205541849136353
+   },
+   "passA": false,
+   "passA_half": false,
+   "passB": false
+  }
+ ],
+ "cstar_A": 0.0,
+ "cstar_A_half": 0.0,
+ "cstar_B": 0.0,
+ "honest_rejected": false,
+ "I1_A": -0.02602644467033209,
+ "I1_B": -0.02602644467033209,
+ "m1_cstar_A": 0.565,
+ "cat_margin_cstar_A": -0.023549972102046013
+}

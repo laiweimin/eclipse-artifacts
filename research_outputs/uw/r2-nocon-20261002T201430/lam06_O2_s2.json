@@ -1,0 +1,9 @@
+{
+ "best": 3.2265121936798096,
+ "est_pass": true,
+ "true_s": 7.044025157232636,
+ "true_pass": false,
+ "F_acc_atk": 0.9,
+ "flips_to_mem": 8,
+ "flips_to_loss": 2
+}

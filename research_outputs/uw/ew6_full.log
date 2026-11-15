@@ -1,0 +1,34 @@
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+Files already downloaded and verified
+u0_t44500_k30 44101 I1 0.1323
+u0_t44500_k30 44102 I1 0.2477
+u0_t44500_k30 44103 I1 0.0002
+u0_t44500_k30 45201 I1 0.1465
+u0_t44500_k30 45202 I1 0.055
+u0_t44500_k30 45203 I1 0.0485
+u1_t44600_k30 45001 I1 0.179
+u1_t44600_k30 45002 I1 0.167
+u1_t44600_k30 45003 I1 0.0
+u1_t44600_k30 45211 I1 0.1556
+u1_t44600_k30 45212 I1 0.0029
+u1_t44600_k30 45213 I1 0.0013
+u2_t44700_k30 45101 I1 0.0
+u2_t44700_k30 45102 I1 0.0665
+u2_t44700_k30 45103 I1 0.3255
+u2_t44700_k30 45221 I1 0.2145
+u2_t44700_k30 45222 I1 0.2908
+u2_t44700_k30 45223 I1 0.0094
+u3_t44700_k300 45111 I1 0.1418
+u3_t44700_k300 45112 I1 0.121
+u3_t44700_k300 45113 I1 0.0484
+u3_t44700_k300 45231 I1 0.005
+u3_t44700_k300 45232 I1 0.1162
+u3_t44700_k300 45233 I1 0.0828
+LAW rho = 0.785 over 14 cells
+VERDICT: BACK_TO_AUTHOR -- only 2/4 units leak at 0.20; dry cells []; law rho=0.78
+saved research_outputs/uw/ew6-20260925T213308

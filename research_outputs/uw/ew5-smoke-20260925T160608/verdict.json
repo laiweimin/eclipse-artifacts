@@ -1,0 +1,28 @@
+{
+ "armA": {
+  "44600_k30": {
+   "status": "failed",
+   "reason": "I1*=-0.000 < 0.10"
+  }
+ },
+ "armB": {
+  "status": "uniform_only",
+  "reason": "all families < 0.10",
+  "i1_by_family": {
+   "topF": {
+    "i1_star": 0.0,
+    "per_seed": [
+     {
+      "seed": 44801,
+      "I1": 0.0,
+      "ctrl_gain": 3.6195003986358643
+     }
+    ]
+   }
+  }
+ },
+ "baseline_44500": {
+  "30": 0.2477,
+  "300": 0.2139
+ }
+}

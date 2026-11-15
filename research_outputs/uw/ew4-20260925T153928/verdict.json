@@ -1,0 +1,41 @@
+{
+ "status": "UNDECIDED",
+ "reason": "control failure at [] / skip_frac 0.53",
+ "i1_star": {
+  "30": 0.24768752576405062,
+  "300": 0.21386191838202753,
+  "1000": 0.10659875676965443
+ },
+ "motive": {
+  "30": {
+   "qret_util": 0.37746373708425296,
+   "qret_cat": 1.343895951939903,
+   "vacuous_den_util": false,
+   "vacuous_den_cat": false,
+   "seed": 44102,
+   "start": "S0"
+  },
+  "300": {
+   "qret_util": 0.5737987201861547,
+   "qret_cat": 1.098361022153954,
+   "vacuous_den_util": false,
+   "vacuous_den_cat": false,
+   "seed": 44112,
+   "start": "S0"
+  },
+  "1000": {
+   "qret_util": -0.07356531974305347,
+   "qret_cat": 0.38644062597979745,
+   "vacuous_den_util": false,
+   "vacuous_den_cat": false,
+   "seed": 44123,
+   "start": "S0"
+  }
+ },
+ "control_fail": {
+  "30": [],
+  "300": [],
+  "1000": []
+ },
+ "skip_frac": 0.5277777777777778
+}

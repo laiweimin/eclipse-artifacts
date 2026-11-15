@@ -1,0 +1,37 @@
+{
+ "grid": [
+  1.0,
+  4.0
+ ],
+ "starts": [
+  {
+   "start": "e3_ft_s46811.pt",
+   "start_o2": -0.08161802589893341,
+   "start_Facc": 0.6333333333333333,
+   "b_pass": null,
+   "b_max_passing": null,
+   "sweep": [
+    {
+     "b": 1.0,
+     "s": 8.603773584905575,
+     "pass": false,
+     "o2": 0.9183819890022278,
+     "F_acc": 0.8,
+     "flips_mem_vs_start": 5,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 4.0,
+     "s": 18.57861635220109,
+     "pass": false,
+     "o2": 3.918381929397583,
+     "F_acc": 1.0,
+     "flips_mem_vs_start": 11,
+     "flips_loss_vs_start": 0
+    }
+   ],
+   "E2": 1.863001275807619
+  }
+ ],
+ "verdict": "BIAS_WEAK_OR_BLOCKED"
+}

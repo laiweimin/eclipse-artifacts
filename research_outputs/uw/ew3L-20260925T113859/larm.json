@@ -1,0 +1,328 @@
+{
+ "run_id": "ew3L-20260925T113859",
+ "sets": [
+  {
+   "k": 30,
+   "j": 0,
+   "is_deep_F": true,
+   "rank": 30,
+   "null_dim": 482,
+   "lazy": true,
+   "capA": 0.6270336773626148,
+   "capB": 0.5948886844322057
+  },
+  {
+   "k": 30,
+   "j": 1,
+   "is_deep_F": false,
+   "rank": 30,
+   "null_dim": 482,
+   "lazy": true,
+   "capA": 0.5944026444084736,
+   "capB": 0.5706494933688763
+  },
+  {
+   "k": 30,
+   "j": 2,
+   "is_deep_F": false,
+   "rank": 30,
+   "null_dim": 482,
+   "lazy": true,
+   "capA": 0.6986657183500995,
+   "capB": 0.6986657183500995
+  },
+  {
+   "k": 30,
+   "j": 3,
+   "is_deep_F": false,
+   "rank": 30,
+   "null_dim": 482,
+   "lazy": true,
+   "capA": 0.7350665194985111,
+   "capB": 0.7350665194985111
+  },
+  {
+   "k": 30,
+   "j": 4,
+   "is_deep_F": false,
+   "rank": 30,
+   "null_dim": 482,
+   "lazy": true,
+   "capA": 0.6987355991142941,
+   "capB": 0.6849359532228927
+  },
+  {
+   "k": 30,
+   "j": 5,
+   "is_deep_F": false,
+   "rank": 30,
+   "null_dim": 482,
+   "lazy": true,
+   "capA": 0.7851583725525078,
+   "capB": 0.7851583725525078
+  },
+  {
+   "k": 30,
+   "j": 6,
+   "is_deep_F": false,
+   "rank": 30,
+   "null_dim": 482,
+   "lazy": true,
+   "capA": 0.6271753570995238,
+   "capB": 0.6219240824117336
+  },
+  {
+   "k": 30,
+   "j": 7,
+   "is_deep_F": false,
+   "rank": 30,
+   "null_dim": 482,
+   "lazy": true,
+   "capA": 0.5977960655228618,
+   "capB": 0.5577287801285533
+  },
+  {
+   "k": 30,
+   "j": 8,
+   "is_deep_F": false,
+   "rank": 30,
+   "null_dim": 482,
+   "lazy": true,
+   "capA": 0.7466845090557123,
+   "capB": 0.7466845090557123
+  },
+  {
+   "k": 30,
+   "j": 9,
+   "is_deep_F": false,
+   "rank": 30,
+   "null_dim": 482,
+   "lazy": true,
+   "capA": 0.5911866674522384,
+   "capB": 0.5844646216852591
+  },
+  {
+   "k": 300,
+   "j": 0,
+   "is_deep_F": true,
+   "rank": 300,
+   "null_dim": 212,
+   "lazy": true,
+   "capA": 0.10941041557858655,
+   "capB": 0.10941041557858655
+  },
+  {
+   "k": 300,
+   "j": 1,
+   "is_deep_F": false,
+   "rank": 300,
+   "null_dim": 212,
+   "lazy": true,
+   "capA": 0.09882240637345008,
+   "capB": 0.060995141445328915
+  },
+  {
+   "k": 300,
+   "j": 2,
+   "is_deep_F": false,
+   "rank": 300,
+   "null_dim": 212,
+   "lazy": true,
+   "capA": 0.10622402940038633,
+   "capB": 0.10417478900700117
+  },
+  {
+   "k": 300,
+   "j": 3,
+   "is_deep_F": false,
+   "rank": 300,
+   "null_dim": 212,
+   "lazy": true,
+   "capA": 0.10824909842635244,
+   "capB": 0.10824909842635244
+  },
+  {
+   "k": 300,
+   "j": 4,
+   "is_deep_F": false,
+   "rank": 300,
+   "null_dim": 212,
+   "lazy": true,
+   "capA": 0.10591146506780891,
+   "capB": 0.08643087979115094
+  },
+  {
+   "k": 300,
+   "j": 5,
+   "is_deep_F": false,
+   "rank": 300,
+   "null_dim": 212,
+   "lazy": true,
+   "capA": 0.1052249961130437,
+   "capB": 0.10385746305304322
+  },
+  {
+   "k": 300,
+   "j": 6,
+   "is_deep_F": false,
+   "rank": 300,
+   "null_dim": 212,
+   "lazy": true,
+   "capA": 0.1005474604892227,
+   "capB": 0.06083777388368794
+  },
+  {
+   "k": 300,
+   "j": 7,
+   "is_deep_F": false,
+   "rank": 300,
+   "null_dim": 212,
+   "lazy": true,
+   "capA": 0.10746433829363677,
+   "capB": 0.10746433829363677
+  },
+  {
+   "k": 300,
+   "j": 8,
+   "is_deep_F": false,
+   "rank": 300,
+   "null_dim": 212,
+   "lazy": true,
+   "capA": 0.11632616170301291,
+   "capB": 0.11632616170301291
+  },
+  {
+   "k": 300,
+   "j": 9,
+   "is_deep_F": false,
+   "rank": 300,
+   "null_dim": 212,
+   "lazy": true,
+   "capA": 0.10182110566113955,
+   "capB": 0.06083446438037543
+  },
+  {
+   "k": 1000,
+   "j": 0,
+   "is_deep_F": true,
+   "rank": 511,
+   "null_dim": 1,
+   "lazy": true,
+   "capA": 0.034132995797970134,
+   "capB": 0.0
+  },
+  {
+   "k": 1000,
+   "j": 1,
+   "is_deep_F": false,
+   "rank": 511,
+   "null_dim": 1,
+   "lazy": true,
+   "capA": 0.030587834775947842,
+   "capB": 0.0
+  },
+  {
+   "k": 1000,
+   "j": 2,
+   "is_deep_F": false,
+   "rank": 510,
+   "null_dim": 2,
+   "lazy": true,
+   "capA": 0.030688959918030556,
+   "capB": 0.0
+  },
+  {
+   "k": 1000,
+   "j": 3,
+   "is_deep_F": false,
+   "rank": 511,
+   "null_dim": 1,
+   "lazy": true,
+   "capA": 0.03334546620620382,
+   "capB": 0.0
+  },
+  {
+   "k": 1000,
+   "j": 4,
+   "is_deep_F": false,
+   "rank": 511,
+   "null_dim": 1,
+   "lazy": true,
+   "capA": 0.03140100130563106,
+   "capB": 0.0
+  },
+  {
+   "k": 1000,
+   "j": 5,
+   "is_deep_F": false,
+   "rank": 511,
+   "null_dim": 1,
+   "lazy": true,
+   "capA": 0.032635719033768607,
+   "capB": 0.0
+  },
+  {
+   "k": 1000,
+   "j": 6,
+   "is_deep_F": false,
+   "rank": 510,
+   "null_dim": 2,
+   "lazy": true,
+   "capA": 0.03000457704543813,
+   "capB": 0.0
+  },
+  {
+   "k": 1000,
+   "j": 7,
+   "is_deep_F": false,
+   "rank": 510,
+   "null_dim": 2,
+   "lazy": true,
+   "capA": 0.03520249360855676,
+   "capB": 0.0
+  },
+  {
+   "k": 1000,
+   "j": 8,
+   "is_deep_F": false,
+   "rank": 510,
+   "null_dim": 2,
+   "lazy": true,
+   "capA": 0.031358014241540944,
+   "capB": 0.0
+  },
+  {
+   "k": 1000,
+   "j": 9,
+   "is_deep_F": false,
+   "rank": 511,
+   "null_dim": 1,
+   "lazy": true,
+   "capA": 0.028953915923172424,
+   "capB": 0.0
+  }
+ ],
+ "aggregates": {
+  "k=30": {
+   "lazy_frac": 1.0,
+   "capA_med": 0.6629205377248116,
+   "capA_q05": 0.5926338570825442,
+   "capA_q95": 0.7678451339789497,
+   "capB_med": 0.6534300178173131
+  },
+  "k=300": {
+   "lazy_frac": 1.0,
+   "capA_med": 0.10606774723409762,
+   "capA_q05": 0.09959868072554776,
+   "capA_q95": 0.11321407594702104,
+   "capB_med": 0.1040161260300222
+  },
+  "k=1000": {
+   "lazy_frac": 1.0,
+   "capA_med": 0.031379507773586,
+   "capA_q05": 0.029426713428191992,
+   "capA_q95": 0.034721219593792776,
+   "capB_med": 0.0
+  }
+ }
+}

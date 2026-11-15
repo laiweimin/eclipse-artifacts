@@ -1,0 +1,21 @@
+{
+ "control": {
+  "44101": {
+   "fm_start": 2.452841281890869,
+   "fm_end": Infinity,
+   "gain": Infinity
+  },
+  "44102": {
+   "fm_start": 2.8365845680236816,
+   "fm_end": Infinity,
+   "gain": Infinity
+  },
+  "44103": {
+   "fm_start": 3.4242374897003174,
+   "fm_end": Infinity,
+   "gain": Infinity
+  }
+ },
+ "ctrl_ok": true,
+ "threshold": 0.5
+}

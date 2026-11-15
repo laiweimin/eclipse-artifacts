@@ -1,0 +1,111 @@
+{
+ "full": [
+  {
+   "j": 0,
+   "queries": 3,
+   "no_rejection": false,
+   "true_pass": false,
+   "gain": -0.07719161742589788
+  },
+  {
+   "j": 1,
+   "queries": 3,
+   "no_rejection": false,
+   "true_pass": true,
+   "gain": -0.09120823753223327
+  },
+  {
+   "j": 2,
+   "queries": 3,
+   "no_rejection": false,
+   "true_pass": false,
+   "gain": -0.3550990191981234
+  },
+  {
+   "j": 3,
+   "queries": 3,
+   "no_rejection": false,
+   "true_pass": true,
+   "gain": 0.0
+  },
+  {
+   "j": 4,
+   "queries": 3,
+   "no_rejection": false,
+   "true_pass": true,
+   "gain": -0.014115393221508413
+  },
+  {
+   "j": 5,
+   "queries": 3,
+   "no_rejection": false,
+   "true_pass": true,
+   "gain": -0.5292994411226539
+  }
+ ],
+ "lastlayer": [
+  {
+   "j": 0,
+   "queries": 4,
+   "true_pass": false,
+   "gain": -0.07719161742589788
+  },
+  {
+   "j": 1,
+   "queries": 5,
+   "true_pass": true,
+   "gain": 0.6009369444618405
+  },
+  {
+   "j": 2,
+   "queries": 4,
+   "true_pass": false,
+   "gain": -0.3550990191981234
+  },
+  {
+   "j": 3,
+   "queries": 5,
+   "true_pass": true,
+   "gain": 1.6908914317036068
+  },
+  {
+   "j": 4,
+   "queries": 5,
+   "true_pass": true,
+   "gain": 0.8339662466574366
+  },
+  {
+   "j": 5,
+   "queries": 6,
+   "true_pass": true,
+   "gain": 1.2515413208087094
+  }
+ ],
+ "bias": [
+  {
+   "j": 1,
+   "queries": 3,
+   "true_pass": true,
+   "gain": 0.31136798830884327
+  },
+  {
+   "j": 3,
+   "queries": 7,
+   "true_pass": true,
+   "gain": 1.4761126561168263
+  },
+  {
+   "j": 4,
+   "queries": 5,
+   "true_pass": true,
+   "gain": 0.5226529039006916
+  },
+  {
+   "j": 5,
+   "queries": 7,
+   "true_pass": true,
+   "gain": 1.2151975495197171
+  }
+ ],
+ "verdict": "U1_PATH_FAIL"
+}

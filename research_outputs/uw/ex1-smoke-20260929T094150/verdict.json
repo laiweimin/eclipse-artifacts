@@ -1,0 +1,37 @@
+{
+ "arm": "c",
+ "seeds": [
+  46701
+ ],
+ "gamma": 0.0,
+ "luck": 0.0,
+ "best_elev": 0.0,
+ "gain": 0.0,
+ "E": 1.710710048675537,
+ "fm0": 5.3334126472473145,
+ "fm_med": 3.6227025985717773,
+ "fm_band_caught": 0,
+ "verdict": "NULL",
+ "verdict_why": "elevation 0.000, gain 0.000 < 0.10: the family caps fm at its own honest luck",
+ "rows": [
+  {
+   "seed": 46701,
+   "I1": 0.0,
+   "elev": 0.0,
+   "pass_band": true,
+   "fm_exceeds_family_max": false
+  }
+ ],
+ "honest_mm": {
+  "46701": {
+   "m1_acc": 0.8816,
+   "m2_catacc": 0.738,
+   "m3_Floss": 0.45751503109931946,
+   "m4_KS": 0.45500000000000007,
+   "m5_adv": 0.7958,
+   "m6_fm": 3.6227025985717773,
+   "util_margin": 7.15869665145874,
+   "cat_margin": 2.9087791442871094
+  }
+ }
+}

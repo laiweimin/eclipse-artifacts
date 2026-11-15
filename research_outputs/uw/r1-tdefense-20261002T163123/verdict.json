@@ -1,0 +1,53 @@
+{
+ "qT": 8.64010238647461,
+ "qC": 10.46540880503135,
+ "honest_T_pass": 0.8333333333333334,
+ "honest_combined_pass": 0.9166666666666666,
+ "honest_naive_joint_pass": 0.5833333333333334,
+ "arms": {
+  "T_only": {
+   "O2": {
+    "gains": [
+     0.6852709003154851,
+     -0.09120823753223327,
+     2.0958217554552876
+    ],
+    "max_gain": 2.0958217554552876,
+    "best_gain_pass": 2.0958217554552876,
+    "pass_frac": 0.6666666666666666,
+    "est_pass_frac": 0.6666666666666666,
+    "mean_flips_to_mem": 5.666666666666667
+   }
+  },
+  "naive_joint": {
+   "O2": {
+    "gains": [
+     -0.07719161742589788,
+     -0.09120823753223327,
+     -0.3550990191981234
+    ],
+    "max_gain": -0.07719161742589788,
+    "best_gain_pass": -1000000000.0,
+    "pass_frac": 0.0,
+    "est_pass_frac": 0.0,
+    "mean_flips_to_mem": 2.0
+   }
+  },
+  "combined": {
+   "O2": {
+    "gains": [
+     1.1731529801891059,
+     0.33748203545971234,
+     2.084256478666818
+    ],
+    "max_gain": 2.084256478666818,
+    "best_gain_pass": 2.084256478666818,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 7.333333333333333
+   }
+  }
+ },
+ "verdict": "T_LEAKS",
+ "verdict_why": "direct per-record score admits passing gain"
+}

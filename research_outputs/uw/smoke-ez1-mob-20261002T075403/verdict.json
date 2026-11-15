@@ -1,0 +1,89 @@
+{
+ "spec": {
+  "dataset": "CIFAR10",
+  "arch": "mobilenet_v2",
+  "nc": 10,
+  "cls": 3,
+  "pool_scheme": "build_pool",
+  "t0": 47101,
+  "ens0": 47111,
+  "t0_epochs": 1,
+  "n_ft": 2,
+  "iters": 2,
+  "n_starts": 1
+ },
+ "theta0_objs": {
+  "O1": -0.7040424346923828,
+  "O2": -2.1156539916992188,
+  "O3": 0.4687829911708832
+ },
+ "q": {
+  "0.2": 10.99999999999999,
+  "0.3": 10.99999999999999
+ },
+ "honest_pass": {
+  "0.2": 0.625,
+  "0.3": 0.625
+ },
+ "E_guard": {
+  "O1": {
+   "E": -0.08531469106674194,
+   "pool_std": 0.05892664194107056,
+   "measurable": false
+  },
+  "O2": {
+   "E": -0.011285066604614258,
+   "pool_std": 0.04909777641296387,
+   "measurable": false
+  },
+  "O3": {
+   "E": 0.20881915092468262,
+   "pool_std": 0.08966326713562012,
+   "measurable": true
+  }
+ },
+ "arms": {
+  "oracle_primary": {
+   "O2": {
+    "gains": [
+     8.701371136416453
+    ],
+    "max_gain": 8.701371136416453,
+    "best_gain_pass": -1000000000.0,
+    "pass_frac": 0.0,
+    "est_pass_frac": 0.0,
+    "mean_flips_to_mem": 2.0
+   }
+  },
+  "oracle_repl_O2": {
+   "O2": {
+    "gains": [
+     -1.2981165296832486
+    ],
+    "max_gain": -1.2981165296832486,
+    "best_gain_pass": -1.2981165296832486,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 7.0
+   }
+  },
+  "NO1_O2": null,
+  "NO2_O2": null,
+  "sweep": {
+   "0.3": {
+    "O2": {
+     "gains": [
+      8.701371136416453
+     ],
+     "max_gain": 8.701371136416453,
+     "best_gain_pass": -1000000000.0,
+     "pass_frac": 0.0,
+     "est_pass_frac": 0.0,
+     "mean_flips_to_mem": 2.0
+    }
+   }
+  }
+ },
+ "verdict": "NULL",
+ "verdict_why": "no objective reaches 0.1 with pass"
+}

@@ -1,0 +1,12 @@
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+Files already downloaded and verified
+ctrl 30 44101 390161.016
+opt 30 44101 S0 ok 0.182
+opt 30 44101 S3 ok 0.1691
+VERDICT: KILL -- I1*(300)=0.000 and I1*(1000)=0.000 both < 0.10-- small-k-only loophole
+saved research_outputs/uw/ew4-smoke-20260925T153804

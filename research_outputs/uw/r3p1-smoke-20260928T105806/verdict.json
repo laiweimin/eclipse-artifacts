@@ -1,0 +1,103 @@
+{
+ "config": {
+  "k": 30,
+  "aud_seeds": [
+   46301
+  ],
+  "ft_aud_seeds": [
+   46311
+  ],
+  "epochs": 2,
+  "iters": 8,
+  "smoke": true
+ },
+ "units": {
+  "retrain": {
+   "aud_luck": 0.0,
+   "honest_pass": {
+    "44101": false,
+    "44102": false,
+    "44103": false,
+    "45201": false,
+    "45202": false,
+    "45203": false
+   },
+   "honest_reject_n": 6,
+   "regen_match_ew6": {
+    "44101": true,
+    "44102": true
+   },
+   "regen_I1": {
+    "44101": 0.13224784563885264,
+    "44102": 0.24756186260681726
+   },
+   "regen_pass_aud": {
+    "44101": false,
+    "44102": false
+   },
+   "adaptive": {
+    "46301": {
+     "I1": 0.0,
+     "fm": -0.7960898280143738,
+     "final_mm": {
+      "m1_acc": 0.5698,
+      "m2_catacc": 0.354,
+      "m3_Floss": 1.6931778192520142,
+      "m4_KS": 0.3873333333333334,
+      "m5_adv": 0.6654222222222222,
+      "m6_fm": -0.7960898280143738,
+      "util_margin": 0.6672413945198059,
+      "cat_margin": -0.6663159132003784
+     },
+     "n_acc": 0
+    }
+   },
+   "adaptive_pass": 1,
+   "adaptive_gain_over_luck": 0.0,
+   "verdict": "BANDS_DONT_TRANSFER",
+   "verdict_why": "6/6 provider honest models rejected by auditor bands; calibration variance dominates"
+  },
+  "ft": {
+   "aud_luck": 0.0,
+   "honest_pass": {
+    "45901": false,
+    "45902": false,
+    "45903": false,
+    "45904": false,
+    "45905": false,
+    "45906": false
+   },
+   "honest_reject_n": 6,
+   "regen_match_ew9f": {
+    "45901": true
+   },
+   "regen_I1": {
+    "45901": 0.040182109897163365
+   },
+   "regen_pass_aud": {
+    "45901": false
+   },
+   "adaptive": {
+    "46311": {
+     "I1": 1.1009723462841275e-07,
+     "fm": -0.21575072407722473,
+     "final_mm": {
+      "m1_acc": 0.7928,
+      "m2_catacc": 0.566,
+      "m3_Floss": 1.647441029548645,
+      "m4_KS": 0.552,
+      "m5_adv": 0.8212111111111111,
+      "m6_fm": -0.21575072407722473,
+      "util_margin": 3.77575421333313,
+      "cat_margin": 0.29122528433799744
+     },
+     "n_acc": 1
+    }
+   },
+   "adaptive_pass": 1,
+   "adaptive_gain_over_luck": 1.1009723462841275e-07,
+   "verdict": "BANDS_DONT_TRANSFER",
+   "verdict_why": "6/6 provider honest models rejected by auditor bands; calibration variance dominates"
+  }
+ }
+}

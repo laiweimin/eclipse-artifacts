@@ -1,0 +1,24 @@
+{
+ "ez7_dir": "research_outputs/uw/ez7-c100b-20261002T095746",
+ "q": 4.076923076923073,
+ "fm_max": 4.32267427444458,
+ "uncapped_ref_gains": [
+  0.131,
+  0.39,
+  0.868
+ ],
+ "arms": {
+  "O2": {
+   "gains": [
+    -0.02495635633412474
+   ],
+   "max_gain": -0.02495635633412474,
+   "best_gain_pass": -0.02495635633412474,
+   "pass_frac": 1.0,
+   "est_pass_frac": 1.0,
+   "mean_flips_to_mem": 5.0
+  }
+ },
+ "verdict": "CAP_CLOSES",
+ "verdict_why": "one-sided cap closes O2 on CIFAR-100 too"
+}

@@ -1,0 +1,104 @@
+{
+ "generated": "2026-11-01T19:08:10",
+ "best_layer_ratio": 4.0,
+ "gates": {
+  "G1_feasible": 2,
+  "G2_ci_positive": 0,
+  "G3_median_survival": 0,
+  "G4_vs_GR": null,
+  "G4_paired_diffs": null
+ },
+ "verdict": "FAIL",
+ "rows": [
+  {
+   "tag": "e3-s1",
+   "layer_ratio": 4.0,
+   "pass": true,
+   "auc_base": 0.5466666666666666,
+   "auc_fin": 0.564,
+   "ci": [
+    -0.12750416666666672,
+    0.16217499999999996
+   ],
+   "ztpr_base": 0.1,
+   "ztpr_fin": 0.13333333333333333,
+   "survival_200": 0.92,
+   "phase": "sweep"
+  },
+  {
+   "tag": "e4-s1",
+   "layer_ratio": 4.0,
+   "pass": true,
+   "auc_base": 0.5051666666666667,
+   "auc_fin": 0.5401666666666667,
+   "ci": [
+    -0.10570000000000002,
+    0.16833749999999997
+   ],
+   "ztpr_base": 0.06666666666666667,
+   "ztpr_fin": 0.06666666666666667,
+   "survival_200": 0.93,
+   "phase": "sweep"
+  },
+  {
+   "tag": "e3-s1",
+   "layer_ratio": 8.0,
+   "pass": true,
+   "auc_base": 0.5466666666666666,
+   "auc_fin": 0.5638333333333333,
+   "ci": [
+    -0.1275041666666666,
+    0.1618499999999999
+   ],
+   "ztpr_base": 0.1,
+   "ztpr_fin": 0.13333333333333333,
+   "survival_200": 0.92,
+   "phase": "sweep"
+  },
+  {
+   "tag": "e4-s1",
+   "layer_ratio": 8.0,
+   "pass": true,
+   "auc_base": 0.5051666666666667,
+   "auc_fin": 0.5395,
+   "ci": [
+    -0.10669583333333324,
+    0.16799999999999998
+   ],
+   "ztpr_base": 0.06666666666666667,
+   "ztpr_fin": 0.06666666666666667,
+   "survival_200": 0.93,
+   "phase": "sweep"
+  },
+  {
+   "tag": "e3-s1",
+   "layer_ratio": 16.0,
+   "pass": true,
+   "auc_base": 0.5466666666666666,
+   "auc_fin": 0.5638333333333333,
+   "ci": [
+    -0.1275041666666666,
+    0.1618499999999999
+   ],
+   "ztpr_base": 0.1,
+   "ztpr_fin": 0.13333333333333333,
+   "survival_200": 0.92,
+   "phase": "sweep"
+  },
+  {
+   "tag": "e4-s1",
+   "layer_ratio": 16.0,
+   "pass": true,
+   "auc_base": 0.5051666666666667,
+   "auc_fin": 0.539,
+   "ci": [
+    -0.10702916666666665,
+    0.16733333333333333
+   ],
+   "ztpr_base": 0.06666666666666667,
+   "ztpr_fin": 0.06666666666666667,
+   "survival_200": 0.93,
+   "phase": "sweep"
+  }
+ ]
+}

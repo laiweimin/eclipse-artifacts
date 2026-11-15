@@ -1,0 +1,102 @@
+{
+ "generated": "2026-10-26T17:02:13",
+ "q2": 7.430000000000018,
+ "e4_pass": [
+  true,
+  true,
+  false,
+  true,
+  true,
+  true
+ ],
+ "rows": [
+  {
+   "tag": "e3-s1",
+   "family": "base",
+   "arm": "stale",
+   "s6_2": 1.9591048899110581,
+   "pass2": true
+  },
+  {
+   "tag": "e3-s1",
+   "family": "ce",
+   "arm": "stale",
+   "s6_2": 4.550000000000007,
+   "pass2": true
+  },
+  {
+   "tag": "e3-s1",
+   "family": "gr",
+   "arm": "stale",
+   "s6_2": 5.170000000000006,
+   "pass2": true
+  },
+  {
+   "tag": "e3-s1",
+   "family": "base",
+   "arm": "proc12",
+   "pre_tpr": 0.03333333333333333,
+   "arms": {
+    "s905": {
+     "s6_2": 7.750000000000013,
+     "pass2": false,
+     "tpr": 0.06666666666666667,
+     "m1": 0.7887
+    },
+    "s906": {
+     "s6_2": 14.71000000000003,
+     "pass2": false,
+     "tpr": 0.03333333333333333,
+     "m1": 0.8086
+    }
+   }
+  },
+  {
+   "tag": "e3-s1",
+   "family": "ce",
+   "arm": "proc12",
+   "pre_tpr": 0.23333333333333334,
+   "arms": {
+    "s905": {
+     "s6_2": 2.6046809376354263,
+     "pass2": true,
+     "tpr": 0.0,
+     "m1": 0.8217
+    },
+    "s906": {
+     "s6_2": 11.230000000000024,
+     "pass2": false,
+     "tpr": 0.0,
+     "m1": 0.8276
+    }
+   }
+  },
+  {
+   "tag": "e3-s1",
+   "family": "gr",
+   "arm": "proc12",
+   "pre_tpr": 0.3,
+   "arms": {
+    "s905": {
+     "s6_2": 6.730000000000011,
+     "pass2": true,
+     "tpr": 0.0,
+     "m1": 0.8117
+    },
+    "s906": {
+     "s6_2": 11.390000000000025,
+     "pass2": false,
+     "tpr": 0.03333333333333333,
+     "m1": 0.8221
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G1_stale_all_rejected": false,
+  "G2_median_retention": -0.20833333333333331,
+  "G2_washed": true,
+  "G3_compound": false
+ },
+ "verdict": "STALE-CAUGHT; washed; no-compound"
+}

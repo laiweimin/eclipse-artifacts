@@ -1,0 +1,33 @@
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+Files already downloaded and verified
+theta0 44600 trained
+armA_t44600_k30 45001 I1 0.1199 ctrl 2.5072039229728064e+35
+armA_t44600_k30 45002 I1 0.0005 ctrl 2.2382898725413595e+35
+armA_t44600_k30 45003 I1 0.0 ctrl 3.251583210707294e+35
+armA_t44600_k300 45011 I1 0.0016 ctrl 4.8176957946633126e+19
+armA_t44600_k300 45012 I1 0.1702 ctrl 3.966435860448438e+19
+armA_t44600_k300 45013 I1 0.0 ctrl 4.281205176061809e+34
+theta0 44700 trained
+armA_t44700_k30 45101 I1 0.0 ctrl 7.333683557786616e+34
+armA_t44700_k30 45102 I1 0.3302 ctrl 7.273177234451104e+31
+armA_t44700_k30 45103 I1 0.2224 ctrl inf
+armA_t44700_k300 45111 I1 0.0037 ctrl 9.777816119356285e+35
+armA_t44700_k300 45112 I1 0.0013 ctrl 1.119254191906787e+36
+armA_t44700_k300 45113 I1 0.0 ctrl 2.119524925746016e+34
+armB_topF 44801 I1 0.1893 ctrl 4.159934093933335e+34
+armB_topF 44802 I1 0.147 ctrl 5.020597150001227e+35
+armB_topF 44803 I1 0.0002 ctrl 309017461129199.1
+armB_botF 44811 I1 0.0038 ctrl 3.09571998037098e+23
+armB_botF 44812 I1 0.1296 ctrl 2.5793355658664346e+17
+armB_botF 44813 I1 0.0 ctrl 7.705091790352847e+20
+armB_lossF 44821 I1 0.0002 ctrl 1.297428083637819e+21
+armB_lossF 44822 I1 0.2053 ctrl 1.613246073165736e+30
+armB_lossF 44823 I1 0.0 ctrl 7.403502583720686e+35
+VERDICT A: {"44600_k30": {"status": "partial", "reason": "I1*=0.120 deviates >0.10 from 0.248 but >= 0.10"}, "44600_k300": {"status": "replicated", "reason": "|0.170-(0.214)| <= 0.10"}, "44700_k30": {"status": "replicated", "reason": "|0.330-(0.248)| <= 0.10"}, "44700_k300": {"status": "failed", "reason": "I1*=0.004 < 0.10"}}
+VERDICT B: bounded -- max family I1*=0.205 < 2x uniform
+saved research_outputs/uw/ew5-20260925T160840

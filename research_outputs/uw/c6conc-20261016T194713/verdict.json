@@ -1,0 +1,257 @@
+{
+ "generated": "2026-10-16T19:55:37",
+ "rows": [
+  {
+   "arm": "uniform",
+   "start": "ce_e3-s1.pt",
+   "pass": false,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.3,
+     "target_tpr5": 0.3,
+     "cover_tpr5": NaN,
+     "target_auc": 0.7483333333333333,
+     "fpr5": 0.09
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.3333333333333333,
+     "target_tpr5": 0.3333333333333333,
+     "cover_tpr5": NaN,
+     "target_auc": 0.7386666666666667,
+     "fpr5": 0.115
+    }
+   }
+  },
+  {
+   "arm": "uniform",
+   "start": "ce_e3-s3.pt",
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.36666666666666664,
+     "target_tpr5": 0.36666666666666664,
+     "cover_tpr5": NaN,
+     "target_auc": 0.847,
+     "fpr5": 0.055
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.23333333333333334,
+     "target_tpr5": 0.23333333333333334,
+     "cover_tpr5": NaN,
+     "target_auc": 0.7958333333333333,
+     "fpr5": 0.085
+    }
+   }
+  },
+  {
+   "arm": "uniform",
+   "start": "ce_e3-s4.pt",
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.0,
+     "target_tpr5": 0.0,
+     "cover_tpr5": NaN,
+     "target_auc": 0.536,
+     "fpr5": 0.04
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.06666666666666667,
+     "target_tpr5": 0.06666666666666667,
+     "cover_tpr5": NaN,
+     "target_auc": 0.5435,
+     "fpr5": 0.045
+    }
+   }
+  },
+  {
+   "arm": "conc5",
+   "start": "s1",
+   "n_target": 5,
+   "target_idx": [
+    2,
+    3,
+    4,
+    6,
+    21
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.1,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.12,
+     "target_auc": 0.703,
+     "fpr5": 0.075
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.1,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.12,
+     "target_auc": 0.762,
+     "fpr5": 0.11
+    }
+   }
+  },
+  {
+   "arm": "conc5",
+   "start": "s2",
+   "n_target": 5,
+   "target_idx": [
+    2,
+    3,
+    4,
+    6,
+    21
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.06666666666666667,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.08,
+     "target_auc": 0.459,
+     "fpr5": 0.095
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.03333333333333333,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.04,
+     "target_auc": 0.342,
+     "fpr5": 0.105
+    }
+   }
+  },
+  {
+   "arm": "conc5",
+   "start": "s3",
+   "n_target": 5,
+   "target_idx": [
+    2,
+    3,
+    4,
+    6,
+    21
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.03333333333333333,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.04,
+     "target_auc": 0.312,
+     "fpr5": 0.03
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.13333333333333333,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.16,
+     "target_auc": 0.326,
+     "fpr5": 0.075
+    }
+   }
+  },
+  {
+   "arm": "conc10",
+   "start": "s1",
+   "n_target": 10,
+   "target_idx": [
+    2,
+    3,
+    4,
+    6,
+    11,
+    14,
+    15,
+    21,
+    25,
+    26
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.1,
+     "target_tpr5": 0.2,
+     "cover_tpr5": 0.05,
+     "target_auc": 0.775,
+     "fpr5": 0.075
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.1,
+     "target_tpr5": 0.2,
+     "cover_tpr5": 0.05,
+     "target_auc": 0.8225,
+     "fpr5": 0.105
+    }
+   }
+  },
+  {
+   "arm": "conc10",
+   "start": "s2",
+   "n_target": 10,
+   "target_idx": [
+    2,
+    3,
+    4,
+    6,
+    11,
+    14,
+    15,
+    21,
+    25,
+    26
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.06666666666666667,
+     "target_tpr5": 0.1,
+     "cover_tpr5": 0.05,
+     "target_auc": 0.5035,
+     "fpr5": 0.1
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.0,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.0,
+     "target_auc": 0.4555,
+     "fpr5": 0.115
+    }
+   }
+  },
+  {
+   "arm": "conc10",
+   "start": "s3",
+   "n_target": 10,
+   "target_idx": [
+    2,
+    3,
+    4,
+    6,
+    11,
+    14,
+    15,
+    21,
+    25,
+    26
+   ],
+   "pass": true,
+   "zr": {
+    "z_negloss": {
+     "all_tpr5": 0.03333333333333333,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.05,
+     "target_auc": 0.4275,
+     "fpr5": 0.03
+    },
+    "z_neggrad": {
+     "all_tpr5": 0.1,
+     "target_tpr5": 0.0,
+     "cover_tpr5": 0.15,
+     "target_auc": 0.408,
+     "fpr5": 0.075
+    }
+   }
+  }
+ ]
+}

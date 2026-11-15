@@ -1,0 +1,122 @@
+43501 3 0 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 3 1 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 3 2 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 3 3 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 3 4 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 3 5 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 3 6 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 3 7 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 3 8 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 3 9 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 10 0 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 10 1 lazy 1 capA 0.9936 capB 0.9936 u 0.9955
+43501 10 2 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 10 3 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 10 4 lazy 1 capA 0.9227 capB 0.9227 u 0.9541
+43501 10 5 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 10 6 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 10 7 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 10 8 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 10 9 lazy 0 capA 1.0 capB 1.0 u 1.0
+43501 30 0 lazy 1 capA 0.7148 capB 0.7148 u 0.8271
+43501 30 1 lazy 1 capA 0.6689 capB 0.6689 u 0.7885
+43501 30 2 lazy 1 capA 0.7066 capB 0.7066 u 0.8108
+43501 30 3 lazy 1 capA 0.7442 capB 0.7442 u 0.8463
+43501 30 4 lazy 1 capA 0.6812 capB 0.6481 u 0.7719
+43501 30 5 lazy 1 capA 0.7695 capB 0.7695 u 0.8539
+43501 30 6 lazy 1 capA 0.697 capB 0.661 u 0.7879
+43501 30 7 lazy 1 capA 0.7089 capB 0.7089 u 0.8152
+43501 30 8 lazy 1 capA 0.6958 capB 0.6958 u 0.8125
+43501 30 9 lazy 1 capA 0.691 capB 0.6544 u 0.7881
+43501 60 0 lazy 1 capA 0.467 capB 0.467 u 0.6311
+43501 60 1 lazy 1 capA 0.4272 capB 0.4272 u 0.6037
+43501 60 2 lazy 1 capA 0.4105 capB 0.4105 u 0.5921
+43501 60 3 lazy 1 capA 0.4003 capB 0.4003 u 0.5864
+43501 60 4 lazy 1 capA 0.461 capB 0.461 u 0.6272
+43501 60 5 lazy 1 capA 0.4336 capB 0.4336 u 0.6084
+43501 60 6 lazy 1 capA 0.4508 capB 0.4508 u 0.6199
+43501 60 7 lazy 1 capA 0.464 capB 0.464 u 0.6292
+43501 60 8 lazy 1 capA 0.4174 capB 0.4174 u 0.5971
+43501 60 9 lazy 1 capA 0.4332 capB 0.4332 u 0.6077
+43502 3 0 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 3 1 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 3 2 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 3 3 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 3 4 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 3 5 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 3 6 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 3 7 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 3 8 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 3 9 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 10 0 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 10 1 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 10 2 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 10 3 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 10 4 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 10 5 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 10 6 lazy 1 capA 0.9796 capB 0.9796 u 0.9873
+43502 10 7 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 10 8 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 10 9 lazy 0 capA 1.0 capB 1.0 u 1.0
+43502 30 0 lazy 1 capA 0.6387 capB 0.6387 u 0.7676
+43502 30 1 lazy 1 capA 0.6954 capB 0.694 u 0.8008
+43502 30 2 lazy 1 capA 0.7258 capB 0.7258 u 0.8274
+43502 30 3 lazy 1 capA 0.7108 capB 0.7108 u 0.8188
+43502 30 4 lazy 1 capA 0.6534 capB 0.6312 u 0.7559
+43502 30 5 lazy 1 capA 0.6505 capB 0.636 u 0.7561
+43502 30 6 lazy 1 capA 0.646 capB 0.6258 u 0.7591
+43502 30 7 lazy 1 capA 0.6483 capB 0.6483 u 0.7717
+43502 30 8 lazy 1 capA 0.6639 capB 0.6442 u 0.7734
+43502 30 9 lazy 1 capA 0.6802 capB 0.6589 u 0.7796
+43502 60 0 lazy 1 capA 0.4144 capB 0.4144 u 0.578
+43502 60 1 lazy 1 capA 0.4712 capB 0.4712 u 0.6186
+43502 60 2 lazy 1 capA 0.4095 capB 0.4095 u 0.5754
+43502 60 3 lazy 1 capA 0.4009 capB 0.4009 u 0.5693
+43502 60 4 lazy 1 capA 0.4166 capB 0.4166 u 0.58
+43502 60 5 lazy 1 capA 0.4068 capB 0.4068 u 0.5734
+43502 60 6 lazy 1 capA 0.4348 capB 0.4348 u 0.5925
+43502 60 7 lazy 1 capA 0.436 capB 0.436 u 0.5938
+43502 60 8 lazy 1 capA 0.424 capB 0.424 u 0.5849
+43502 60 9 lazy 1 capA 0.404 capB 0.404 u 0.5714
+43801 100 0 lazy 1 capA 0.2844 capB 0.2844 u 0.4528
+43801 100 1 lazy 1 capA 0.3408 capB 0.3408 u 0.513
+43801 100 2 lazy 1 capA 0.2714 capB 0.2714 u 0.4854
+43801 100 3 lazy 1 capA 0.285 capB 0.285 u 0.4636
+43801 100 4 lazy 1 capA 0.2974 capB 0.2974 u 0.4629
+43801 100 5 lazy 1 capA 0.2739 capB 0.2739 u 0.4525
+43801 100 6 lazy 1 capA 0.2956 capB 0.2956 u 0.4734
+43801 100 7 lazy 1 capA 0.2745 capB 0.2745 u 0.4588
+43801 100 8 lazy 1 capA 0.2946 capB 0.2946 u 0.5103
+43801 100 9 lazy 1 capA 0.3022 capB 0.3022 u 0.4639
+43801 300 0 lazy 1 capA 0.0967 capB 0.0609 u 0.2222
+43801 300 1 lazy 1 capA 0.1071 capB 0.1071 u 0.2358
+43801 300 2 lazy 1 capA 0.1022 capB 0.061 u 0.2415
+43801 300 3 lazy 1 capA 0.089 capB 0.0609 u 0.236
+43801 300 4 lazy 1 capA 0.0901 capB 0.0608 u 0.2331
+43801 300 5 lazy 1 capA 0.1077 capB 0.1077 u 0.2429
+43801 300 6 lazy 1 capA 0.1124 capB 0.1124 u 0.2556
+43801 300 7 lazy 1 capA 0.1072 capB 0.1072 u 0.2441
+43801 300 8 lazy 1 capA 0.1124 capB 0.061 u 0.2488
+43801 300 9 lazy 1 capA 0.1071 capB 0.1071 u 0.2264
+43801 1000 0 lazy 1 capA 0.0331 capB 0.0 u 0.1064
+43801 1000 1 lazy 1 capA 0.0329 capB 0.0 u 0.0969
+43801 1000 2 lazy 1 capA 0.0294 capB 0.0 u 0.1019
+43801 1000 3 lazy 1 capA 0.0322 capB 0.0 u 0.1061
+43801 1000 4 lazy 1 capA 0.0312 capB 0.0 u 0.1136
+43801 1000 5 lazy 1 capA 0.0301 capB 0.0 u 0.1113
+43801 1000 6 lazy 1 capA 0.0334 capB 0.0 u 0.112
+43801 1000 7 lazy 1 capA 0.0323 capB 0.0 u 0.1112
+43801 1000 8 lazy 1 capA 0.0255 capB 0.0 u 0.106
+43801 1000 9 lazy 1 capA 0.0301 capB 0.0 u 0.1035
+VERDICT: {
+ "primary": [
+  "43501",
+  30
+ ],
+ "capA_med": 0.7017951467341746,
+ "qp_med": 0.811620420282224,
+ "qp_valid_frac": 1.0,
+ "qp_conv_frac": 0.9,
+ "status": "PASS"
+}
+saved research_outputs/uw/ew1-20260922T141139

@@ -1,0 +1,40 @@
+{
+ "sub_seeds": [
+  52000,
+  52100,
+  52200
+ ],
+ "q_single": 8.905660377358425,
+ "q_multi": 8.905660377358425,
+ "honest_pass_single": 0.9583333333333334,
+ "honest_pass_multi": 0.9583333333333334,
+ "arms": {
+  "unaware": {
+   "O2": {
+    "gains": [
+     1.272053495004076
+    ],
+    "max_gain": 1.272053495004076,
+    "best_gain_pass": 1.272053495004076,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 8.0
+   }
+  },
+  "aware": {
+   "O2": {
+    "gains": [
+     1.2720609175849233
+    ],
+    "max_gain": 1.2720609175849233,
+    "best_gain_pass": 1.2720609175849233,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 8.0
+   }
+  }
+ },
+ "verdict": "INEFFECTIVE",
+ "verdict_why": "aware gain within 50% of single-sub",
+ "gain_drop_frac": -5.835116900776427e-06
+}

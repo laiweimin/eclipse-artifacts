@@ -1,0 +1,143 @@
+{
+ "generated": "2026-11-01T18:10:30",
+ "n_instances": 10,
+ "qmax": 1.0,
+ "gates": {
+  "G1_feasible": 0,
+  "G1_p": 1.0,
+  "G2_median_survival": 0,
+  "G3_auc_positive": 0,
+  "G3_p": 1.0
+ },
+ "verdict": "NOT-ROBUST",
+ "rows": [
+  {
+   "tag": "e3-s1",
+   "obj": "grad",
+   "auc_base": 0.5466666666666666,
+   "auc_fin": 0.6816666666666666,
+   "ci": [
+    0.011983333333333344,
+    0.25717916666666657
+   ],
+   "ztpr_base": 0.1,
+   "ztpr_fin": 0.3333333333333333,
+   "ztpr_fpr": 0.14,
+   "survival_200": 0.97,
+   "s6_fin": 1.991930010492052,
+   "sJ_main_fin": 6.225424524498184,
+   "pass_multi": true
+  },
+  {
+   "tag": "e3-s3",
+   "obj": "grad",
+   "auc_base": 0.5355,
+   "auc_fin": 0.6358333333333334,
+   "ci": [
+    -0.029512499999999973,
+    0.2268666666666665
+   ],
+   "ztpr_base": 0.03333333333333333,
+   "ztpr_fin": 0.16666666666666666,
+   "ztpr_fpr": 0.1,
+   "survival_200": 0.92,
+   "s6_fin": 7.069182389937036,
+   "sJ_main_fin": 10.680539857825723,
+   "pass_multi": true
+  },
+  {
+   "tag": "e3-s4",
+   "obj": "grad",
+   "auc_base": 0.5168333333333334,
+   "auc_fin": 0.5571666666666667,
+   "ci": [
+    -0.07783749999999998,
+    0.16300416666666667
+   ],
+   "ztpr_base": 0.13333333333333333,
+   "ztpr_fin": 0.13333333333333333,
+   "ztpr_fpr": 0.025,
+   "survival_200": 0.845,
+   "s6_fin": 8.440251572326964,
+   "sJ_main_fin": 14.706312985555373,
+   "pass_multi": true
+  },
+  {
+   "tag": "e4-s0",
+   "obj": "grad",
+   "auc_base": 0.49266666666666664,
+   "auc_fin": 0.6526666666666666,
+   "ci": [
+    0.033654166666666624,
+    0.2815166666666666
+   ],
+   "ztpr_base": 0.03333333333333333,
+   "ztpr_fin": 0.23333333333333334,
+   "ztpr_fpr": 0.045,
+   "survival_200": 0.9,
+   "s6_fin": 7.522012578616283,
+   "sJ_main_fin": 10.221466167919301,
+   "pass_multi": true
+  },
+  {
+   "tag": "e4-s1",
+   "obj": "grad",
+   "auc_base": 0.5051666666666667,
+   "auc_fin": 0.687,
+   "ci": [
+    0.0571541666666667,
+    0.303
+   ],
+   "ztpr_base": 0.06666666666666667,
+   "ztpr_fin": 0.26666666666666666,
+   "ztpr_fpr": 0.13,
+   "survival_200": 0.97,
+   "s6_fin": 3.3962264150943,
+   "sJ_main_fin": 6.14581721631058,
+   "pass_multi": true
+  },
+  {
+   "tag": "e4-s2",
+   "obj": "grad",
+   "auc_base": 0.505,
+   "auc_fin": 0.5988333333333333,
+   "ci": [
+    -0.04003333333333326,
+    0.222675
+   ],
+   "ztpr_base": 0.03333333333333333,
+   "ztpr_fin": 0.1,
+   "ztpr_fpr": 0.02,
+   "survival_200": 0.79,
+   "s6_fin": 7.28301886792446,
+   "sJ_main_fin": 14.869956740325087,
+   "pass_multi": true
+  }
+ ],
+ "gen_metas": {
+  "e3-s1:grad": {
+   "reason": "max-iter",
+   "n_accepted": 41
+  },
+  "e3-s3:grad": {
+   "reason": "max-iter",
+   "n_accepted": 32
+  },
+  "e3-s4:grad": {
+   "reason": "max-iter",
+   "n_accepted": 17
+  },
+  "e4-s0:grad": {
+   "reason": "max-iter",
+   "n_accepted": 27
+  },
+  "e4-s1:grad": {
+   "reason": "max-iter",
+   "n_accepted": 25
+  },
+  "e4-s2:grad": {
+   "reason": "max-iter",
+   "n_accepted": 28
+  }
+ }
+}

@@ -1,0 +1,46 @@
+{
+ "q": 4.647058823529024,
+ "honest_pass_new": 0.8333333333333334,
+ "arms": {
+  "independent_start": {
+   "O1": {
+    "gains": [
+     -0.2916325459409726,
+     0.22279651681172008,
+     0.07229993448444533
+    ],
+    "max_gain": 0.22279651681172008,
+    "best_gain_pass": 0.22279651681172008,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 2.3333333333333335
+   },
+   "O2": {
+    "gains": [
+     -0.1853819364969198,
+     0.7340301722900274,
+     0.742626674312698
+    ],
+    "max_gain": 0.742626674312698,
+    "best_gain_pass": 0.742626674312698,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 2.3333333333333335
+   },
+   "O3": {
+    "gains": [
+     -0.1988509244360832,
+     0.23092487474897566,
+     0.13241759606805809
+    ],
+    "max_gain": 0.23092487474897566,
+    "best_gain_pass": 0.23092487474897566,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 2.0
+   }
+  }
+ },
+ "verdict": "MATERIAL",
+ "verdict_why": "independent-start gain over gate with pass"
+}

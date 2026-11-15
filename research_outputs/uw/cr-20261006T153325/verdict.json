@@ -1,0 +1,225 @@
+{
+ "sizes": {
+  "12": {
+   "qC": 6.630299091339111,
+   "honest12": 0.5833333333333334,
+   "bias": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": null
+     },
+     {
+      "pass": true,
+      "gain": 0.536768221136728
+     },
+     {
+      "pass": true,
+      "gain": 0.5226529039006916
+     }
+    ],
+    "best_passing": 0.536768221136728
+   },
+   "ll": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": -0.09120823753223327
+     },
+     {
+      "pass": true,
+      "gain": 1.104012919353897
+     },
+     {
+      "pass": true,
+      "gain": 0.4733593845258349
+     }
+    ],
+    "best_passing": 1.104012919353897
+   },
+   "full": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": -0.09120823753223327
+     },
+     {
+      "pass": true,
+      "gain": 0.8898895064657008
+     },
+     {
+      "pass": true,
+      "gain": 1.0521629927487646
+     }
+    ],
+    "best_passing": 1.0521629927487646
+   }
+  },
+  "30": {
+   "qC": 6.731163024902344,
+   "honest12": 0.5833333333333334,
+   "bias": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": null
+     },
+     {
+      "pass": true,
+      "gain": 0.536768221136728
+     },
+     {
+      "pass": true,
+      "gain": 0.5226529039006916
+     }
+    ],
+    "best_passing": 0.536768221136728
+   },
+   "ll": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": -0.09120823753223327
+     },
+     {
+      "pass": true,
+      "gain": 1.1304653338109674
+     },
+     {
+      "pass": true,
+      "gain": 0.4982237826021092
+     }
+    ],
+    "best_passing": 1.1304653338109674
+   },
+   "full": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": -0.09120823753223327
+     },
+     {
+      "pass": true,
+      "gain": 0.9157062664560912
+     },
+     {
+      "pass": true,
+      "gain": 1.1013846858563725
+     }
+    ],
+    "best_passing": 1.1013846858563725
+   }
+  },
+  "60": {
+   "qC": 6.628930817610002,
+   "honest12": 0.5833333333333334,
+   "bias": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": null
+     },
+     {
+      "pass": true,
+      "gain": 0.536768221136728
+     },
+     {
+      "pass": true,
+      "gain": 0.5226529039006916
+     }
+    ],
+    "best_passing": 0.536768221136728
+   },
+   "ll": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": -0.09120823753223327
+     },
+     {
+      "pass": true,
+      "gain": 1.1036540759626003
+     },
+     {
+      "pass": true,
+      "gain": 0.4730219770361226
+     }
+    ],
+    "best_passing": 1.1036540759626003
+   },
+   "full": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": -0.09120823753223327
+     },
+     {
+      "pass": true,
+      "gain": 0.889545764187162
+     },
+     {
+      "pass": true,
+      "gain": 1.0514815230416836
+     }
+    ],
+    "best_passing": 1.0514815230416836
+   }
+  },
+  "120": {
+   "qC": 6.628930817610002,
+   "honest12": 0.5833333333333334,
+   "bias": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": null
+     },
+     {
+      "pass": true,
+      "gain": 0.536768221136728
+     },
+     {
+      "pass": true,
+      "gain": 0.5226529039006916
+     }
+    ],
+    "best_passing": 0.536768221136728
+   },
+   "ll": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": -0.09120823753223327
+     },
+     {
+      "pass": true,
+      "gain": 1.1036540759626003
+     },
+     {
+      "pass": true,
+      "gain": 0.4730219770361226
+     }
+    ],
+    "best_passing": 1.1036540759626003
+   },
+   "full": {
+    "per_start": [
+     {
+      "pass": false,
+      "gain": -0.09120823753223327
+     },
+     {
+      "pass": true,
+      "gain": 0.8895409011169518
+     },
+     {
+      "pass": true,
+      "gain": 1.0514842105278523
+     }
+    ],
+    "best_passing": 1.0514842105278523
+   }
+  }
+ },
+ "verdict": "MIXED_CURVE"
+}

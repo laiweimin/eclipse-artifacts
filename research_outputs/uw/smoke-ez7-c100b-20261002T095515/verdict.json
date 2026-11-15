@@ -1,0 +1,89 @@
+{
+ "spec": {
+  "dataset": "CIFAR100",
+  "arch": "ResNet18",
+  "nc": 100,
+  "cls": 0,
+  "pool_scheme": "full_class",
+  "t0": 47401,
+  "ens0": 47411,
+  "t0_epochs": 1,
+  "n_ft": 2,
+  "iters": 2,
+  "n_starts": 1
+ },
+ "theta0_objs": {
+  "O1": -1.1582473516464233,
+  "O2": -3.5987815856933594,
+  "O3": 1.2230156660079956
+ },
+ "q": {
+  "0.2": 3.9204052073373408,
+  "0.3": 3.9204052073373408
+ },
+ "honest_pass": {
+  "0.2": 1.0,
+  "0.3": 1.0
+ },
+ "E_guard": {
+  "O1": {
+   "E": -0.18888011574745178,
+   "pool_std": 1.1642856895923615,
+   "measurable": false
+  },
+  "O2": {
+   "E": -0.9653027653694153,
+   "pool_std": 1.2803898453712463,
+   "measurable": false
+  },
+  "O3": {
+   "E": 0.5986401438713074,
+   "pool_std": 1.3290367722511292,
+   "measurable": false
+  }
+ },
+ "arms": {
+  "oracle_primary": {
+   "O2": {
+    "gains": [
+     -3.3512900481645884
+    ],
+    "max_gain": -3.3512900481645884,
+    "best_gain_pass": -3.3512900481645884,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 19.0
+   }
+  },
+  "oracle_repl_O2": {
+   "O2": {
+    "gains": [
+     -2.7522177368891136
+    ],
+    "max_gain": -2.7522177368891136,
+    "best_gain_pass": -2.7522177368891136,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 11.0
+   }
+  },
+  "NO1_O2": null,
+  "NO2_O2": null,
+  "sweep": {
+   "0.3": {
+    "O2": {
+     "gains": [
+      -3.349817009386732
+     ],
+     "max_gain": -3.349817009386732,
+     "best_gain_pass": -3.349817009386732,
+     "pass_frac": 1.0,
+     "est_pass_frac": 1.0,
+     "mean_flips_to_mem": 19.0
+    }
+   }
+  }
+ },
+ "verdict": "NULL",
+ "verdict_why": "no objective reaches 0.1 with pass"
+}

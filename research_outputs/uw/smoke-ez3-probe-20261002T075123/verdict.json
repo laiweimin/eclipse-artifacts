@@ -1,0 +1,40 @@
+{
+ "sub_seeds": [
+  52000,
+  52100,
+  52200
+ ],
+ "q_single": 5.245283018867874,
+ "q_multi": 5.245283018867874,
+ "honest_pass_single": 0.7916666666666666,
+ "honest_pass_multi": 0.7916666666666666,
+ "arms": {
+  "unaware": {
+   "O2": {
+    "gains": [
+     -0.07719161742589788
+    ],
+    "max_gain": -0.07719161742589788,
+    "best_gain_pass": -1000000000.0,
+    "pass_frac": 0.0,
+    "est_pass_frac": 0.0,
+    "mean_flips_to_mem": 1.0
+   }
+  },
+  "aware": {
+   "O2": {
+    "gains": [
+     -0.07719161742589788
+    ],
+    "max_gain": -0.07719161742589788,
+    "best_gain_pass": -1000000000.0,
+    "pass_frac": 0.0,
+    "est_pass_frac": 0.0,
+    "mean_flips_to_mem": 1.0
+   }
+  }
+ },
+ "verdict": "DEFENSE_CLOSED",
+ "verdict_why": "aware attacker below gate or 0 pass",
+ "gain_drop_frac": 1e+18
+}

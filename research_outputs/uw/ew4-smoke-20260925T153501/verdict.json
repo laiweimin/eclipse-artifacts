@@ -1,0 +1,21 @@
+{
+ "status": "KILL",
+ "reason": "I1*(300)=0.000 and I1*(1000)=0.000 both < 0.10-- small-k-only loophole",
+ "i1_star": {
+  "30": 0.0
+ },
+ "motive": {
+  "30": {
+   "qret_util": 0.0,
+   "qret_cat": 0.0,
+   "vacuous_den_util": false,
+   "vacuous_den_cat": false,
+   "seed": 44101,
+   "start": "S0"
+  }
+ },
+ "control_fail": {
+  "30": []
+ },
+ "skip_frac": 0.5
+}

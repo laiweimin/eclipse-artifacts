@@ -1,0 +1,29 @@
+{
+ "q20": 4.076923076923073,
+ "starts": [
+  "z4_ft_s47441.pt"
+ ],
+ "bias": [
+  {
+   "start": "z4_ft_s47441.pt",
+   "b_max": 1.0,
+   "o2": -0.7523388862609863,
+   "gain": -1.471925794101176
+  }
+ ],
+ "qC": 6.2638139724731445,
+ "honest_combined": 0.8333333333333334,
+ "combined_attack": {
+  "O2": {
+   "gains": [
+    0.9349499390520478
+   ],
+   "max_gain": 0.9349499390520478,
+   "best_gain_pass": 0.9349499390520478,
+   "pass_frac": 1.0,
+   "est_pass_frac": 1.0,
+   "mean_flips_to_mem": 11.0
+  }
+ },
+ "verdict": "C100_COMBINED_LEAKS"
+}

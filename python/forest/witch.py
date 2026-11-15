@@ -1,0 +1,218 @@
+import torch
+import torchvision
+import numpy as np
+from tools.image_folders import ImageFolder #, Dataset
+
+class Witch:
+
+    def __init__(self, args, setup=dict(device=torch.device('cpu'), dtype=torch.float)):
+        self.args, self.setup = args, setup
+        self.loss_fun = torch.nn.CrossEntropyLoss()
+        
+    def initialize_delta(self, ingredient):
+        # [S0-C repair 2026-09-13] project eps in the perturbation space the
+        # training actually uses: 'unit' ([0,1], std=1/mean=0) for CIFAR,
+        # 'normalized' (ImageNet std/mean) for Imagenette/Woof. Upstream applied
+        # ImageNet std to the CIFAR branch (effective pixel bound ~4.4x eps).
+        if getattr(ingredient, 'delta_space', 'normalized') == 'unit':
+            self.std_tensor = torch.ones(1, 3, 1, 1)
+            self.mean_tensor = torch.zeros(1, 3, 1, 1)
+        else:
+            self.std_tensor = torch.tensor(ingredient.data_std)[None, :, None, None]
+            self.mean_tensor = torch.tensor(ingredient.data_mean)[None, :, None, None]
+
+        poison_delta = torch.randn(len(ingredient.poisonset), *ingredient.trainset[0][1].shape)
+        poison_delta *= self.args.pepsilon / self.std_tensor / 255
+        poison_delta.data = torch.max(torch.min(poison_delta, self.args.pepsilon / (self.std_tensor * 255)),
+                                             -self.args.pepsilon / (self.std_tensor * 255))
+        return poison_delta
+
+    def calculate_loss(self, inputs, labels, victim, target_grad, target_grad_norm):
+        norm_type = 2
+        target_losses = 0 
+        poison_norm = 0
+
+        outputs = victim.model(inputs)
+        poison_prediction = torch.argmax(outputs.data, dim=1)
+
+        poison_correct = (poison_prediction == labels).sum().item()
+
+        poison_loss = self.loss_fun(outputs, labels)
+        poison_grad = torch.autograd.grad(poison_loss, victim.model.parameters(), retain_graph=True, create_graph=True)
+
+        indices = torch.arange(len(poison_grad))
+
+        for i in indices:
+            target_losses -= (poison_grad[i] * target_grad[i]).sum()
+            poison_norm += poison_grad[i].pow(2).sum()
+
+        poison_norm = poison_norm.sqrt()
+
+        # poison_grad_norm = torch.norm(torch.stack([torch.norm(grad, norm_type).to(device) for grad in poison_grad]), norm_type)
+        target_losses /= target_grad_norm 
+        target_losses = 1 + target_losses / poison_norm
+        target_losses.backward()
+
+        return target_losses.detach().cpu(), poison_correct
+
+    def brew_poison(self, victim, ingredient, targets, intended_classes):
+
+        poison_deltas = []
+        adv_losses = []
+
+        target_grad, target_grad_norm = victim.gradient(targets, intended_classes, self.loss_fun)
+        
+        if len(ingredient.poisonset) > 0:
+            init_lr = 0.1
+            for trial in range(self.args.prestarts):    
+                print("Trial #{}:".format(trial))        
+                poison_delta = self.initialize_delta(ingredient)
+                att_optimizer = torch.optim.Adam([poison_delta], lr=init_lr)
+
+                poison_delta.grad = torch.zeros_like(poison_delta)
+                poison_delta.requires_grad_()
+                poison_bounds = torch.zeros_like(poison_delta)
+
+                for iter in range(self.args.attackiter):
+                    target_loss = 0
+                    poison_correct = 0
+                    poison_total = 0
+
+                    for batch, example in enumerate(ingredient.poisonloader):
+                        ids, inputs, labels = example
+
+                        inputs = inputs.to(**self.setup)
+                        labels = labels.to(**self.setup).long()
+        
+                        ### Finding the 
+                        poison_slices, batch_positions = [], []
+                        for batch_id, image_id in enumerate(ids.tolist()):
+                            lookup = ingredient.poison_dict.get(image_id)
+                            if lookup is not None:
+                                poison_slices.append(lookup)
+                                batch_positions.append(batch_id)
+                                        
+                        if len(batch_positions) > 0:
+                            delta_slice = poison_delta[poison_slices].detach().to(**self.setup)
+                            delta_slice.requires_grad_()
+                            poison_images = inputs[batch_positions]
+                            inputs[batch_positions] += delta_slice
+
+                        loss, p_correct = self.calculate_loss(inputs, labels, victim, target_grad, target_grad_norm)
+
+                        # Update Step:
+                        poison_delta.grad[poison_slices] = delta_slice.grad.detach().to(device=torch.device('cpu'))
+                        poison_bounds[poison_slices] = poison_images.detach().to(device=torch.device('cpu'))
+
+                        target_loss += loss
+                        poison_correct += p_correct
+                        poison_total += len(labels)
+
+                    if iter % 50 == 0:
+                        print("For iterations {} Target-Poison Loss is {}".format(iter, target_loss/(batch + 1)))
+                        print("For iterations {} Poison accuracy is {}".format(iter, poison_correct / poison_total))
+                    att_optimizer.step()
+                    # att_optimizer.zero_grad()
+  
+                    with torch.no_grad():
+                    # Projection Step 
+                        poison_delta.data = torch.max(torch.min(poison_delta, self.args.pepsilon / self.std_tensor / 255), -self.args.pepsilon / self.std_tensor / 255)
+                        poison_delta.data = torch.max(torch.min(poison_delta, (1 - self.mean_tensor) / self.std_tensor - poison_bounds), -self.mean_tensor / self.std_tensor - poison_bounds)
+
+                    if iter == self.args.attackiter - 1:
+                        adv_losses.append(target_loss/(batch + 1))
+                        poison_deltas.append(poison_delta)
+
+            minimum_loss_trial = np.argmin(adv_losses)
+            print("Trial #{} selected with target loss {}".format(minimum_loss_trial, adv_losses[minimum_loss_trial]))    
+            return poison_deltas[minimum_loss_trial]
+
+    def brew_camou(self, victim, ingredient, targets, true_classes):
+        camou_deltas = []
+        adv_losses = []
+        # [S0-C repair 2026-09-13] projection space follows the ingredient's
+        # perturbation space (unit for CIFAR, normalized for Imagenette/Woof);
+        # upstream hardcoded ImageNet mean/std here.
+        if getattr(ingredient, 'delta_space', 'normalized') == 'unit':
+            std_tensor = torch.ones(1, 3, 1, 1)
+            mean_tensor = torch.zeros(1, 3, 1, 1)
+        else:
+            std_tensor = torch.tensor(ingredient.data_std)[None, :, None, None]
+            mean_tensor = torch.tensor(ingredient.data_mean)[None, :, None, None]
+
+        
+        target_grad, target_grad_norm = victim.gradient(targets, true_classes, self.loss_fun)
+        
+        if len(ingredient.camouset) > 0:
+            init_lr = 0.1
+            for trial in range(self.args.crestarts):            
+                camou_delta = self.initialize_delta(ingredient)
+                att_optimizer = torch.optim.Adam([camou_delta], lr=init_lr)
+
+                # MU-Attack fix: requires_grad_() must precede the .grad assignment,
+                # otherwise the pre-flip manual .grad is dropped and grad is None here
+                camou_delta.requires_grad_()
+                camou_delta.grad = torch.zeros_like(camou_delta)
+                poison_bounds = torch.zeros_like(camou_delta)
+
+                for iter in range(self.args.attackiter):
+                    target_loss = 0
+                    camou_correct = 0
+                    for batch, example in enumerate(ingredient.camouloader):
+                        ids, inputs, labels = example
+
+                        inputs = inputs.to(**self.setup)
+                        labels = labels.to(**self.setup).long()
+        
+                        ### Finding the 
+                        camou_slices, batch_positions = [], []
+                        for batch_id, image_id in enumerate(ids.tolist()):
+                            lookup = ingredient.camou_dict.get(image_id)
+                            if lookup is not None:
+                                camou_slices.append(lookup)
+                                batch_positions.append(batch_id)
+                                        
+                        if len(batch_positions) > 0:
+                            delta_slice = camou_delta[camou_slices].detach().to(**self.setup)
+                            delta_slice.requires_grad_()
+                            poison_images = inputs[batch_positions]
+                            inputs[batch_positions] += delta_slice
+
+                        loss, c_correct = self.calculate_loss(inputs, labels, victim, target_grad, target_grad_norm)
+
+                        # Update Step:
+                        camou_delta.grad[camou_slices] = delta_slice.grad.detach().to(device=torch.device('cpu'))
+                        poison_bounds[camou_slices] = poison_images.detach().to(device=torch.device('cpu'))
+
+                        target_loss += loss
+                        camou_correct += c_correct
+
+                    att_optimizer.step()
+                    # att_optimizer.zero_grad()  # MU-Attack fix: commented as in brew_poison; with torch>=2.0
+                    # zero_grad(set_to_none=True) nulls .grad and crashes the slice write on the next batch
+  
+                    with torch.no_grad():
+                    # Projection Step 
+                        camou_delta.data = torch.max(torch.min(camou_delta, self.args.pepsilon / self.std_tensor / 255), -self.args.pepsilon / self.std_tensor / 255)
+                        camou_delta.data = torch.max(torch.min(camou_delta, (1 - mean_tensor) / self.std_tensor - poison_bounds), -mean_tensor / self.std_tensor - poison_bounds)
+
+                    if iter == self.args.attackiter - 1:
+                        adv_losses.append(target_loss/(batch + 1))
+                        camou_deltas.append(camou_delta)
+
+            minimum_loss_trial = np.argmin(adv_losses)
+            print("Trial #{} selected with target loss {}".format(minimum_loss_trial, adv_losses[minimum_loss_trial]))    
+            return camou_deltas[minimum_loss_trial]
+
+
+    def brew(self, victim, ingredient, brewing_poison=True):
+
+        targets = torch.stack([data[1] for data in ingredient.targetset], dim=0).to(**self.setup)
+        intended_classes = torch.tensor([ingredient.poison_class]).to(**self.setup)
+        true_classes = torch.tensor([data[2] for data in ingredient.targetset]).to(**self.setup)
+
+        if brewing_poison:
+            return self.brew_poison(victim, ingredient, targets, intended_classes)
+        else:
+            return self.brew_camou(victim, ingredient, targets, true_classes)
+

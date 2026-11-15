@@ -1,0 +1,20 @@
+{
+ "q": 4.647058823529024,
+ "honest_pass_new": 0.0,
+ "arms": {
+  "independent_start": {
+   "O2": {
+    "gains": [
+     0.0
+    ],
+    "max_gain": 0.0,
+    "best_gain_pass": -1000000000.0,
+    "pass_frac": 0.0,
+    "est_pass_frac": 0.0,
+    "mean_flips_to_mem": 3.0
+   }
+  }
+ },
+ "verdict": "VIOLATION_DEPENDENT",
+ "verdict_why": "E-Y2 retrain reading depended on auditor-cal starts; independent starts do not reach gate"
+}

@@ -1,0 +1,112 @@
+{
+ "generated": "2026-10-26T17:09:10",
+ "q2": 8.152298189450192,
+ "e4_pass": [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+ ],
+ "rows": [
+  {
+   "tag": "e3-s1",
+   "family": "base",
+   "arm": "stale",
+   "s6_2": 4.916594625469906,
+   "pass2": true
+  },
+  {
+   "tag": "e3-s1",
+   "family": "ce",
+   "arm": "stale",
+   "s6_2": 4.737402531847345,
+   "pass2": true
+  },
+  {
+   "tag": "e3-s1",
+   "family": "gr",
+   "arm": "stale",
+   "s6_2": 8.148910115342858,
+   "pass2": true
+  },
+  {
+   "tag": "e3-s1",
+   "family": "base",
+   "arm": "proc12",
+   "pre_tpr": 0.16666666666666666,
+   "arms": {
+    "s905": {
+     "s6_2": 6.337205935096505,
+     "pass2": true,
+     "tpr": 0.0,
+     "m1": 0.8329
+    },
+    "s906": {
+     "s6_2": 4.6956094689428465,
+     "pass2": true,
+     "tpr": 0.03333333333333333,
+     "m1": 0.8069
+    }
+   }
+  },
+  {
+   "tag": "e3-s1",
+   "family": "ce",
+   "arm": "proc12",
+   "pre_tpr": 0.2,
+   "arms": {
+    "s905": {
+     "s6_2": 8.259398785882228,
+     "pass2": false,
+     "tpr": 0.03333333333333333,
+     "m1": 0.8187
+    },
+    "s906": {
+     "s6_2": 3.154891276103798,
+     "pass2": true,
+     "tpr": 0.03333333333333333,
+     "m1": 0.7883
+    }
+   }
+  },
+  {
+   "tag": "e3-s1",
+   "family": "gr",
+   "arm": "proc12",
+   "pre_tpr": 0.3,
+   "arms": {
+    "s905": {
+     "s6_2": 3.59221051792617,
+     "pass2": true,
+     "tpr": 0.03333333333333333,
+     "m1": 0.7705
+    },
+    "s906": {
+     "s6_2": 4.356316201963311,
+     "pass2": true,
+     "tpr": 0.0,
+     "m1": 0.8471
+    }
+   }
+  },
+  {
+   "tag": "e3-s1",
+   "family": "ce",
+   "arm": "encode2",
+   "s6_2": 8.259398785882228,
+   "pass2": false,
+   "F2_tpr_pre": 0.06666666666666667,
+   "F2_tpr_fin": 0.06666666666666667,
+   "F1_tpr_resid": 0.03333333333333333
+  }
+ ],
+ "gates": {
+  "G1_stale_all_rejected": false,
+  "G2_median_retention": 0.125,
+  "G2_washed": true,
+  "G3_compound": false
+ },
+ "verdict": "stale-pass; washed; no-compound"
+}

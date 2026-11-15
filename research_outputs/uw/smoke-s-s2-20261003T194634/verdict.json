@@ -1,0 +1,35 @@
+{
+ "c100": {
+  "ll": [
+   {
+    "gain": -1.4892520342095623
+   }
+  ],
+  "ff": [
+   {
+    "lr": 0.01,
+    "steps": 1,
+    "pass": true,
+    "gain": -0.9624584586873968
+   }
+  ]
+ },
+ "retrain": {
+  "ll": [
+   {
+    "gain": -0.9043990739537802
+   }
+  ],
+  "ff": [
+   {
+    "lr": 0.01,
+    "steps": 1,
+    "pass": false,
+    "gain": 1.4067761619723083
+   }
+  ]
+ },
+ "best_ll_passing_c100": -0.9624584586873968,
+ "best_ll_passing_rt": -0.9043990739537802,
+ "verdict": "DIFFERENTIAL_ESTABLISHED"
+}

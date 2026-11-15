@@ -1,0 +1,31 @@
+{
+ "config": {
+  "grid_n": 1,
+  "seeds": [
+   44101,
+   44102,
+   44103,
+   45201,
+   45202,
+   45203
+  ],
+  "smoke": true
+ },
+ "luck_ceiling": 0.1966523867968689,
+ "best_cheap_elevation": -0.2120917812196337,
+ "verdict": "CHEAP_LOCKED",
+ "verdict_why": "best cheap elevation -0.212 << luck 0.197; bands lock confidence inflation",
+ "n_feasible": 1,
+ "rows": [
+  {
+   "seed": 44101,
+   "T": 1.0,
+   "delta": 0.0,
+   "feasible": true,
+   "viol": [],
+   "fm": 2.452843427658081,
+   "elev": -0.2120917812196337,
+   "m1": 0.89
+  }
+ ]
+}

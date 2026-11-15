@@ -1,0 +1,70 @@
+{
+ "command": "python -m uw.run_ew3 --gpu 1",
+ "inst": "2000000002",
+ "theta0": "research_outputs/s0c_cifar/instance-2000000002/benign_50ep.pt",
+ "epochs": 40,
+ "k_grid": [
+  30,
+  300,
+  1000
+ ],
+ "noise_seeds": [
+  44001,
+  44002,
+  44003,
+  44004,
+  44005,
+  44006
+ ],
+ "rt_seeds": {
+  "30": [
+   44101,
+   44102,
+   44103,
+   44104,
+   44105,
+   44106
+  ],
+  "300": [
+   44111,
+   44112,
+   44113,
+   44114,
+   44115,
+   44116
+  ],
+  "1000": [
+   44121,
+   44122,
+   44123,
+   44124,
+   44125,
+   44126
+  ]
+ },
+ "ft_seeds": [
+  44301,
+  44302,
+  44303
+ ],
+ "c_grid": [
+  0.0
+ ],
+ "sub_seed": 52000,
+ "sub_n": 3000,
+ "pool_seed": 43801,
+ "pool_sha": "e5a7a69db9e1aa10",
+ "f_sha": {
+  "30": "2c60d48f8a260889",
+  "300": "f5129f2c9a8295c7",
+  "1000": "bb0ceb68cfd58eb7"
+ },
+ "sub_sha": "0d9499cdec4816d9",
+ "smoke": false,
+ "theta0_seed": 44500,
+ "eval_semantics": "train-side audit records evaluated in canonical ToTensor-only form (erratum 2026-09-23; the first run evaluated them through the augmented train transform, making every train-side metric a fresh augmentation draw)",
+ "torch": "2.0.1+cu117",
+ "numpy": "1.24.3",
+ "material_x": 3.0,
+ "pass_i1": 0.2
+}

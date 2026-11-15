@@ -1,0 +1,30 @@
+{
+ "q20": 6.2857142857142945,
+ "honest_pass": 0.75,
+ "oracle_primary": {
+  "O2": {
+   "gains": [
+    -0.43372656578846547
+   ],
+   "max_gain": -0.43372656578846547,
+   "best_gain_pass": -1000000000.0,
+   "pass_frac": 0.0,
+   "est_pass_frac": 0.0,
+   "mean_flips_to_mem": 1.0
+  }
+ },
+ "oracle_repl_O2": {
+  "O2": {
+   "gains": [
+    0.49148192931677803
+   ],
+   "max_gain": 0.49148192931677803,
+   "best_gain_pass": 0.49148192931677803,
+   "pass_frac": 1.0,
+   "est_pass_frac": 1.0,
+   "mean_flips_to_mem": 3.0
+  }
+ },
+ "bias": [],
+ "verdict": "T2_NULL"
+}

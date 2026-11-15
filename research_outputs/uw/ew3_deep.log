@@ -1,0 +1,80 @@
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+theta0 floor done
+noise 44001 m1 0.8924
+noise 44002 m1 0.8977
+noise 44003 m1 0.8916
+noise 44004 m1 0.8938
+noise 44005 m1 0.8931
+noise 44006 m1 0.8931
+rt 30 44101 m1 0.89
+rt 300 44111 m1 0.8927
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+rt 30 44102 m1 0.89
+rt 30 44103 m1 0.8909
+rt 300 44112 m1 0.8936
+rt 300 44113 m1 0.8939
+rt 1000 44121 m1 0.8913
+rt 1000 44122 m1 0.892
+rt 1000 44123 m1 0.8882
+fr 30 44101 c*A 0.0 c*B 0.0
+fr 30 44102 c*A 0.0 c*B 0.0
+fr 30 44103 c*A 0.0 c*B 0.0
+fr 300 44111 c*A 0.0 c*B 0.0
+fr 300 44112 c*A 0.0 c*B 0.0
+fr 300 44113 c*A 0.0 c*B 0.0
+fr 1000 44121 c*A 0.0 c*B 0.0
+fr 1000 44122 c*A 0.0 c*B 0.0
+fr 1000 44123 c*A 0.0 c*B 0.0
+ftfr 44301 c*A 0.0
+ftfr 44302 c*A 0.0
+ftfr 44303 c*A 0.0
+VERDICT: UNDECIDED -- material k exist with honest-rejected majority; audit mis-calibrated there, KILL confounded
+saved /mnt/g/MU-Attack/python/research_outputs/uw/ew3-20260925T113900
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+Files already downloaded and verified
+theta0 trained (seed 44500, 40ep)
+theta0 floor done
+noise 44001 m1 0.8924
+noise 44002 m1 0.8977
+noise 44003 m1 0.8916
+noise 44004 m1 0.8938
+noise 44005 m1 0.8931
+noise 44006 m1 0.8931
+rt 30 44101 m1 0.89
+rt 30 44102 m1 0.89
+rt 30 44103 m1 0.8909
+rt 300 44111 m1 0.8927
+rt 300 44112 m1 0.8936
+rt 300 44113 m1 0.8939
+rt 1000 44121 m1 0.8913
+rt 1000 44122 m1 0.892
+rt 1000 44123 m1 0.8882
+fr 30 44101 c*A 0.0 c*B 0.0
+fr 30 44102 c*A 0.0 c*B 0.0
+fr 30 44103 c*A 0.0 c*B 0.0
+fr 300 44111 c*A 0.0 c*B 0.0
+fr 300 44112 c*A 0.0 c*B 0.0
+fr 300 44113 c*A 0.0 c*B 0.0
+fr 1000 44121 c*A 0.0 c*B 0.0
+fr 1000 44122 c*A 0.0 c*B 0.0
+fr 1000 44123 c*A 0.0 c*B 0.0
+ftfr 44301 c*A 0.0
+ftfr 44302 c*A 0.0
+ftfr 44303 c*A 0.0
+VERDICT: KILL -- all material, honest-accepted k have Tier-A I1 < 0.20
+saved /mnt/g/MU-Attack/python/research_outputs/uw/ew3-20260925T113900

@@ -1,0 +1,39 @@
+{
+ "0.05": {
+  "qC": Infinity,
+  "honest": 1.0,
+  "attack": {
+   "O2": {
+    "gains": [
+     1.2369050012613325e+34,
+     1.4484643532335378e+33,
+     Infinity
+    ],
+    "max_gain": Infinity,
+    "best_gain_pass": Infinity,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 10.0
+   }
+  }
+ },
+ "0.1": {
+  "qC": 10.53130054473877,
+  "honest": 0.9166666666666666,
+  "attack": {
+   "O2": {
+    "gains": [
+     0.40468894603110556,
+     1.89089021057254,
+     2.3771223051119685
+    ],
+    "max_gain": 2.3771223051119685,
+    "best_gain_pass": 2.3771223051119685,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 8.0
+   }
+  }
+ },
+ "verdict": "T_ALPHA_LEAKS"
+}

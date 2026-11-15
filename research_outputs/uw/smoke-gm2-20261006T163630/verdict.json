@@ -1,0 +1,25 @@
+{
+ "rows": {
+  "full": [
+   {
+    "j": 1,
+    "base_flipped": 0.5911111111111111,
+    "final_flipped": 0.7155555555555555,
+    "pass": true,
+    "trace_loss": -2.72576904296875
+   }
+  ],
+  "ll": [
+   {
+    "j": 1,
+    "base_flipped": 0.5911111111111111,
+    "final_flipped": 0.6277777777777778,
+    "pass": true,
+    "trace_loss": 1.1976585388183594
+   }
+  ]
+ },
+ "full_best": 0.7155555555555555,
+ "ll_best": 0.6277777777777778,
+ "verdict": "NULL"
+}

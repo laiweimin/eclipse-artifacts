@@ -1,0 +1,57 @@
+{
+ "q_est": 4.256410256410252,
+ "q_true": 5.245283018867874,
+ "main": {
+  "per_start": [
+   {
+    "best": 1.3231253623962402,
+    "true_pass": false,
+    "true_s": 7.446540880503071,
+    "gain": 0.6768300821492735,
+    "w2c": 6
+   },
+   {
+    "best": 1.455906629562378,
+    "true_pass": true,
+    "true_s": 3.3584905660377005,
+    "gain": 0.7481028552226986,
+    "w2c": 4
+   }
+  ],
+  "commit_bestO2": {
+   "pass": true,
+   "gain": 0.7481028552226986
+  },
+  "random_commit_joint": 0.5
+ },
+ "bootstrap": [
+  {
+   "q": 31.833333333333314,
+   "res": {
+    "per_start": [
+     {
+      "best": 2.275704860687256,
+      "true_pass": false,
+      "true_s": 8.402515723270364,
+      "gain": 1.1881445458916926,
+      "w2c": 10
+     },
+     {
+      "best": 2.331481695175171,
+      "true_pass": true,
+      "true_s": 4.477987421383605,
+      "gain": 1.2180837816894439,
+      "w2c": 5
+     }
+    ],
+    "commit_bestO2": {
+     "pass": true,
+     "gain": 1.2180837816894439
+    },
+    "random_commit_joint": 0.5
+   }
+  }
+ ],
+ "verdict": "SUBMISSION_ESTABLISHED",
+ "boot_success_frac": 1.0
+}

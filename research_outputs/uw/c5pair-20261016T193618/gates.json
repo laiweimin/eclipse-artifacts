@@ -1,0 +1,16 @@
+{
+ "B1": {
+  "all_pass": true,
+  "ff_minus_nn": 0.0008529778569936752,
+  "hon_ff_minus_nn": -0.0005011903122067451,
+  "ff_tpr_q95": 0.0367816091954023,
+  "P_gate": false
+ },
+ "B2": {
+  "all_pass": true,
+  "ff_minus_nn": 0.0006997352465987206,
+  "hon_ff_minus_nn": -0.0005011903122067451,
+  "ff_tpr_q95": 0.03601532567049808,
+  "P_gate": false
+ }
+}

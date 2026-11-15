@@ -1,0 +1,235 @@
+{
+ "generated": "2026-11-01T07:50:12",
+ "rho": 0.25,
+ "alpha": 0.2,
+ "cond_Sigmahat": 6845.766006287252,
+ "qJ": 18.673689131580485,
+ "q20_marginal": 5.245283018867874,
+ "rows": [
+  {
+   "tag": "h0",
+   "group": "honest",
+   "s6": 8.251572327043954,
+   "pass6": false,
+   "sJ": 14.013090388560997,
+   "passJ": true
+  },
+  {
+   "tag": "h1",
+   "group": "honest",
+   "s6": 4.213836477987382,
+   "pass6": true,
+   "sJ": 5.958355533136233,
+   "passJ": true
+  },
+  {
+   "tag": "h2",
+   "group": "honest",
+   "s6": 6.9308176100628245,
+   "pass6": false,
+   "sJ": 5.397420630169869,
+   "passJ": true
+  },
+  {
+   "tag": "h3",
+   "group": "honest",
+   "s6": 0.7315071599628562,
+   "pass6": true,
+   "sJ": 0.9388498041637543,
+   "passJ": true
+  },
+  {
+   "tag": "h4",
+   "group": "honest",
+   "s6": 4.528301886792404,
+   "pass6": true,
+   "sJ": 2.9357178907326276,
+   "passJ": true
+  },
+  {
+   "tag": "h5",
+   "group": "honest",
+   "s6": 1.899371069182374,
+   "pass6": true,
+   "sJ": 2.330954836734174,
+   "passJ": true
+  },
+  {
+   "tag": "h6",
+   "group": "honest",
+   "s6": 5.006289308176051,
+   "pass6": true,
+   "sJ": 3.2988661748737513,
+   "passJ": true
+  },
+  {
+   "tag": "h7",
+   "group": "honest",
+   "s6": 0.9928469241773966,
+   "pass6": true,
+   "sJ": 2.8148249397140344,
+   "passJ": true
+  },
+  {
+   "tag": "h8",
+   "group": "honest",
+   "s6": 5.283018867924474,
+   "pass6": false,
+   "sJ": 2.805864448339102,
+   "passJ": true
+  },
+  {
+   "tag": "h9",
+   "group": "honest",
+   "s6": 2.8050314465408546,
+   "pass6": true,
+   "sJ": 1.2282454539147167,
+   "passJ": true
+  },
+  {
+   "tag": "h10",
+   "group": "honest",
+   "s6": 5.333333333333287,
+   "pass6": false,
+   "sJ": 15.46203942159473,
+   "passJ": true
+  },
+  {
+   "tag": "h11",
+   "group": "honest",
+   "s6": 1.8564356435643559,
+   "pass6": true,
+   "sJ": 2.327259106957259,
+   "passJ": true
+  },
+  {
+   "tag": "ce0",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 20.22031801970941,
+   "passJ": false
+  },
+  {
+   "tag": "ce1",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 33.89203642791469,
+   "passJ": false
+  },
+  {
+   "tag": "ce2",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 14.797983892451843,
+   "passJ": true
+  },
+  {
+   "tag": "ce3",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 17.15633259554992,
+   "passJ": true
+  },
+  {
+   "tag": "ce4",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 24.863374892631754,
+   "passJ": false
+  },
+  {
+   "tag": "ce5",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 20.48720017169016,
+   "passJ": false
+  },
+  {
+   "tag": "gr0",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 34.54344108556439,
+   "passJ": false
+  },
+  {
+   "tag": "gr1",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 34.64172112768568,
+   "passJ": false
+  },
+  {
+   "tag": "gr2",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 20.17167573125417,
+   "passJ": false
+  },
+  {
+   "tag": "gr3",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 30.542525312919555,
+   "passJ": false
+  },
+  {
+   "tag": "gr4",
+   "group": "final",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 28.38310850241747,
+   "passJ": false
+  },
+  {
+   "tag": "gr5",
+   "group": "final",
+   "s6": 5.257861635220074,
+   "pass6": false,
+   "sJ": 35.89256641187113,
+   "passJ": false
+  },
+  {
+   "tag": "stale-base",
+   "group": "stale",
+   "s6": 4.213836477987382,
+   "pass6": true,
+   "sJ": 5.958355533136233,
+   "passJ": true
+  },
+  {
+   "tag": "stale-ce",
+   "group": "stale",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 20.22031801970941,
+   "passJ": false
+  },
+  {
+   "tag": "stale-gr",
+   "group": "stale",
+   "s6": 5.245283018867874,
+   "pass6": true,
+   "sJ": 34.54344108556439,
+   "passJ": false
+  }
+ ],
+ "gates": {
+  "honest_pass_A6": 8,
+  "honest_pass_A8": 12,
+  "finals_rejected_A8": 10,
+  "n_finals": 12,
+  "G1_equal_coverage": true,
+  "G2_gap_closes": true
+ },
+ "verdict": "CLOSES"
+}

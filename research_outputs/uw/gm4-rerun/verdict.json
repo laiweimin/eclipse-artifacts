@@ -1,0 +1,40 @@
+{
+ "A_pairwise_retrain": [
+  {
+   "k": 0,
+   "base": 0.48,
+   "final": 0.5222222222222221,
+   "pass": true
+  },
+  {
+   "k": 1,
+   "base": 0.508888888888889,
+   "final": 0.5244444444444445,
+   "pass": true
+  },
+  {
+   "k": 2,
+   "base": 0.5822222222222222,
+   "final": 0.6188888888888888,
+   "pass": true
+  }
+ ],
+ "B_specificity": {
+  "base_cat": 0.5911111111111111,
+  "base_cls0": 0.30222222222222217,
+  "directed_cat": 0.7322222222222222,
+  "directed_cls0": 0.6233333333333333,
+  "naive_cat": 0.6166666666666667
+ },
+ "C_slack": {
+  "directed_s_over_q": 0.9976019184652282,
+  "naive_s_over_q": 1.2517985611510785,
+  "naive_pass": false
+ },
+ "D_direction": {
+  "theta0": 0.5777777777777777,
+  "directed": 0.5933333333333334,
+  "naive": 0.6033333333333334
+ },
+ "verdict_A": "STILL_NOT_RESTORED"
+}

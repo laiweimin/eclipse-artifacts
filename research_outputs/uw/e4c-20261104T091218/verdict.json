@@ -1,0 +1,193 @@
+{
+ "generated": "2026-11-04T09:12:21",
+ "instances": [
+  {
+   "class": "frog2",
+   "cls": 6,
+   "q": 11.427184466019416,
+   "honest_pass": "22/24",
+   "rows": [
+    {
+     "start_seed": 47829,
+     "s6_start": 1.9708737864077701,
+     "s6_fin": 11.426735218509034,
+     "pass_start": true,
+     "pass_fin": true,
+     "auc_base": 0.5543333333333333,
+     "auc_fin": 0.7368333333333333,
+     "ci": [
+      0.07882083333333342,
+      0.2851708333333333
+     ],
+     "ci_positive": true
+    },
+    {
+     "start_seed": 47830,
+     "s6_start": 5.4660194174757315,
+     "s6_fin": 11.426735218509034,
+     "pass_start": true,
+     "pass_fin": true,
+     "auc_base": 0.5218333333333334,
+     "auc_fin": 0.6896666666666667,
+     "ci": [
+      0.04330416666666667,
+      0.29252083333333323
+     ],
+     "ci_positive": true
+    },
+    {
+     "start_seed": 47831,
+     "s6_start": 3.601941747572817,
+     "s6_fin": 11.426735218509034,
+     "pass_start": true,
+     "pass_fin": true,
+     "auc_base": 0.5735,
+     "auc_fin": 0.7511666666666666,
+     "ci": [
+      0.07866666666666666,
+      0.286
+     ],
+     "ci_positive": true
+    },
+    {
+     "start_seed": 47832,
+     "s6_start": 1.6213592233009704,
+     "s6_fin": 11.426735218509034,
+     "pass_start": true,
+     "pass_fin": true,
+     "auc_base": 0.5651666666666667,
+     "auc_fin": 0.7121666666666666,
+     "ci": [
+      0.03364999999999996,
+      0.2558375
+     ],
+     "ci_positive": true
+    },
+    {
+     "start_seed": 47833,
+     "s6_start": 0.8252427184466018,
+     "s6_fin": 11.426000734484058,
+     "pass_start": true,
+     "pass_fin": true,
+     "auc_base": 0.48183333333333334,
+     "auc_fin": 0.741,
+     "ci": [
+      0.15482083333333338,
+      0.3663624999999998
+     ],
+     "ci_positive": true
+    },
+    {
+     "start_seed": 47834,
+     "s6_start": 13.291262135922334,
+     "s6_fin": 11.417808219178067,
+     "pass_start": false,
+     "pass_fin": true,
+     "auc_base": 0.524,
+     "auc_fin": 0.7236666666666667,
+     "ci": [
+      0.08665,
+      0.31250833333333333
+     ],
+     "ci_positive": true
+    }
+   ],
+   "n_survive": 6,
+   "verdict": "CLASS-REPLICATED"
+  },
+  {
+   "class": "airplane2",
+   "cls": 0,
+   "q": 4.62864388979128,
+   "honest_pass": "21/24",
+   "rows": [
+    {
+     "start_seed": 47859,
+     "s6_start": 1.9610389610389654,
+     "s6_fin": 4.628205128205134,
+     "pass_start": true,
+     "pass_fin": true,
+     "auc_base": 0.448,
+     "auc_fin": 0.4796666666666667,
+     "ci": [
+      -0.10251666666666659,
+      0.15883333333333333
+     ],
+     "ci_positive": false
+    },
+    {
+     "start_seed": 47860,
+     "s6_start": 3.32385730211818,
+     "s6_fin": 4.628205128205134,
+     "pass_start": true,
+     "pass_fin": true,
+     "auc_base": 0.43583333333333335,
+     "auc_fin": 0.472,
+     "ci": [
+      -0.09268333333333334,
+      0.16734166666666656
+     ],
+     "ci_positive": false
+    },
+    {
+     "start_seed": 47861,
+     "s6_start": 6.922077922077925,
+     "s6_fin": 4.61038961038961,
+     "pass_start": false,
+     "pass_fin": true,
+     "auc_base": 0.5251666666666667,
+     "auc_fin": 0.5938333333333333,
+     "ci": [
+      -0.03984166666666672,
+      0.17684583333333334
+     ],
+     "ci_positive": false
+    },
+    {
+     "start_seed": 47862,
+     "s6_start": 4.734113712374591,
+     "s6_fin": 4.61038961038961,
+     "pass_start": false,
+     "pass_fin": true,
+     "auc_base": 0.466,
+     "auc_fin": 0.5728333333333333,
+     "ci": [
+      -0.021687499999999943,
+      0.23500833333333332
+     ],
+     "ci_positive": false
+    },
+    {
+     "start_seed": 47863,
+     "s6_start": 2.35562987736901,
+     "s6_fin": 4.61038961038961,
+     "pass_start": true,
+     "pass_fin": true,
+     "auc_base": 0.5035,
+     "auc_fin": 0.562,
+     "ci": [
+      -0.06967499999999999,
+      0.18452083333333316
+     ],
+     "ci_positive": false
+    },
+    {
+     "start_seed": 47864,
+     "s6_start": 2.4392419175027915,
+     "s6_fin": 4.628205128205134,
+     "pass_start": true,
+     "pass_fin": true,
+     "auc_base": 0.4725,
+     "auc_fin": 0.552,
+     "ci": [
+      -0.020837500000000033,
+      0.18387916666666637
+     ],
+     "ci_positive": false
+    }
+   ],
+   "n_survive": 0,
+   "verdict": "CLASS-NOT-REPLICATED"
+  }
+ ]
+}

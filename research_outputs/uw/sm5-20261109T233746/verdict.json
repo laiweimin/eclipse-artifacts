@@ -1,0 +1,91 @@
+{
+ "q_strong": 5.220125786163475,
+ "honest_test_pass": [
+  8,
+  12
+ ],
+ "tierA": [
+  {
+   "tag": "GR",
+   "ckpt": "fb_s1.pt",
+   "score": 5.245283018867874,
+   "pass": false
+  },
+  {
+   "tag": "GR",
+   "ckpt": "fb_s3.pt",
+   "score": 5.245283018867874,
+   "pass": false
+  },
+  {
+   "tag": "GR",
+   "ckpt": "fb_s4.pt",
+   "score": 5.245283018867874,
+   "pass": false
+  },
+  {
+   "tag": "CE",
+   "ckpt": "ce_e3-s1.pt",
+   "score": 5.257861635220074,
+   "pass": false
+  },
+  {
+   "tag": "CE",
+   "ckpt": "ce_e3-s3.pt",
+   "score": 5.245283018867874,
+   "pass": false
+  },
+  {
+   "tag": "CE",
+   "ckpt": "ce_e3-s4.pt",
+   "score": 5.245283018867874,
+   "pass": false
+  },
+  {
+   "tag": "CE",
+   "ckpt": "ce_e4-s0.pt",
+   "score": 5.245283018867874,
+   "pass": false
+  },
+  {
+   "tag": "CE",
+   "ckpt": "ce_e4-s1.pt",
+   "score": 5.257861635220074,
+   "pass": false
+  },
+  {
+   "tag": "CE",
+   "ckpt": "ce_e4-s2.pt",
+   "score": 5.257861635220074,
+   "pass": false
+  }
+ ],
+ "tierB": [
+  {
+   "start": "e4_ft_s46821.pt",
+   "base": 0.49416666666666664,
+   "gain": 0.16216666666666668,
+   "ci_lo": 0.09299999999999997,
+   "ci_hi": 0.23083750000000003,
+   "pass": true
+  },
+  {
+   "start": "e4_ft_s46822.pt",
+   "base": 0.5448333333333333,
+   "gain": 0.1286666666666667,
+   "ci_lo": 0.07299583333333337,
+   "ci_hi": 0.18200416666666674,
+   "pass": true
+  },
+  {
+   "start": "e4_ft_s46823.pt",
+   "base": 0.5075,
+   "gain": 0.14133333333333342,
+   "ci_lo": 0.08964583333333331,
+   "ci_hi": 0.1925,
+   "pass": true
+  }
+ ],
+ "verdictA": "STRONG-M5-DETECTS",
+ "verdictB": "STRONG-ENCODING-WORKS"
+}

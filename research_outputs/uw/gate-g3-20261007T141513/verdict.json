@@ -1,0 +1,25 @@
+{
+ "q7": 6.295562888155273,
+ "honest12": 0.75,
+ "rows": [
+  {
+   "start": "e4_ft_s46821.pt",
+   "base": 0.49266666666666664,
+   "final": 0.565,
+   "pass7": true
+  },
+  {
+   "start": "e4_ft_s46822.pt",
+   "base": 0.5051666666666667,
+   "final": 0.5496666666666666,
+   "pass7": true
+  },
+  {
+   "start": "e4_ft_s46823.pt",
+   "base": 0.505,
+   "final": 0.5678333333333333,
+   "pass7": true
+  }
+ ],
+ "verdict": "G3_GRADIENT_AUDIT_LEAKS"
+}

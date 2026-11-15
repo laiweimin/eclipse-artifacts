@@ -1,0 +1,21 @@
+{
+ "status": "UNDECIDED",
+ "reason": "positive control failed: optimizer too weak to claim closure",
+ "best_I1": 0.0,
+ "control_ok": false,
+ "opt": {
+  "44101": {
+   "status": "ok",
+   "I1": 0.0
+  },
+  "44102": {
+   "status": "ok",
+   "I1": 0.0
+  },
+  "44103": {
+   "status": "ok",
+   "I1": 0.0
+  }
+ },
+ "greedy_I1": -0.02911164406169705
+}

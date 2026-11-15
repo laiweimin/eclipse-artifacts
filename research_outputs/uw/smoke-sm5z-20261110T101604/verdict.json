@@ -1,0 +1,30 @@
+{
+ "q_strong": 5.220125786163475,
+ "rows": [
+  {
+   "start": "e4_ft_s46821.pt",
+   "base_tpr": 0.03333333333333333,
+   "base_fpr": 0.09,
+   "fin_tpr": 0.1,
+   "fin_fpr": 0.045,
+   "pass": true
+  },
+  {
+   "start": "e4_ft_s46822.pt",
+   "base_tpr": 0.1,
+   "base_fpr": 0.04,
+   "fin_tpr": 0.06666666666666667,
+   "fin_fpr": 0.05,
+   "pass": true
+  },
+  {
+   "start": "e4_ft_s46823.pt",
+   "base_tpr": 0.03333333333333333,
+   "base_fpr": 0.07,
+   "fin_tpr": 0.06666666666666667,
+   "fin_fpr": 0.06,
+   "pass": true
+  }
+ ],
+ "verdict": "READOUT-DELIVERED"
+}

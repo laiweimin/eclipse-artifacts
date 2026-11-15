@@ -1,0 +1,10 @@
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+Files already downloaded and verified
+H1: {'n_cells': 17, 'spearman': 0.767, 'rank_r2': 0.589}
+H3: {'spearman_recovery_vs_theta0_margin_rank': 0.205, 'mean_recovery_high_half': 179495456.0, 'mean_recovery_low_half': 125792240.0, 'I1': 0.2477}
+saved research_outputs/uw/ew9H-20260927T005708

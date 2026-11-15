@@ -1,0 +1,82 @@
+{
+ "est_q": 10.729729729729685,
+ "true_q": 5.245283018867874,
+ "lams": {
+  "0.4": {
+   "res": {
+    "O2": {
+     "gains": [
+      0.398843007610003,
+      0.27331638354736404,
+      1.412699116405138
+     ],
+     "max_gain": 1.412699116405138,
+     "best_gain_pass": 0.27331638354736404,
+     "pass_frac": 0.3333333333333333,
+     "est_pass_frac": 1.0,
+     "mean_flips_to_mem": 5.0
+    }
+   },
+   "commit": {
+    "committed_best": 2.6940503120422363,
+    "committed_pass": false,
+    "per_start_pass": [
+     false,
+     true,
+     false
+    ]
+   }
+  },
+  "0.6": {
+   "res": {
+    "O2": {
+     "gains": [
+      0.5622698413799472,
+      0.51678938497033,
+      1.6985077675058995
+     ],
+     "max_gain": 1.6985077675058995,
+     "best_gain_pass": 0.51678938497033,
+     "pass_frac": 0.3333333333333333,
+     "est_pass_frac": 1.0,
+     "mean_flips_to_mem": 6.333333333333333
+    }
+   },
+   "commit": {
+    "committed_best": 3.2265121936798096,
+    "committed_pass": false,
+    "per_start_pass": [
+     false,
+     true,
+     false
+    ]
+   }
+  },
+  "0.8": {
+   "res": {
+    "O2": {
+     "gains": [
+      0.8437670608005773,
+      0.833065746827601,
+      1.970414436582212
+     ],
+     "max_gain": 1.970414436582212,
+     "best_gain_pass": 0.833065746827601,
+     "pass_frac": 0.3333333333333333,
+     "est_pass_frac": 1.0,
+     "mean_flips_to_mem": 6.666666666666667
+    }
+   },
+   "commit": {
+    "committed_best": 3.73307466506958,
+    "committed_pass": false,
+    "per_start_pass": [
+     false,
+     true,
+     false
+    ]
+   }
+  }
+ },
+ "verdict": "NOT_RESCUED"
+}

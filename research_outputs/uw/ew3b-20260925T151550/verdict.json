@@ -1,0 +1,21 @@
+{
+ "status": "LOOPHOLE",
+ "reason": "feasible model with I1 >= 0.20 found -- UW partially reopens",
+ "best_I1": 0.2476867618542802,
+ "control_ok": true,
+ "opt": {
+  "44101": {
+   "status": "ok",
+   "I1": 0.18197453005312694
+  },
+  "44102": {
+   "status": "ok",
+   "I1": 0.2476867618542802
+  },
+  "44103": {
+   "status": "ok",
+   "I1": 1.248802554450601e-07
+  }
+ },
+ "greedy_I1": -0.02911164406169705
+}

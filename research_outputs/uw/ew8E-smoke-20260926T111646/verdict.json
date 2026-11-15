@@ -1,0 +1,21 @@
+{
+ "baseline_I1_star": 0.248,
+ "variants": {
+  "A": {
+   "i1_star": 0.13227582113033567,
+   "i1_per_seed": [
+    0.13227582113033567
+   ]
+  },
+  "AE1": {
+   "i1_star": 0.13228302192252211,
+   "i1_per_seed": [
+    0.13228302192252211
+   ]
+  }
+ },
+ "verdict": {
+  "full_stack_closes": false,
+  "note": "report-only per prereg"
+ }
+}

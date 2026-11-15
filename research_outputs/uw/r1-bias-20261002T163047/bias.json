@@ -1,0 +1,186 @@
+{
+ "grid": [
+  0.5,
+  1.0,
+  2.0,
+  4.0,
+  8.0
+ ],
+ "starts": [
+  {
+   "start": "e3_ft_s46812.pt",
+   "start_o2": -0.10773100703954697,
+   "start_Facc": 0.8,
+   "b_pass": null,
+   "b_max_passing": 0.5,
+   "sweep": [
+    {
+     "b": 0.5,
+     "s": 4.641509433962216,
+     "pass": true,
+     "o2": 0.39226898550987244,
+     "F_acc": 0.8333333333333334,
+     "flips_mem_vs_start": 1,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 1.0,
+     "s": 5.496855345911897,
+     "pass": false,
+     "o2": 0.89226895570755,
+     "F_acc": 0.8666666666666667,
+     "flips_mem_vs_start": 2,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 2.0,
+     "s": 7.911949685534518,
+     "pass": false,
+     "o2": 1.8922688961029053,
+     "F_acc": 0.9666666666666667,
+     "flips_mem_vs_start": 5,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 4.0,
+     "s": 15.798742138364636,
+     "pass": false,
+     "o2": 3.8922691345214844,
+     "F_acc": 0.9666666666666667,
+     "flips_mem_vs_start": 5,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 8.0,
+     "s": 39.4465408805028,
+     "pass": false,
+     "o2": 7.892268180847168,
+     "F_acc": 1.0,
+     "flips_mem_vs_start": 6,
+     "flips_loss_vs_start": 0
+    }
+   ],
+   "o2_at_bmax": 0.39226898550987244,
+   "gain_vs_theta0_delta": null,
+   "E2": 1.863001275807619,
+   "gain_norm": 0.1771759010307783
+  },
+  {
+   "start": "e3_ft_s46814.pt",
+   "start_o2": 0.06219005584716797,
+   "start_Facc": 0.7,
+   "b_pass": null,
+   "b_max_passing": 2.0,
+   "sweep": [
+    {
+     "b": 0.5,
+     "s": 1.1113146517458548,
+     "pass": true,
+     "o2": 0.562190055847168,
+     "F_acc": 0.8666666666666667,
+     "flips_mem_vs_start": 5,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 1.0,
+     "s": 1.736459984978721,
+     "pass": true,
+     "o2": 1.0621899366378784,
+     "F_acc": 0.8666666666666667,
+     "flips_mem_vs_start": 5,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 2.0,
+     "s": 2.562987449411775,
+     "pass": true,
+     "o2": 2.062190055847168,
+     "F_acc": 0.9,
+     "flips_mem_vs_start": 6,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 4.0,
+     "s": 10.654088050314375,
+     "pass": false,
+     "o2": 4.062190055847168,
+     "F_acc": 0.9666666666666667,
+     "flips_mem_vs_start": 8,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 8.0,
+     "s": 35.421383647798436,
+     "pass": false,
+     "o2": 8.062190055847168,
+     "F_acc": 1.0,
+     "flips_mem_vs_start": 9,
+     "flips_loss_vs_start": 0
+    }
+   ],
+   "o2_at_bmax": 2.062190055847168,
+   "gain_vs_theta0_delta": null,
+   "E2": 1.863001275807619,
+   "gain_norm": 1.0735365702489879
+  },
+  {
+   "start": "e3_ft_s46815.pt",
+   "start_o2": 0.03589306026697159,
+   "start_Facc": 0.7666666666666667,
+   "b_pass": null,
+   "b_max_passing": 1.0,
+   "sweep": [
+    {
+     "b": 0.5,
+     "s": 4.930817610062839,
+     "pass": true,
+     "o2": 0.5358930826187134,
+     "F_acc": 0.7666666666666667,
+     "flips_mem_vs_start": 0,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 1.0,
+     "s": 5.232704402515675,
+     "pass": true,
+     "o2": 1.0358930826187134,
+     "F_acc": 0.7666666666666667,
+     "flips_mem_vs_start": 0,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 2.0,
+     "s": 6.817610062893013,
+     "pass": false,
+     "o2": 2.035892963409424,
+     "F_acc": 0.8,
+     "flips_mem_vs_start": 1,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 4.0,
+     "s": 13.79874213836465,
+     "pass": false,
+     "o2": 4.035893440246582,
+     "F_acc": 0.9,
+     "flips_mem_vs_start": 4,
+     "flips_loss_vs_start": 0
+    },
+    {
+     "b": 8.0,
+     "s": 37.69811320754684,
+     "pass": false,
+     "o2": 8.035892486572266,
+     "F_acc": 1.0,
+     "flips_mem_vs_start": 7,
+     "flips_loss_vs_start": 0
+    }
+   ],
+   "o2_at_bmax": 1.0358930826187134,
+   "gain_vs_theta0_delta": null,
+   "E2": 1.863001275807619,
+   "gain_norm": 0.5226529039006916
+  }
+ ],
+ "verdict": "BIAS_REPLICATES"
+}

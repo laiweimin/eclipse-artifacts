@@ -1,0 +1,26 @@
+{
+ "ez7_dir": "research_outputs/uw/ez7-c100b-20261002T095746",
+ "q": 4.076923076923073,
+ "fm_max": 4.32267427444458,
+ "uncapped_ref_gains": [
+  0.131,
+  0.39,
+  0.868
+ ],
+ "arms": {
+  "O2": {
+   "gains": [
+    0.13067116213869479,
+    0.3896491127169732,
+    0.5597089018942845
+   ],
+   "max_gain": 0.5597089018942845,
+   "best_gain_pass": 0.5597089018942845,
+   "pass_frac": 1.0,
+   "est_pass_frac": 1.0,
+   "mean_flips_to_mem": 4.0
+  }
+ },
+ "verdict": "CAP_LEAKS",
+ "verdict_why": "one-sided cap admits a passing O2 gain over gate on CIFAR-100"
+}

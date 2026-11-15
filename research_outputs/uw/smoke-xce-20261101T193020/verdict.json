@@ -1,0 +1,24 @@
+{
+ "generated": "2026-11-01T19:31:23",
+ "gates": {
+  "G1_pass": 1,
+  "G2_dog_auc_075": 0,
+  "G3_dog_tpr_030": 0
+ },
+ "verdict": "CHANNEL-BLOCKED",
+ "rows": [
+  {
+   "tag": "e3-s1",
+   "n_acc": 4,
+   "s6_base": 4.213836477987382,
+   "s6_fin": 5.220125786163475,
+   "pass": true,
+   "dog_auc_base": 0.5435,
+   "dog_auc_fin": 0.5461666666666667,
+   "dog_tpr": 0.06666666666666667,
+   "dog_fpr": 0.03,
+   "cat_ztpr_base": 0.1,
+   "cat_ztpr_fin": 0.1
+  }
+ ]
+}

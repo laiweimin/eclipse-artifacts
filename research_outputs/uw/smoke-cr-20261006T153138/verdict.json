@@ -1,0 +1,60 @@
+{
+ "sizes": {
+  "2": {
+   "qC": Infinity,
+   "honest12": 1.0,
+   "bias": {
+    "per_start": [
+     {
+      "pass": true,
+      "gain": 2.0558649789512145
+     },
+     {
+      "pass": true,
+      "gain": 2.1470731404979757
+     },
+     {
+      "pass": true,
+      "gain": 2.1329579512374712
+     }
+    ],
+    "best_passing": 2.1470731404979757
+   },
+   "ll": {
+    "per_start": [
+     {
+      "pass": true,
+      "gain": 0.25439027410593257
+     },
+     {
+      "pass": true,
+      "gain": 0.2585381530563645
+     },
+     {
+      "pass": true,
+      "gain": 0.27629015098087334
+     }
+    ],
+    "best_passing": 0.27629015098087334
+   },
+   "full": {
+    "per_start": [
+     {
+      "pass": true,
+      "gain": 40266.40274436969
+     },
+     {
+      "pass": true,
+      "gain": 2216700.1394133214
+     },
+     {
+      "pass": true,
+      "gain": 6805.687350212764
+     }
+    ],
+    "best_passing": 2216700.1394133214
+   }
+  }
+ },
+ "verdict": "MIXED_CURVE"
+}

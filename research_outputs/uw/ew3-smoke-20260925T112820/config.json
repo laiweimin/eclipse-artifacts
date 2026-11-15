@@ -1,0 +1,44 @@
+{
+ "command": "python -m uw.run_ew3 --gpu 0 --smoke",
+ "inst": "2000000002",
+ "theta0": "research_outputs/s0c_cifar/instance-2000000002/benign_50ep.pt",
+ "epochs": 2,
+ "k_grid": [
+  30,
+  300
+ ],
+ "noise_seeds": [
+  44001,
+  44002
+ ],
+ "rt_seeds": {
+  "30": [
+   44101
+  ],
+  "300": [
+   44111
+  ]
+ },
+ "ft_seeds": [
+  44301
+ ],
+ "c_grid": [
+  0.0,
+  0.5,
+  1.0
+ ],
+ "sub_seed": 52000,
+ "sub_n": 3000,
+ "pool_seed": 43801,
+ "pool_sha": "e5a7a69db9e1aa10",
+ "f_sha": {
+  "30": "2c60d48f8a260889",
+  "300": "f5129f2c9a8295c7"
+ },
+ "sub_sha": "0d9499cdec4816d9",
+ "smoke": true,
+ "torch": "2.0.1+cu117",
+ "numpy": "1.24.3",
+ "material_x": 3.0,
+ "pass_i1": 0.2
+}

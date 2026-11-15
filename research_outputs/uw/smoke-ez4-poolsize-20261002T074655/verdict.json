@@ -1,0 +1,52 @@
+{
+ "true_q": 5.245283018867874,
+ "sizes": {
+  "12": {
+   "est_q": 10.729729729729685,
+   "res": {
+    "O2": {
+     "gains": [
+      1.1463106242865
+     ],
+     "max_gain": 1.1463106242865,
+     "best_gain_pass": -1000000000.0,
+     "pass_frac": 0.0,
+     "est_pass_frac": 1.0,
+     "mean_flips_to_mem": 8.0
+    }
+   }
+  },
+  "6": {
+   "est_q": Infinity,
+   "res": {
+    "O2": {
+     "gains": [
+      11.105044526116874
+     ],
+     "max_gain": 11.105044526116874,
+     "best_gain_pass": -1000000000.0,
+     "pass_frac": 0.0,
+     "est_pass_frac": 1.0,
+     "mean_flips_to_mem": 9.0
+    }
+   }
+  },
+  "3": {
+   "est_q": Infinity,
+   "res": {
+    "O2": {
+     "gains": [
+      11.104500886057592
+     ],
+     "max_gain": 11.104500886057592,
+     "best_gain_pass": -1000000000.0,
+     "pass_frac": 0.0,
+     "est_pass_frac": 1.0,
+     "mean_flips_to_mem": 9.0
+    }
+   }
+  }
+ },
+ "verdict": "DEGRADED",
+ "verdict_why": "size-6 departs from size-12 (report curve)"
+}

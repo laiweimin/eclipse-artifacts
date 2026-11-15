@@ -1,0 +1,38 @@
+{
+ "generated": "2026-11-01T16:25:14",
+ "n_instances": 10,
+ "qmax": 1.0,
+ "gates": {
+  "G1_feasible": 1,
+  "G1_p": 0.5,
+  "G2_median_survival": 0.93,
+  "G3_auc_positive": 0,
+  "G3_p": 1.0
+ },
+ "verdict": "TRADE-OFF",
+ "rows": [
+  {
+   "tag": "e3-s1",
+   "obj": "ce",
+   "auc_base": 0.5466666666666666,
+   "auc_fin": 0.5656666666666667,
+   "ci": [
+    -0.12567500000000004,
+    0.16420833333333312
+   ],
+   "ztpr_base": 0.1,
+   "ztpr_fin": 0.13333333333333333,
+   "ztpr_fpr": 0.085,
+   "survival_200": 0.93,
+   "s6_fin": 2.3058440174861285,
+   "sJ_main_fin": 6.7324086071179305,
+   "pass_multi": true
+  }
+ ],
+ "gen_metas": {
+  "e3-s1:ce": {
+   "reason": "max-iter",
+   "n_accepted": 4
+  }
+ }
+}

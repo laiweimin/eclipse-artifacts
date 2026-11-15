@@ -1,0 +1,101 @@
+{
+ "generated": "2026-11-01T20:29:47",
+ "n_instances": 10,
+ "qmax": 1.0,
+ "gates": {
+  "G1_feasible": 2,
+  "G1_p": 0.25,
+  "G2_median_survival": 0.95,
+  "G3_auc_positive": 0,
+  "G3_p": 1.0
+ },
+ "verdict": "NOT-ROBUST",
+ "rows": [
+  {
+   "tag": "warm-e3-s3",
+   "obj": "ce",
+   "auc_base": 0.6928333333333333,
+   "auc_fin": 0.6916666666666667,
+   "ci": [
+    -0.09651249999999992,
+    0.08702916666666648
+   ],
+   "ztpr_base": 0.3,
+   "ztpr_fin": 0.26666666666666666,
+   "ztpr_fpr": 0.09,
+   "survival_200": 0.95,
+   "s6_fin": 3.207547169811289,
+   "sJ_main_fin": 6.184429842871124,
+   "pass_multi": true
+  },
+  {
+   "tag": "warm-e3-s3",
+   "obj": "grad",
+   "auc_base": 0.6928333333333333,
+   "auc_fin": 0.693,
+   "ci": [
+    -0.09466666666666668,
+    0.08752916666666653
+   ],
+   "ztpr_base": 0.3,
+   "ztpr_fin": 0.3,
+   "ztpr_fpr": 0.09,
+   "survival_200": 0.95,
+   "s6_fin": 3.220125786163489,
+   "sJ_main_fin": 6.22978723612326,
+   "pass_multi": true
+  },
+  {
+   "tag": "warm-e3-s4",
+   "obj": "ce",
+   "auc_base": 0.6928333333333333,
+   "auc_fin": 0.6916666666666667,
+   "ci": [
+    -0.09651249999999992,
+    0.08702916666666648
+   ],
+   "ztpr_base": 0.3,
+   "ztpr_fin": 0.26666666666666666,
+   "ztpr_fpr": 0.09,
+   "survival_200": 0.95,
+   "s6_fin": 3.207547169811289,
+   "sJ_main_fin": 6.184527786225901,
+   "pass_multi": true
+  },
+  {
+   "tag": "warm-e3-s4",
+   "obj": "grad",
+   "auc_base": 0.6928333333333333,
+   "auc_fin": 0.6928333333333333,
+   "ci": [
+    -0.09483749999999999,
+    0.08719999999999976
+   ],
+   "ztpr_base": 0.3,
+   "ztpr_fin": 0.3,
+   "ztpr_fpr": 0.09,
+   "survival_200": 0.95,
+   "s6_fin": 3.220125786163489,
+   "sJ_main_fin": 6.229204539131991,
+   "pass_multi": true
+  }
+ ],
+ "gen_metas": {
+  "warm-e3-s3:ce": {
+   "reason": "stall",
+   "n_accepted": 4
+  },
+  "warm-e3-s3:grad": {
+   "reason": "max-iter",
+   "n_accepted": 18
+  },
+  "warm-e3-s4:ce": {
+   "reason": "stall",
+   "n_accepted": 5
+  },
+  "warm-e3-s4:grad": {
+   "reason": "max-iter",
+   "n_accepted": 14
+  }
+ }
+}

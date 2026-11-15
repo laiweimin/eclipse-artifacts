@@ -1,0 +1,22 @@
+# MU-Attack baseline environment (pinned 2026-09-08)
+#
+# Interpreter : /root/anaconda3/envs/py38/bin/python  (WSL Ubuntu-20.04, WSL2)
+#               Windows 侧路径映射: G:\MU-Attack\python -> /mnt/g/MU-Attack/python
+# Python      : 3.8.18
+# Platform    : WSL2 Ubuntu-20.04, CUDA 11.7 runtime (bundled in torch wheel)
+# GPU         : NVIDIA GeForce RTX 4090 D (24 GB, cuda available: True)
+#               备用卡: NVIDIA GeForce RTX 2080 Ti (22 GB)
+# Baseline 需 GPU: forest/witch.py 原状含 .cuda()（修复后设备自适应）
+#
+# 稳定调用形式（PowerShell 或 Git Bash 均可）:
+#   wsl bash -lc "cd /mnt/g/MU-Attack/python && /root/anaconda3/envs/py38/bin/python run_single.py ..."
+#
+# 安装本文件（需要 cu117 wheel 索引，已在下方声明）:
+#   /root/anaconda3/envs/py38/bin/pip install -r requirements.txt
+
+--extra-index-url https://download.pytorch.org/whl/cu117
+
+torch==2.0.1+cu117
+torchvision==0.15.2+cu117
+numpy==1.24.3
+pillow==10.2.0

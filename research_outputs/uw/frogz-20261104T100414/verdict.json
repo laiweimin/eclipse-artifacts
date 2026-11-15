@@ -1,0 +1,68 @@
+{
+ "generated": "2026-11-04T10:04:43",
+ "tau_note": "per-model aux q95 (primary wp protocol)",
+ "rows": [
+  {
+   "start": 47729,
+   "tpr_base": 0.03333333333333333,
+   "tpr_fin": 0.06666666666666667,
+   "inc": 0.03333333333333333,
+   "fpr_fin": 0.07,
+   "retention": [
+    -0.9999999999999998,
+    -0.9999999999999998
+   ]
+  },
+  {
+   "start": 47730,
+   "tpr_base": 0.2,
+   "tpr_fin": 0.1,
+   "inc": -0.1,
+   "fpr_fin": 0.12
+  },
+  {
+   "start": 47731,
+   "tpr_base": 0.06666666666666667,
+   "tpr_fin": 0.1,
+   "inc": 0.03333333333333334,
+   "fpr_fin": 0.075,
+   "retention": [
+    0.0,
+    -1.9999999999999996
+   ]
+  },
+  {
+   "start": 47732,
+   "tpr_base": 0.03333333333333333,
+   "tpr_fin": 0.06666666666666667,
+   "inc": 0.03333333333333333,
+   "fpr_fin": 0.115,
+   "retention": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "start": 47733,
+   "tpr_base": 0.0,
+   "tpr_fin": 0.06666666666666667,
+   "inc": 0.06666666666666667,
+   "fpr_fin": 0.045,
+   "retention": [
+    0.0,
+    0.5000000000000001
+   ]
+  },
+  {
+   "start": 47734,
+   "tpr_base": 0.1,
+   "tpr_fin": 0.1,
+   "inc": 0.0,
+   "fpr_fin": 0.035
+  }
+ ],
+ "n_zpos": 0,
+ "z_verdict": "FROG-Z-WEAK",
+ "median_retention": -0.4999999999999999,
+ "persistence_verdict": "FROG-WASHED"
+}

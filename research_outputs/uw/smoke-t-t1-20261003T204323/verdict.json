@@ -1,0 +1,42 @@
+{
+ "main": {
+  "per_start": [
+   {
+    "j": 0,
+    "best": 1.6239906549453735,
+    "true_pass": false,
+    "gain": 0.838325029284351,
+    "w2c": 7
+   },
+   {
+    "j": 1,
+    "best": 0.886283278465271,
+    "true_pass": true,
+    "gain": 0.442347105887437,
+    "w2c": 3
+   }
+  ],
+  "commit": {
+   "j": 0,
+   "best": 1.6239906549453735,
+   "true_pass": false,
+   "gain": 0.838325029284351,
+   "w2c": 7
+  }
+ },
+ "all_pass_frac": 0.5,
+ "bootstrap": [
+  {
+   "commit_ok": false,
+   "commit_gain": 0.6768303381003372
+  }
+ ],
+ "t3_quantile_rule": {
+  "j": 1,
+  "est_s": 3.3333333333333304,
+  "pass": true,
+  "gain": 0.442347105887437
+ },
+ "verdict": "T1_LEAK_FAIL",
+ "boot_frac": 0.0
+}

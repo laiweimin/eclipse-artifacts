@@ -1,0 +1,13 @@
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+Files already downloaded and verified
+theta0 44600 trained
+armA_t44600_k30 45001 I1 -0.0 ctrl 4.7
+armB_topF 44801 I1 0.0 ctrl 3.6
+VERDICT A: {"44600_k30": {"status": "failed", "reason": "I1*=-0.000 < 0.10"}}
+VERDICT B: uniform_only -- all families < 0.10
+saved research_outputs/uw/ew5-smoke-20260925T160608

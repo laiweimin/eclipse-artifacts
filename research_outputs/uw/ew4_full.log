@@ -1,0 +1,54 @@
+Files already downloaded and verified
+Files already downloaded and verified
+Setting seed as 2000000002
+Target image is chosen with ID [8060] from class frog (6)
+3150 poison images are chosen from class truck (9)
+3150 camouflage images are chosen from class truck (6)
+Files already downloaded and verified
+ctrl 30 44101 inf
+opt 30 44101 S0 ok 0.182
+opt 30 44101 S1 no_feasible_start 0.0
+opt 30 44101 S2 no_feasible_start 0.0
+opt 30 44101 S3 ok 0.1691
+ctrl 30 44102 inf
+opt 30 44102 S0 ok 0.2477
+opt 30 44102 S1 no_feasible_start 0.0
+opt 30 44102 S2 no_feasible_start 0.0
+opt 30 44102 S3 no_feasible_start 0.0
+ctrl 30 44103 5.736941354359636e+35
+opt 30 44103 S0 ok 0.0
+opt 30 44103 S1 no_feasible_start 0.0
+opt 30 44103 S2 no_feasible_start 0.0
+opt 30 44103 S3 ok -0.0619
+ctrl 300 44111 inf
+opt 300 44111 S0 ok 0.0736
+opt 300 44111 S1 no_feasible_start 0.0
+opt 300 44111 S2 no_feasible_start 0.0
+opt 300 44111 S3 ok 0.0656
+ctrl 300 44112 2.5263246454553366e+20
+opt 300 44112 S0 ok 0.2139
+opt 300 44112 S1 no_feasible_start 0.0
+opt 300 44112 S2 no_feasible_start 0.0
+opt 300 44112 S3 ok 0.1839
+ctrl 300 44113 inf
+opt 300 44113 S0 ok 0.0
+opt 300 44113 S1 no_feasible_start 0.0
+opt 300 44113 S2 no_feasible_start 0.0
+opt 300 44113 S3 ok -0.026
+ctrl 1000 44121 8.132708211374745e+32
+opt 1000 44121 S0 ok 0.0012
+opt 1000 44121 S1 no_feasible_start 0.0
+opt 1000 44121 S2 no_feasible_start 0.0
+opt 1000 44121 S3 ok 0.0013
+ctrl 1000 44122 3.1467334031999403e+34
+opt 1000 44122 S0 ok 0.0283
+opt 1000 44122 S1 no_feasible_start 0.0
+opt 1000 44122 S2 no_feasible_start 0.0
+opt 1000 44122 S3 ok 0.0212
+ctrl 1000 44123 9.586225388341854e+34
+opt 1000 44123 S0 ok 0.1066
+opt 1000 44123 S1 no_feasible_start 0.0
+opt 1000 44123 S2 no_feasible_start 0.0
+opt 1000 44123 S3 ok 0.0894
+VERDICT: UNDECIDED -- control failure at [] / skip_frac 0.53
+saved research_outputs/uw/ew4-20260925T153928

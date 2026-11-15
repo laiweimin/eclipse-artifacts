@@ -1,0 +1,126 @@
+{
+ "generated": "2026-11-03T22:44:51",
+ "q_rt": 5.637837837837867,
+ "cal_scores": [
+  1.2297297297297303,
+  1.4310810810810917,
+  4.1538461538460485,
+  5.637837837837867,
+  4.75941903056795,
+  3.8233918353722576
+ ],
+ "honest_pass": {
+  "47601": true,
+  "47602": true,
+  "47603": true,
+  "47604": true,
+  "47605": true,
+  "47606": true,
+  "47607": true,
+  "47608": true,
+  "47609": true,
+  "47610": true,
+  "47611": true,
+  "47612": true,
+  "47613": true,
+  "47614": true,
+  "47615": true,
+  "44101": true,
+  "44102": true,
+  "44103": true
+ },
+ "rows": [
+  {
+   "start_seed": 47613,
+   "start_src": "new",
+   "s6_start": 3.5054054054054173,
+   "s6_fin": 5.6378378378378535,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.49666666666666665,
+   "auc_fin": 0.5001666666666666,
+   "ci": [
+    -0.1583416666666667,
+    0.1653791666666664
+   ],
+   "ci_positive": false
+  },
+  {
+   "start_seed": 47614,
+   "start_src": "new",
+   "s6_start": 1.4791666666666659,
+   "s6_fin": 5.6377755952279625,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.5041666666666667,
+   "auc_fin": 0.5043333333333333,
+   "ci": [
+    -0.14667083333333333,
+    0.1518416666666666
+   ],
+   "ci_positive": false
+  },
+  {
+   "start_seed": 47615,
+   "start_src": "new",
+   "s6_start": 2.4615384615384026,
+   "s6_fin": 5.637822963302325,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.477,
+   "auc_fin": 0.4801666666666667,
+   "ci": [
+    -0.12934166666666663,
+    0.13967083333333336
+   ],
+   "ci_positive": false
+  },
+  {
+   "start_seed": 44101,
+   "start_src": "ew3-existing",
+   "s6_start": 5.12095289763093,
+   "s6_fin": 5.615384615384494,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.4575,
+   "auc_fin": 0.4646666666666667,
+   "ci": [
+    -0.1258458333333333,
+    0.14534166666666665
+   ],
+   "ci_positive": false
+  },
+  {
+   "start_seed": 44102,
+   "start_src": "ew3-existing",
+   "s6_start": 2.7692307692306706,
+   "s6_fin": 5.637820002797677,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.4698333333333333,
+   "auc_fin": 0.4781666666666667,
+   "ci": [
+    -0.14417916666666666,
+    0.1610083333333332
+   ],
+   "ci_positive": false
+  },
+  {
+   "start_seed": 44103,
+   "start_src": "ew3-existing",
+   "s6_start": 2.0769230769229816,
+   "s6_fin": 5.6378378378378535,
+   "pass_start": true,
+   "pass_fin": true,
+   "auc_base": 0.48483333333333334,
+   "auc_fin": 0.48533333333333334,
+   "ci": [
+    -0.15617916666666673,
+    0.15550833333333325
+   ],
+   "ci_positive": false
+  }
+ ],
+ "n_survive": 0,
+ "verdict": "EXACT-RT-NEGATIVE"
+}

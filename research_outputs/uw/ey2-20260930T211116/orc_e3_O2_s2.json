@@ -1,0 +1,14 @@
+{
+ "best": -0.5993598699569702,
+ "true_s": 6.9308176100628245,
+ "true_pass": false,
+ "est_s": 6.9308176100628245,
+ "est_pass": false,
+ "m1": 0.768,
+ "m2": 0.466,
+ "F_acc_atk": 0.43333333333333335,
+ "F_acc_honmed": 0.7,
+ "F_acc_theta0": 0.9333333333333333,
+ "flips_to_mem": 0,
+ "flips_to_loss": 8
+}

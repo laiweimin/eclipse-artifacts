@@ -1,0 +1,155 @@
+{
+ "note": "EXPLORATORY post-hoc: acceptance bands = leave-one-out honest theta_R ensemble spread per k (frozen run used k=0 noise bands which reject honest retrains at every k); computed from stored fr metrics, no new GPU",
+ "per_k": {
+  "30": [
+   {
+    "seed": 44101,
+    "band_loo": {
+     "m1_acc": 0.0009,
+     "m2_catacc": 0.018,
+     "m3_Floss": 0.25654,
+     "m4_KS": 0.083,
+     "m5_adv": 0.02946,
+     "m6_fm": 0.58765
+    },
+    "cstar_A": 0.0,
+    "cstar_B": 0.0,
+    "I1_A": 0.0,
+    "floor_pass": false,
+    "honest_c0_pass": true
+   },
+   {
+    "seed": 44102,
+    "band_loo": {
+     "m1_acc": 0.0009,
+     "m2_catacc": 0.006,
+     "m3_Floss": 0.25654,
+     "m4_KS": 0.083,
+     "m5_adv": 0.02946,
+     "m6_fm": 0.58765
+    },
+    "cstar_A": 0.0,
+    "cstar_B": 0.0,
+    "I1_A": 0.0,
+    "floor_pass": false,
+    "honest_c0_pass": false
+   },
+   {
+    "seed": 44103,
+    "band_loo": {
+     "m1_acc": 0.0,
+     "m2_catacc": 0.018,
+     "m3_Floss": 0.02389,
+     "m4_KS": 0.07633,
+     "m5_adv": 0.02336,
+     "m6_fm": 0.38375
+    },
+    "cstar_A": 0.0,
+    "cstar_B": 0.0,
+    "I1_A": 0.0,
+    "floor_pass": false,
+    "honest_c0_pass": false
+   }
+  ],
+  "300": [
+   {
+    "seed": 44111,
+    "band_loo": {
+     "m1_acc": 0.0003,
+     "m2_catacc": 0.02,
+     "m3_Floss": 0.07093,
+     "m4_KS": 0.02033,
+     "m5_adv": 0.01537,
+     "m6_fm": 0.23292
+    },
+    "cstar_A": 0.0,
+    "cstar_B": 0.0,
+    "I1_A": 0.0,
+    "floor_pass": false,
+    "honest_c0_pass": false
+   },
+   {
+    "seed": 44112,
+    "band_loo": {
+     "m1_acc": 0.0009,
+     "m2_catacc": 0.02,
+     "m3_Floss": 0.07093,
+     "m4_KS": 0.01033,
+     "m5_adv": 0.00233,
+     "m6_fm": 0.0368
+    },
+    "cstar_A": 0.0,
+    "cstar_B": 0.0,
+    "I1_A": 0.0,
+    "floor_pass": false,
+    "honest_c0_pass": false
+   },
+   {
+    "seed": 44113,
+    "band_loo": {
+     "m1_acc": 0.0009,
+     "m2_catacc": 0.012,
+     "m3_Floss": 0.01651,
+     "m4_KS": 0.02033,
+     "m5_adv": 0.01537,
+     "m6_fm": 0.23292
+    },
+    "cstar_A": 0.0,
+    "cstar_B": 0.0,
+    "I1_A": 0.0,
+    "floor_pass": false,
+    "honest_c0_pass": false
+   }
+  ],
+  "1000": [
+   {
+    "seed": 44121,
+    "band_loo": {
+     "m1_acc": 0.0031,
+     "m2_catacc": 0.011,
+     "m3_Floss": 0.03255,
+     "m4_KS": 0.02567,
+     "m5_adv": 0.00709,
+     "m6_fm": 0.14022
+    },
+    "cstar_A": 0.0,
+    "cstar_B": 0.0,
+    "I1_A": 0.0,
+    "floor_pass": false,
+    "honest_c0_pass": true
+   },
+   {
+    "seed": 44122,
+    "band_loo": {
+     "m1_acc": 0.0031,
+     "m2_catacc": 0.011,
+     "m3_Floss": 0.03255,
+     "m4_KS": 0.02567,
+     "m5_adv": 0.00709,
+     "m6_fm": 0.14022
+    },
+    "cstar_A": 0.0,
+    "cstar_B": 0.0,
+    "I1_A": 0.0,
+    "floor_pass": false,
+    "honest_c0_pass": true
+   },
+   {
+    "seed": 44123,
+    "band_loo": {
+     "m1_acc": 0.0007,
+     "m2_catacc": 0.011,
+     "m3_Floss": 0.00336,
+     "m4_KS": 0.00233,
+     "m5_adv": 0.00353,
+     "m6_fm": 0.03829
+    },
+    "cstar_A": 0.0,
+    "cstar_B": 0.0,
+    "I1_A": 0.0,
+    "floor_pass": false,
+    "honest_c0_pass": false
+   }
+  ]
+ }
+}

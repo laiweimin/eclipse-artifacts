@@ -1,0 +1,39 @@
+{
+ "H1_variance_explained": {
+  "n_cells": 17,
+  "spearman": 0.767,
+  "rank_r2": 0.589
+ },
+ "H2_band_source": {
+  "t44600_k30": {
+   "i1_star_3seed": 0.11986487160012561,
+   "gamma_3seed": 0.12384396373579575,
+   "i1_star_6seed": 0.17895272926263525,
+   "gamma_6seed": 0.2553398814439659
+  },
+  "t44700_k30": {
+   "i1_star_3seed": 0.3302142508845055,
+   "gamma_3seed": 0.45404050722366945,
+   "i1_star_6seed": 0.3255012872534642,
+   "gamma_6seed": 0.42436247280849104
+  },
+  "t44700_k300": {
+   "i1_star_3seed": 0.003708202087797932,
+   "gamma_3seed": 0.0759394865655366,
+   "i1_star_6seed": 0.14184869583891374,
+   "gamma_6seed": 0.11264481050350535
+  },
+  "t44500_k30": {
+   "i1_star_3seed": 0.2477,
+   "gamma_3seed": 0.23535773560338033,
+   "i1_star_6seed": 0.247696501703853,
+   "gamma_6seed": 0.2120938879869918
+  }
+ },
+ "H3_leak_identity": {
+  "spearman_recovery_vs_theta0_margin_rank": 0.205,
+  "mean_recovery_high_half": 179495456.0,
+  "mean_recovery_low_half": 125792240.0,
+  "I1": 0.2477
+ }
+}

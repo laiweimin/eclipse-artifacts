@@ -1,0 +1,19 @@
+{
+ "0.1": {
+  "qC": 10.53130054473877,
+  "honest": 0.9166666666666666,
+  "attack": {
+   "O2": {
+    "gains": [
+     0.40373393491715537
+    ],
+    "max_gain": 0.40373393491715537,
+    "best_gain_pass": 0.40373393491715537,
+    "pass_frac": 1.0,
+    "est_pass_frac": 1.0,
+    "mean_flips_to_mem": 6.0
+   }
+  }
+ },
+ "verdict": "T_ALPHA_LEAKS"
+}

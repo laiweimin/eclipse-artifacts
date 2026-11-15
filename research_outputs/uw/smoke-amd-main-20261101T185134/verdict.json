@@ -1,0 +1,36 @@
+{
+ "generated": "2026-11-01T18:52:37",
+ "gates": {
+  "G1_feasible": 1,
+  "G2_ci_positive": 0,
+  "G3_median_survival": 0,
+  "G4_vs_GR": null,
+  "G4_paired_diffs": null
+ },
+ "verdict": "FAIL",
+ "rows": [
+  {
+   "tag": "e3-s1",
+   "pass": true,
+   "auc_base": 0.5466666666666666,
+   "auc_fin": 0.5245,
+   "ci": [
+    -0.17719166666666664,
+    0.12935416666666658
+   ],
+   "ztpr_base": 0.1,
+   "ztpr_fin": 0.1,
+   "survival_200": 0.95,
+   "alpha_final": 0.5
+  }
+ ],
+ "metas": {
+  "e3-s1": {
+   "n_accepted": 4,
+   "alpha_final": 0.5,
+   "alpha_traj": [
+    0.5
+   ]
+  }
+ }
+}

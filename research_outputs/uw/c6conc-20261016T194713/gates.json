@@ -1,0 +1,18 @@
+{
+ "conc5": {
+  "all_pass": true,
+  "target_tpr_med": 0.0,
+  "cover_tpr_med": 0.12,
+  "uniform_tpr_med": 0.23333333333333334,
+  "differential": -0.23333333333333334,
+  "C_gate": false
+ },
+ "conc10": {
+  "all_pass": true,
+  "target_tpr_med": 0.0,
+  "cover_tpr_med": 0.05,
+  "uniform_tpr_med": 0.23333333333333334,
+  "differential": -0.23333333333333334,
+  "C_gate": false
+ }
+}
