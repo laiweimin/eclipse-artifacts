@@ -1,0 +1,2177 @@
+\documentclass[lettersize,journal]{IEEEtran}
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\usepackage{needspace}
+\pgfplotsset{compat=1.17}
+\usepackage{flushend}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+
+\begin{document}
+
+\title{ECLIPSE: Per-Record Membership Encoding Passes Behavioral\\
+ Unlearning Audits}
+
+\author{Weimin~Lai,~Qiao~Yan,~and~Sizhe~Liang%
+\thanks{Manuscript draft, 2026. The authors are with the College of
+Computer Science and Software Engineering, Shenzhen University,
+Shenzhen, China.}}
+
+\markboth{IEEE Transactions on Dependable and Secure Computing}%
+{IEEE Transactions on Dependable and Secure Computing}
+
+\maketitle
+
+\begin{abstract}
+Machine unlearning answers a data-deletion request by
+returning a model that no longer reflects the deleted
+records, and behavioral deletion audits certify compliance by
+comparing aggregate statistics of the returned model against
+honest retraining within tolerance bands. Existing attacks
+bypass other verification layers or operate without an
+acceptance constraint; none must satisfy a live, calibrated,
+multi-metric acceptance rule while the encoding takes place.
+This paper shows that the rule itself can be turned into a
+carrier: we propose ECLIPSE, a provider-side construction
+whose feasible-direction contrastive encoder optimizes under
+the audit's acceptance test. In the principal
+fine-tuning-referenced setting, a
+provider with access to the realized audit scorer constructs
+accepted models with increased membership-ranking signal;
+stronger working-point readout requires an honest reference
+ensemble. We further trace why the audit tolerates the
+encoding: the acceptance region is centered on the reference
+operator's own forget-fit, the utility-side allowance is the
+resource the encoder spends, and the tested constructions do
+not reproduce the signal under from-scratch-referenced audits.
+Four audit-side countermeasures are evaluated; adaptive
+encoders survive the joint covariance rule and threshold
+tightening, while the aligned statistic and the aggregate
+z-detector hold. Transfer and persistence tests bound the
+effect across reference families, classes, deletion scales,
+architectures, and benign fine-tuning.
+\end{abstract}
+
+\begin{IEEEkeywords}
+machine unlearning, deletion audits, membership inference,
+conformal calibration, adversarial providers
+\end{IEEEkeywords}
+
+
+\section{Introduction}\label{sec:intro}
+% ============================================================
+% Para 1: Domain background → research problem + core challenge
+% Check 1 fix: metric list simplified to 3 representative items
+% ============================================================
+\IEEEPARstart{M}{achine} unlearning has emerged as the primary
+mechanism for honoring data-deletion requests in machine learning
+services: instead of retraining from scratch, the provider returns
+a model claimed to no longer reflect the deleted records. Because
+the requester cannot inspect the training pipeline, certification
+rests on \emph{behavioral deletion audits}. The auditor queries
+the returned model, computes a suite of aggregate statistics
+(accuracy, forget-set loss, membership-inference advantage, and
+related metrics), and accepts the model iff every statistic falls
+within a tolerance band calibrated from honest retraining
+\cite{goel2022adversarial,tu2025reliable,dorna2025openunlearning,xue2025survey}.
+The audit is the \emph{only} barrier between a dishonest provider
+and the data subject's erasure right: the provider must return
+some model, cannot be compelled to retrain honestly, and no one
+outside the service observes the training run. This paper
+addresses the following research questions:
+
+\begin{itemize}
+\item[\textbf{RQ1}] \emph{Feasibility:} Can a dishonest
+provider construct a model that passes every audit statistic
+while carrying readable per-record membership signals?
+\item[\textbf{RQ2}] \emph{Mechanism:} Why does the audit
+tolerate such encoding---is the tolerance structural or an
+implementation artifact?
+\item[\textbf{RQ3}] \emph{Defense:} Can audit-side hardening
+detect or block the encoding, and at what cost?
+\end{itemize}
+
+% ============================================================
+% Para 2: Existing research directions → their shortcomings
+% ============================================================
+A recent survey names the open threat class: adversaries who
+``manipulate model behavior to appear compliant during audit,
+while covertly retaining information''~\cite{xue2025survey}.
+Existing attacks either bypass a different verification
+interface or operate without any acceptance constraint: the
+dishonest-provider study of Zhang et
+al.~\cite{zhang2024fragile} circumvents replay-based and
+backdoor-based protocols, and information encoding by
+malicious trainers---Song et al.~\cite{song2017remember},
+Truth Serum~\cite{truthserum2022}, Privacy
+Backdoors~\cite{wen2024privacy}---passes at most a
+model-quality gate, never a live, calibrated, multi-metric
+acceptance rule \emph{while} the encoding takes place. The
+unexamined surface is the acceptance region's
+\emph{interior}: what information a dishonest provider can
+deliberately place there, and who can read it after acceptance.
+
+% ============================================================
+% Para 3: Our method → how it solves the above problems
+% Check 2 fix: no specific numbers; qualitative statement only
+% ============================================================
+This paper proposes ECLIPSE (\emph{Encoding that Crosses audIt
+Lines while Preserving Signals of Erasure-eligible records}), a
+provider-side construction that answers RQ1 affirmatively.
+ECLIPSE exploits a structural property of the
+acceptance rule: the accuracy component leaves an allowance that
+the provider can spend, while the deletion itself forces the
+forget-side tolerance wide---room the encoder, as we show,
+does not use (\S\ref{sec:allowance}). Implementing the
+encoding faces two challenges. First, acceptance is live:
+starting from a feasible model, FIDE commits only candidates
+that pass the unchanged scorer for every audited statistic
+simultaneously; trial candidates may be rejected. Our
+feasible-direction contrastive encoder puts the audit
+check inside the optimization loop, so every committed
+iterate is feasible and the encoder may be terminated at any
+point. Second, membership must be readable \emph{per record}
+after acceptance, not merely detectable in aggregate. Our
+reference-calibrated readout (CAL-Z) calibrates each record
+against the audit's own honest references and reads it at a
+working-point threshold once the model is accepted and
+deployed (Section~\ref{sec:method}).
+
+% ============================================================
+% Para 4: Main contributions (bullets) with key numbers
+% (numbers live here, not in P3 — TDSC convention)
+% Check 5 fix: "false alarm rates" → "false-rejection rates"
+% ============================================================
+Our contributions are as follows.
+\begin{itemize}
+\item \emph{ECLIPSE and the acceptance--readout gap (RQ1).}
+The first construction of deliberate per-record membership
+encoding inside a live, conformally calibrated multi-metric
+deletion audit. Nine of nine starts show label-blind AUC
+gains (all sensitivity intervals positive); a
+reference-calibrated readout reaches per-record TPR $0.43$
+at a nominal $5\%$ threshold---from a model that passes
+every audit statistic.
+\item \emph{The two-part mechanism (RQ2).} \emph{Admissibility:}
+under a retrain-calibrated audit both tested F-aware starts are
+rejected---the original model on the deletion statistics
+(forget-set loss $0.10$ against a centre of $0.82$) while its
+accuracy is in band, the fine-tuned start on accuracy and
+margin---and the F-free starts it admits deliver no signal, so
+the retrain boundary closes at admission as well as through
+the small allowance; because reference family and start
+ancestry are collinear, the two closings are reported jointly,
+not as one identified cause. \emph{Budget:} within the admitted
+family, delivered gain rises monotonically with the utility
+allowance ($0.084$ to $0.253$ over a six-fold range; the two
+tightest settings are single-start probes) and is invariant to
+the forget-side width---the width deletion-inflated dispersion
+widens (\S\ref{sec:allowance}). The allowance is not
+sufficient; class and scale remain bounded empirically.
+\item \emph{Measurement discipline for deletion-audit
+readings.} Matched-budget selection and logit-scale controls
+that reinterpret recovery scores, rollback exclusion on a
+full grid, and split-conformal coverage calibration with a
+declared false-rejection target---tools that prevent both
+inflated attack claims and false-rejection rates.
+\item \emph{Defense evaluation with adaptive counter-arms
+(RQ3).} The aligned seventh statistic
+($+0.14\to+0.04$), the covariance-calibrated joint rule,
+and the aggregate z-detector with held-out validation,
+plus a stronger membership probe as an instrument-level
+test. Outcomes differ by instrument and are not
+interchangeable: the joint rule and threshold tightening are
+each evaded by re-optimized encoders; the aligned statistic's
+compression survives re-optimization and two objective
+redesigns; the composite z-detector arm admits feasible finals
+with no positive gain; and the stronger probe rejects the
+frozen finals while a fresh encoding under it delivers again.
+\end{itemize}
+
+We evaluate ECLIPSE on CIFAR-10/100 with ResNet-18 and
+MobileNetV2 under preregistered gates; the results
+demonstrate a passing-yet-readable encoding whose tolerance
+traces to the audit's calibration structure, with defense
+outcomes that differ by instrument.
+
+% ============================================================
+% Para 5: Paper organization
+% Check 4 fix: RQ-to-section mapping
+% ============================================================
+The remainder of this paper is organized as follows.
+Section~\ref{sec:related} reviews related work.
+Section~\ref{sec:threat} states the threat model and the
+audit protocol. Section~\ref{sec:method} presents ECLIPSE
+(RQ1: construction), together with the structural property
+it exploits---deletion-forced dispersion of the acceptance
+region. Section~\ref{sec:eval} evaluates ECLIPSE in three
+acts: feasibility and delivered signal (RQ1), why the audit
+tolerates the encoding (RQ2: mechanism), and the
+auditor's countermeasures (RQ3). Section~\ref{sec:discussion}
+states limitations and directions; Section~\ref{sec:conclusion}
+concludes.
+
+\section{Background and Related Work}\label{sec:related}
+\subsection{Statistical deletion audits}
+Auditing unlearning spans parametric replay (proof-of-unlearning
+logs \cite{thudi2022necessity}), cryptographic and proof-carrying
+variants \cite{xue2025survey}, and behavioral statistics. On the
+behavioral side, Goel et al.~\cite{goel2022adversarial} introduced
+the Interclass Confusion test as a stronger black-box check and
+showed that poisoned labels survive naive unlearning evaluations;
+Tu et al.~\cite{tu2025reliable} formalize MIA-based evaluation as a
+cryptographic game, expose a split-sampling sabotage construction
+against naive two-split testing, and derive a swap-based fix;
+benchmark suites \cite{dorna2025openunlearning} document that
+unlearning metrics disagree with one another, and the verification
+survey \cite{xue2025survey} systematizes the field. Our audit
+model---five deployable metrics with tolerance bands---is the
+deployment-facing representative of this line, and we inherit its
+central, largely unexamined design parameter: the tolerance. None of
+these works characterizes the acceptance region that the tolerance
+induces---nor, at record granularity, the information a dishonest
+provider can park inside it while passing.
+
+\subsection{Attacks on unlearning and its verification}
+The known attack families occupy several layers: request-layer
+degradation \cite{huang2025unlearn}, data-layer payloads
+\cite{di2023hidden}, and log-layer forgery
+\cite{thudi2022necessity}. Closest to us, Zhang et
+al.~\cite{zhang2024fragile} study the dishonest provider
+directly: adversarial unlearning procedures retain the
+forgotten data while passing \emph{replay-based and
+backdoor-based} verification protocols (their evaluation also
+includes membership-inference measurements); their closest
+analogues under a banded audit are measured in
+Sections~\ref{sec:wash} and~\ref{sec:region}.
+\emph{Active information encoding} by malicious trainers is
+established in the broader security literature---Song et
+al.~\cite{song2017remember} encode retrievable information
+behind a model-quality gate, Truth
+Serum~\cite{truthserum2022} amplifies membership inference
+via poisoning, Privacy Backdoors~\cite{wen2024privacy} leak
+membership through later fine-tuning---all before or during
+training, without a live, deletion-referenced, calibrated
+multi-metric acceptance constraint.
+
+Our readout draws on a different lineage: the
+membership-inference foundations
+\cite{shokri2017membership, yeom2018privacy, salem2019mlleaks},
+difficulty calibration \cite{watson2022importance}, and
+reference-normalized decoding \cite{carlini2022membership};
+Hayes et al.~\cite{hayes2024inexact} show that
+population-level unlearning MIAs understate per-example
+leakage. The present study differs in direction: a provider
+\emph{intentionally constructs} an artifact that satisfies the
+acceptance region while carrying per-record signal, working
+\emph{under} a live conformal audit.
+\emph{Post-hoc transformation} attacks exploit the
+audit-deployment gap instead: quantization after unlearning
+restores forgotten content \cite{zhang2025catastrophic}
+without passing the audit's own statistics. The survey
+\cite{xue2025survey} names behavioral-space forgery as a
+threat class; on the defense side, Di et
+al.~\cite{di2024adversarial} make unlearning robust to MIA
+auditors---our results suggest the harder problem is not
+making honest models pass, but making dishonest models fail.
+Table~\ref{tab:neighbors} consolidates the delimitation; the
+qualifier-scoped first claim of Section~\ref{sec:intro} is
+made against these families and the unlearning-verification
+and malicious-encoding search record documented in the
+project archive (retrieval through 2026-11). Throughout, a
+returned model that is optimized to pass the audit while
+retaining forget-set influence is called a \emph{wash}.
+
+\begin{table*}[t]
+\caption{Attack families on unlearning and its verification, and
+where this work sits. ``Passes audit statistics'' asks whether the
+returned artifact must itself satisfy the audit's banded metrics
+(forged logs and deployment-time transforms evade this constraint by
+construction; the wash must meet it head-on).}
+\label{tab:neighbors}
+\centering
+\small
+\begin{tabular}{p{24mm}p{28mm}p{24mm}p{16mm}p{42mm}}
+\toprule
+Family & Representative & Artifact attacked & Passes audit stats? & What is characterized \\
+\midrule
+Request-layer & Unlearn-and-Burn \cite{huang2025unlearn} & the deletion request itself & --- & utility destruction via adversarial requests \\
+Data-layer & Hidden Poison \cite{di2023hidden} & training data & --- & payload activated by the unlearning event \\
+Log-layer & auditable definitions \cite{thudi2022necessity} & replayed training trajectories & no (forged logs) & process-verification forgery \\
+Verification-bypass & fragile verification \cite{zhang2024fragile} & replay/backdoor verification protocols & yes (those protocols) & dishonest provider retains data past replay and backdoor checks \\
+Statistical-test sabotage & split-sampling construction \cite{tu2025reliable} & the audit's evaluation split & yes (the sabotaged test) & evaluator-side sabotage of a naive two-split MIA evaluation (swap-based fix derived); aggregate sabotage, no per-record encoding, no calibrated multi-metric band \\
+Post-hoc transform & quantization recovery \cite{zhang2025catastrophic} & deployment-time quantization & no (audit vs.\ deployment gap) & forgotten-content restoration at deployment \\
+Behavioral forgery & fingerprint suppression, signal obfuscation, performance spoofing \cite{xue2025survey} & probe responses, privacy signals, metrics & partially & named threat class; mechanism-level open \\
+\midrule
+\textbf{In-band encoding (this work)} & first-order contrastive encoding under a live conformal audit & the returned model vs.\ banded statistical acceptance & \textbf{yes, by construction} & the acceptance--readout gap: per-record membership readable in passing models; forced tolerance; partial suppression \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Unlearning operators}
+Exact retraining \cite{bourtoule2021machine}, certified
+removal \cite{guo2020certified}, and approximate operators
+\cite{foster2024ssd, golatkar2020eternal, kurmanji2023towards}
+define what the honest provider would return; LLM-scale
+variants are benchmarked in \cite{maini2024tofu,
+dorna2025openunlearning}. Our threat model is orthogonal to
+the operator: the dishonest provider returns \emph{whatever
+passes}, so the audit's geometry is the object of study.
+Across all families of Table~\ref{tab:neighbors}, the
+difference from this work is threefold, as sharpened in
+Section~\ref{sec:threat}. Firstly, \emph{live acceptance}:
+the returned artifact must itself satisfy every banded
+statistic, where forged logs and deployment-time transforms
+evade this constraint by construction. Secondly,
+\emph{provider-known calibration}: the provider holds the
+realized scoring function, a stronger information setting
+than the listed families assume. Thirdly, \emph{no process
+control}: nothing about training is observed or attested, so
+the attack surface is the returned model's behavior alone.
+
+
+\section{Threat Model and Audit Protocol}\label{sec:threat}\label{sec:audit}
+This section sets the stage in three steps: the parties,
+capabilities, and definitions; the audit as a computational
+object (metric suite, acceptance region, calibration); and the
+protocol versions under which results are reported.
+
+\subsection{Parties, Capabilities, and Definitions}
+A \emph{provider} holds model $\theta_0$ trained on dataset $D$ and
+receives a deletion request for a set $F \subset D$. An \emph{auditor}
+receives the returned model $\theta'$, knows $F$ and the retained set
+$R = D \setminus F$, and runs a statistical audit. The provider is
+dishonest: it fully controls $\theta'$ and may retrain internally as
+many times as it likes before returning one model. The auditor is
+honest and black-box-plus-losses---predictions and per-sample losses
+are all that an outside party can query---and retrains only to build
+its reference ensemble.
+Table~\ref{tab:capabilities} fixes the full capability split.
+
+\begin{table}[t]
+\caption{Capability split. The provider is strong (white-box over its
+own returned parameters, audit-aware); the auditor is deployable
+(black-box predictions and losses; no retraining of its own).}
+\label{tab:capabilities}
+\centering
+\small
+\begin{tabular}{p{40mm}p{19mm}p{15mm}}
+\toprule
+Capability & Provider & Auditor \\
+\midrule
+Returned parameters $\theta'$ & full control & metrics only \\
+Audit suite and band semantics & known & defines \\
+Internal retraining budget & $M$ retrains & --- \\
+$F$, $R$ membership & knows & knows \\
+Held-out queries / losses & has & has \\
+Retraining compute & internal & reference-ensemble setup only \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{definition}[Acceptance region]
+\label{def:region}
+Given metric center $c \in \mathbb{R}^5$ and band $b \in
+\mathbb{R}^5_{>0}$, the acceptance region is
+\begin{equation}
+\label{eq:region}
+\mathcal{A}(c,b) = \bigl\{\theta : |m_i(\theta) - c_i| \le b_i,\
+i = 1,\dots,5\bigr\},
+\end{equation}
+where $c$ and $b$ are the median and dispersion radius (maximum
+deviation from the median) of an honest retraining ensemble
+$\{\theta_R^{(s)}\}_{s=1}^{S}$.
+\end{definition}
+
+
+\subsection{Adversary and Downstream Capability Tiers}
+Every downstream claim is scoped to one of three capability
+levels, stated here once. The \textbf{provider} (all tiers)
+knows $\theta_0$, the training data, and $F$; may use any
+retained records; is granted full audit-scoring capability
+(centers, scales, threshold $\hat q_{0.20}$) with unlimited
+offline feasibility queries; and submits one final model.
+\textbf{Tier 1 --- label-blind inferrer} (deployable setting):
+obtains the returned model, sees candidate records with class
+labels but no membership labels, and fixes scoring direction
+and threshold on auxiliary never-trained records. Under this
+tier the demonstrated harm is \emph{ranking-level} membership
+inference (AUC gains on 9/9 starts); working-point
+identification is limited to TPR $\le 0.10$ at nominal $5\%$
+FPR (Section~\ref{sec:working-points}).
+\textbf{Tier 2 --- reference-equipped evaluator}: as Tier 1,
+plus an honest reference ensemble (six models)---a party that
+holds or can reconstruct the auditor's own reference
+infrastructure. The reference-calibrated readout
+(Section~\ref{sec:zreadout}, Table~\ref{tab:zreadout})
+operates at this tier.
+\textbf{Tier 3 --- auditor-side}: the auditor's own ensemble.
+It is what makes the Tier-2 readout demonstrable, but it adds
+no information to an auditor who already knows $F$ and $R$
+(Section~\ref{sec:limitations}).
+
+
+\subsection{Cost accounting for both sides}
+The provider's dominant cost is internal reference generation:
+the reliability figures in this paper assume $M = 6$ honest
+processing runs of the retained set under the audit family's
+operator (roughly six times the honest deletion-processing
+cost), before an optimization that is gradient-cheap (at most
+60 accepted steps on $|F|$ records per candidate). The
+auditor's deployable budget is query-only. A
+two-retrain pilot can measure $\hat\gamma$
+(\S\ref{sec:region}) but has no prospective validation as a
+prediction rule.
+
+
+
+\subsection{Design Constraints for ECLIPSE}
+ECLIPSE operates under three constraints that distinguish it from
+every published attack family (Table~\ref{tab:neighbors}):
+(1)~\emph{Live acceptance}: the returned model must satisfy every
+banded metric simultaneously---the attack surface is the
+\emph{interior} of the acceptance region.
+(2)~\emph{Provider-known calibration}: the provider holds the
+audit's centers, scales, and threshold ($\hat q_{0.20}$), and
+may make unlimited offline feasibility queries.
+(3)~\emph{No process control}: the provider controls only the
+returned parameters $\theta'$.
+
+\subsection{Audit suite}
+We now define the audited object. Two labeling families appear
+below: $A_5$--$A_8$ are audit-protocol versions
+(Section~\ref{sec:protocol-versions}), and Tier 1--3 are the
+downstream capability levels just stated.
+
+Following deployable practice \cite{goel2022adversarial,
+dorna2025openunlearning}, the audit computes five deployable metrics:
+$m_1$ overall test accuracy; $m_2$ class accuracy on the deleted
+records' class; $m_3$ mean cross-entropy on $F$; $m_4$ two-sample
+Kolmogorov--Smirnov distance between per-sample losses on $F$ and a
+frozen retained subsample (3{,}000 records, fixed across the study);
+$m_5$ membership-inference AUC of a logistic probe on per-sample
+(loss, correct-class-margin) features separating $F$ from the
+retained subsample (random guessing $=$ 0.5). Metrics are
+evaluated in the records' canonical
+(unaugmented) form, matching the training input representation, so
+that evaluation is a fixed forward pass on a given device
+(boundary flips at the acceptance grid are device-disclosed
+in Supplementary Table S12; the separate-execution base-AUC
+difference of Table S6 remains unexplained). The model passes iff
+$|m_i(\theta') - c_i| \le b_i$ for all $i$, with $(c,b)$ from the
+honest ensemble (Definition~\ref{def:region}).
+Section~\ref{sec:calibration} shows this ensemble calibration is
+forced: bands calibrated on full-data retraining variance reject the
+honest ensemble itself.
+
+
+\subsection{The audit as a protocol}\label{sec:protocol}
+The deployable audit we attack is the following interaction.
+(1)~The auditor fixes the metric suite $m_{1..5}$, the forget
+set $F$, and a retained probe sample $S$. (2)~It obtains an
+honest reference ensemble $\{\theta_R^{(s)}\}_{s=1}^{S}$ by
+retraining on $D \setminus F$ under the service's own recipe,
+and publishes or holds the centers $c_i = \mathrm{med}_s\, m_i$
+and bands $b_i = \max_s |m_i - c_i|$. (3)~The service returns
+$\theta'$. (4)~The auditor evaluates $m_{1..5}(\theta')$ on
+canonical-form records and accepts iff every deviation is
+within band. Step (2) is where the dispersion measurement
+bites (the ensemble must be re-estimated per deletion scale),
+and step (4) is where the acceptance region is invoked.
+Nothing in the protocol constrains how the service produces
+$\theta'$---precisely the gap the attack occupies.
+
+Two scope statements bound the protocol. First, the step-(2)
+retrains are the audit's trusted setup, run by the auditor or
+an attested third party. All experiments in this
+paper use the \emph{provider-known calibration} model: the
+provider is granted the exact fixed audit-scoring function,
+including its realized calibration parameters (centers,
+scales, and threshold), and may query it offline without
+limit. This assumption is deliberately conservative: granting
+the provider the realized calibration is the harder case for
+the auditor. Common ensemble distributions alone would not
+imply this: the independent-calibration probe of
+Supplementary Table S22 shows the realized estimated and
+true score systems differ. Under the \emph{independent
+calibration} model, five preregistered estimation draws show
+that acceptance survives broadly while signal delivery is
+draw-dependent rather than systematically blocked (the full
+counts are restated with the limitations;
+Section~\ref{sec:limitations}, Supplementary Tables S22,
+S28). Second, the audit certifies only the \emph{submitted and
+deployed model's behavior}; a dishonest service can retain
+copies elsewhere, and no model-side audit certifies their
+absence.
+
+
+\subsection{Audit protocol versions}\label{sec:protocol-versions}
+Three acceptance rules are used in this paper, plus one joint
+variant evaluated as a hardening step ($A_5$--$A_8$; a
+version-by-experiment summary table is in the supplement,
+Supplementary Table S42). All share the same base metrics
+and honest-reference architecture; they differ in the number
+of scored statistics, the calibration procedure, and the
+knowledge granted to the provider. The $A_6$ audit is the
+paper's principal object: the five metrics above plus $m_6$
+(mean forget-set logit margin). Centers $c_i$ and scales
+$\sigma_i$ are the median and MAD of the fit ensemble; the
+joint score is
+\begin{equation}
+\label{eq:a6}
+s_6(\theta) = \max_i \frac{|m_i(\theta) - c_i|}{\sigma_i},
+\end{equation}
+and the threshold $\hat q_\alpha$ is the
+conformal quantile of the calibration ensemble's scores. The
+$A_7$ audit adds
+\begin{equation}
+\label{eq:a7}
+d(\theta) = \mathbb{E}_{N_a}\|\nabla_x \ell\| -
+\mathbb{E}_F\|\nabla_x \ell\|
+\end{equation}
+(frozen on independent fit models) and recalibrates; computing $d$
+requires per-record input gradients, extending the auditor
+beyond black-box-plus-losses. The $m_5$ probe's complete
+specification (features, standardization, training, and
+in-sample evaluation) is fixed in Supplementary Table S45.
+
+
+\section{ECLIPSE: Methodology}\label{sec:method}\label{sec:encoding}
+
+\subsection{Notation}
+Table~\ref{tab:notation} fixes the symbols used throughout.
+
+\begin{table}[t]
+\caption{Notation.}
+\label{tab:notation}
+\centering
+\small
+\begin{tabular}{cl}
+\toprule
+Symbol & Meaning \\
+\midrule
+$D$, $F$, $R$ & training set, forget (deleted) set, retained set \\
+$\theta_0$, $\theta'$ & original model, returned (encoded) model \\
+$m_i(\cdot)$ & audit metric $i$ ($i=1,\dots,6$) \\
+$c_i$, $\sigma_i$ & reference center / scale for metric $i$ \\
+$s(\theta)$ & joint audit score $= \max_i |m_i(\theta)-c_i|/\sigma_i$ \\
+$\hat q_{\alpha}$ & conformal threshold at level $\alpha$ \\
+$N_c$, $N_a$ & construction pool, seventh-statistic set \\
+$N_{\rm aux}$, $N_{\rm eval}$ & threshold-calibration / evaluation sets \\
+$\ell(\theta;x,y)$ & cross-entropy loss of $\theta$ on $(x,y)$ \\
+$J_{\rm CE}(\theta)$ & contrastive objective (Eq.~\ref{eq:ce-objective}) \\
+$z_i$ & calibrated readout score for record $i$ \\
+$\mu_i$, $\sigma^z_i$ & per-record reference mean / std for $z_i$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Problem Statement}
+\label{sec:problem}
+The provider's task is a constrained optimization problem over
+model parameters, defined by the audit of
+Section~\ref{sec:audit}:
+
+\begin{definition}[Constrained encoding problem]
+\label{def:encoding}
+Given the audit's centers $c$, scales $\sigma$, and threshold
+$\hat q_{\alpha}$, the forget set $F$, and a same-class
+construction pool $N_c$, find
+\begin{equation}
+\label{eq:encoding}
+\theta' = \arg\min_{\theta}\; J_{\rm CE}(\theta)
+\quad\mathrm{s.t.}\quad s(\theta) \le \hat q_{\alpha},
+\end{equation}
+where $s$ is the joint audit score of Eq.~(\ref{eq:a6}) and
+$J_{\rm CE}$ is the contrastive objective of
+Eq.~(\ref{eq:ce-objective}).
+\end{definition}
+
+The feasible set is non-convex and non-smooth: $s$ is a maximum
+of six standardized deviations, one of which ($m_1$, accuracy)
+lives on a discrete grid, and the binding component can switch
+along a trajectory. Three properties of the problem shape the
+solution: (i) with positive scales, the max-score constraint
+$s(\theta) \le \hat q$ is exactly the conjunction of marginal
+bands $|m_i - c_i| \le \hat q\,\sigma_i$---its distinctive
+feature is that the half-widths $\hat q\sigma_i$ are calibrated
+\emph{jointly} through the conformal quantile, and every
+component must be checked; (ii) the submitted model must
+be feasible under the fixed scorer---infeasible candidates
+require a repair stage before submission; (iii) the audit is
+queryable offline without limit (Section~\ref{sec:threat}), so
+the constraint can be checked inside the loop.
+
+\begin{remark}[Anytime termination, a conditional invariant]
+\label{rem:anytime}
+Given a feasible initial model and an unchanged scoring
+function, feasible-direction descent
+(Section~\ref{sec:fide}) commits only passing candidates, so
+every committed iterate $\theta^{(t)}$ remains feasible and the
+provider may terminate at any point---under a compute cap,
+on an interrupt, or after a target number of accepted
+steps---and still return a model that passes. The invariant
+is about feasibility only: trial candidates may fail the
+check, and early termination guarantees neither signal
+delivery nor a pinned endpoint. Probes that start outside a
+new constraint (the tightened-threshold and
+independent-calibration runs of Supplementary Table S22)
+first restore feasibility through the same backtracking
+acceptance test.
+\end{remark}
+
+\subsection{The Structural Resource: Deletion-Forced
+Dispersion}\label{sec:region}\label{sec:calibration}
+ECLIPSE is built on a structural property of the audit's
+acceptance region, so we state it before the construction. A
+naive audit calibrates tolerance on the variance of full-data
+retraining. This fails, and the failure mode is mechanical.
+While $F$ is in the training set, every retrain fits it, and
+the cross-seed spread of forget-side statistics is the
+ordinary noise of fitting easy, repeatedly-constrained
+examples. Excluding $F$ removes that constraint: the optimizer
+is now free to allocate capacity elsewhere, and how much
+residual fit each seed leaves on the deleted records varies
+much more. Dispersion on forget-side statistics is therefore
+\emph{created by the deletion itself}---the very act the audit
+is certifying inflates the tolerance it must grant.
+Concretely: with bands from six full-data retrains, the
+\emph{honest} unlearned ensemble is rejected on $3/3$, $2/3$,
+and $1/3$ of its seeds ($k{=}30/300/1000$; three seeds per
+scale); the full dispersion measurement and its
+scale-by-metric detail are in Section~\ref{sec:eval}. The
+ensemble band we use throughout is the minimal correction and
+covers every honest model in the calibration ensemble by
+construction; it is a sample statistic, not a coverage
+guarantee---a deployed audit should fix a target
+false-positive rate and verify coverage on fresh honest
+outputs (the split-conformal analysis in
+Section~\ref{sec:eval} addresses this directly).
+
+\paragraph*{A linear-model mechanism.}
+The property can be verified in closed form in the
+linear-Gaussian setting. Let $y = X\beta^\ast + \varepsilon$ with $\varepsilon \sim
+\mathcal{N}(0, \sigma^2 I_n)$, let $\hat\beta_{\rm full}$
+minimize the squared loss on all $n$ rows and
+$\hat\beta_{R}$ on the $n{-}k$ rows outside $F$, and let the
+forget-side statistic be the mean squared residual
+$m_F(\hat\beta) = \frac{1}{k}\|y_F - X_F\hat\beta\|^2$.
+
+\begin{proposition}[Constraint release inflates forget-side
+dispersion]
+\label{prop:dispersion}
+Over the noise draw $\varepsilon$ (all else fixed), let
+$\lambda_F^{(R)} = \mathrm{tr}(X_F (X_R^\top
+X_R)^{-1} X_F^\top)$ be the total leverage of the
+deleted block against the retained design. Then,
+whenever $\lambda_F^{(R)} > 0$,
+\begin{equation}
+\label{eq:disp}
+\mathrm{Var}_\varepsilon\big[m_F(\hat\beta_{R})\big] -
+\mathrm{Var}_\varepsilon\big[m_F(\hat\beta_{\rm full})\big]
+\;\ge\; \frac{4\sigma^4}{k^2}\,\lambda_F^{(R)} \;>\; 0,
+\end{equation}
+and the gap decomposes additively into a term growing with
+$\lambda_F^{(R)}$, a second-order leverage term, the in-fit
+contraction term, and the in-fit F-leverage of the full fit.
+The identity is a forget-side statement. Test-side prediction
+variance needs its own condition: under the whitened leverage
+$\delta = \|G_R^{-1/2} X_F^\top X_F G_R^{-1/2}\| = O(k/n)$ the
+relative change is bounded,
+\begin{equation}
+\label{eq:whiten}
+0 \le v_R(x_\ast) - v_{\rm full}(x_\ast) \le
+\delta\,v_{\rm full}(x_\ast),
+\end{equation}
+but
+the unwhitened ratio $\|X_F^\top X_F\|/\|X_R^\top X_R\|$ does
+not control it---for a fixed test point the two variances can
+differ by a constant factor while $k/n \to 0$ (Supplementary
+Appendix). Test-side flatness in our experiments is an
+empirical observation, not a corollary of the identity.
+\end{proposition}
+
+\noindent The proposition supplies the forget-side signature
+the measurement shows---forget-side statistics inflate under
+retraining---and identifies the driver as the leverage mass
+of the deleted block (plus the in-fit F-leverage of the full
+fit), not the identity of the statistic. It is a mechanism
+for the linear model; we do not claim it quantitatively
+predicts the deep-network ratios measured in
+Section~\ref{sec:eval}. The inflation is not an artefact of
+ensemble size or of one class: Section~\ref{sec:eval}
+measures it at every tested scale and across the three tested
+classes, with flat test-side ratios (Supplementary Tables
+S33, S34), while \S\ref{sec:allowance} shows it is not the
+room the encoder spends.
+
+\subsection{Overview}
+ECLIPSE (\emph{Encoding that Crosses audIt Lines while Preserving
+Signals of Erasure-eligible records}) is a provider-side
+construction with two active modules and one readout protocol
+(Fig.~\ref{fig:pipeline}). In the first stage, FIDE optimizes
+under live acceptance, so every iterate is feasible; in the
+second, after the accepted model is deployed, CAL-Z reads
+individual deleted records. Section~\ref{sec:region} explains
+a source of forget-side dispersion in the stated linear
+model; the resource used by the tested encoder is identified
+separately---boundary measurements and the dose response in
+Section~\ref{sec:eval} show the role of utility-side
+tolerance:
+
+\textbf{FIDE (Feasible-Direction Encoding).} A contrastive
+encoder that minimizes a forget-vs-construction objective
+while keeping every committed iterate feasible
+(Remark~\ref{rem:anytime}; Algorithm~\ref{alg:fdce}).
+
+\textbf{Observed outcome: boundary pinning.} The guarantee is
+feasibility only, $s(\theta') \le \hat q$; in the primary runs
+every accepted final also sits at the boundary \emph{exactly},
+through the utility metric $m_1$
+(Section~\ref{sec:pinning}).
+
+\textbf{CAL-Z (Readout Protocol).} After the model passes and
+is deployed, a reference-equipped party reads individual
+deleted records at working-point thresholds
+(Section~\ref{sec:calz}). CAL-Z is an evaluation protocol, not
+part of the provider-side construction.
+
+\input{fig_pipeline}
+
+\subsection{FIDE: Feasible-Direction Contrastive Encoding}
+\label{sec:fide}
+
+\paragraph*{Design rationale: the contrastive structure.}
+The provider must make per-record membership of $F$ readable
+downstream \emph{while} satisfying the acceptance constraint.
+Three natural templates fail: plain forget-set fitting
+delivers $+0.05$--$0.08$ against $+0.14$--$0.20$ for the
+contrastive objective (the fitted records are not
+\emph{separated} from same-class neighbors, so scoring cannot
+rank them); retention training under the audit is
+selection-dominated (Section~\ref{sec:wash}); and cross-class
+encoding moves the non-monitored population without
+per-record resolution. The contrastive structure outperforms
+the tested one-sided alternatives, and its two terms serve
+distinct roles: the $\mathbb{E}_F \ell$ term lowers the
+forget-set loss; the $\lambda\,\mathbb{E}_{N_c}\ell$ term
+raises the loss on same-class retained members, creating the
+separation that downstream scoring exploits. Without $\lambda$,
+the encoder fits $F$ but does not separate it from $N_c$;
+without the $F$ term, the model diverges but carries no signal
+about which records were deleted. In the reported sweep, $\lambda{=}0.5$ is the best tested
+value: $\lambda{=}2$ eliminates the measured gains, and
+$\lambda{=}0.5$ is the only swept value delivering CI-positive
+gains on all three selected signal-bearing starts
+(Supplementary Table S24); the sweep does not establish
+universal necessity.
+
+\paragraph*{Why feasible-direction descent.} The constraint
+region is non-convex and non-smooth ($s$ is a maximum of six
+standardized deviations), and two of its components live on
+discrete grids. We do not claim these features make
+projection or Lagrangian methods impossible; they make exact
+acceptance hard to guarantee from those generic recipes. A
+score-checked backtracking step---accept a candidate only if
+the full audit score stays within threshold---retains a
+passing iterate by construction, which is the property the
+provider actually needs (Remark~\ref{rem:anytime}).
+
+\paragraph*{Objective.} Minimize
+\begin{equation}
+J_{\rm CE}(\theta) = \mathbb{E}_{F}\ell(\theta;x,y) -
+\lambda\,\mathbb{E}_{N_c}\ell(\theta;x,y)
+\label{eq:ce-objective}
+\end{equation}
+by feasible-direction descent (Algorithm~\ref{alg:fdce}).
+
+\paragraph*{The loop in words.} Each iteration draws a fresh
+batch $B$ of 60 construction-pool members, computes the
+objective gradient on $F \cup B$, proposes a candidate
+$\theta_{\rm cand} = \theta - \eta\,\nabla J$ (step size
+$\eta$), and submits it to
+the acceptance test: the \emph{full} six-metric audit score is
+evaluated in full (the six-metric score $s_6$ of
+Eq.~(\ref{eq:a6}) over $m_1$--$m_6$), and the candidate is
+accepted iff
+$s(\theta_{\rm cand}) \le \hat q_{0.20}$ \emph{and} the
+objective improves. On rejection the step is halved (up to 8
+backtracks); on acceptance the step grows by $1.1\times$
+(capped at $3\times10^{-3}$); 12 consecutive rejected
+iterations stall-stop the loop. The audit evaluation dominates
+the cost, and it is exact: no surrogate or per-metric shortcut
+is used, which is what makes Remark~\ref{rem:anytime} hold.
+
+\paragraph*{Gradient variant.} The double-backward objective
+$J_{\rm G} = \mathbb{E}_F\|\nabla_x\ell\| -
+0.5\,\mathbb{E}_{N_c}\|\nabla_x\ell\|$. On some starts the
+gradient variant is stronger; on others CE wins---the capability
+is the task-plus-constraint, and first-order methods carry it.
+
+\paragraph*{Complexity.} Algorithm~\ref{alg:fdce} runs $T$
+iterations (typically 60). Each iteration needs one
+forward-backward pass on $|F| + |B|$ records plus one full
+audit evaluation (all six metrics; backtracking can invoke
+this scorer repeatedly). The audit evaluation dominates the
+cost; end-to-end, an encoding takes approximately $2$--$4$
+minutes on a single consumer GPU.
+
+\input{alg_fdce}
+
+\subsection{Boundary Pinning as a Designed Outcome}
+\label{sec:pinning}
+
+\begin{definition}[Pinned final]
+\label{def:pinned}
+A returned model $\theta'$ is \emph{pinned} iff
+$s(\theta') = \hat q$ exactly and the binding component of the
+joint score is the utility metric: $\arg\max_i
+|m_i(\theta')-c_i|/\sigma_i = 1$ (the $m_1$ term).
+\end{definition}
+
+Pinning is an observed endpoint property of the primary
+accepted finals: all eleven sit at $s_6 = \hat q$ through
+$m_1$, recording the same boundary value $m_1 = 0.7814$
+(Section~\ref{sec:eval}), and the property recurs across
+starts, requests, and audit instances. A plausible mechanism,
+offered as a hypothesis rather than a law: the accuracy-type
+metrics ($m_1$ overall, $m_2$ class-level) live on discrete
+grids whose step is one evaluation-set flip, and the observed
+trajectories exhaust utility-grid slack before the forget-side
+metrics leave their bands, so descent ends pinned through
+$m_1$. We have not proven monotone utility degradation along
+accepted steps, and Definition~\ref{def:pinned} is not claimed
+to hold for every construction or audit variant (the
+expansion includes non-pinned, non-passing endpoints).
+
+Two consequences follow. First, the audit budget is spent on
+utility, not on the forget-side instruments: the audit's own
+membership statistic stays within band on every measured final
+($z_5 \le 2.19$ against the threshold $5.245$,
+Table~\ref{tab:mb-paired})---this is the property that keeps
+the encoding invisible to the suite's privacy instrument.
+Second, pinned finals are brittle to threshold tightening but
+not to honest coverage: a $1\%$ tightening
+($0.99\hat q$) rejects all pinned finals while leaving held-out
+honest acceptance unchanged (Section~\ref{sec:eval}); an
+encoder re-run under the tightened threshold lands at the
+nearest feasible grid value just below the new boundary
+(Section~\ref{sec:eval}), not necessarily at an exact pin.
+
+\subsection{CAL-Z: Reference-Calibrated Readout Protocol}
+\label{sec:calz}
+After the encoded model passes the audit and is deployed, a
+reference-equipped party reads individual deleted records.
+The protocol has four frozen steps.
+(1)~\emph{Score}: each candidate record $i$ receives a score
+$r_i$ under the deployed model (any scorer whose direction is
+fixed in advance; the evaluations of this paper use
+$r_\theta = -\ell$ and $-\|\nabla_x \ell\|$).
+(2)~\emph{Per-record calibration}:
+\begin{equation}
+\label{eq:calz}
+z_i = \frac{r_i - \mu_i}{\sigma^z_i},
+\end{equation}
+where $\mu_i$, $\sigma^z_i$ are the per-record mean
+and standard deviation across the audit's own honest reference
+ensemble---per-record difficulty calibration
+following~\cite{carlini2022membership}; easy and hard records
+are standardized against their own reference behavior, which is
+what separates ``unusually easy for this record'' from
+``member-like''.
+(3)~\emph{Threshold freezing}: the working-point threshold is
+fixed on a never-trained auxiliary set $N_{\rm aux}$ at a
+nominal FPR, before any target record is scored.
+(4)~\emph{Evaluation}: decisions on the target records are
+reported with the actual TPR and actual FPR measured on the
+disjoint never-trained set $N_{\rm eval}$.
+Our use of per-record calibration as a readout of models
+inside a live audit's acceptance region is the application,
+not a contribution. The protocol requires reference-ensemble
+access (Tier-2 capability, Section~\ref{sec:threat});
+CAL-Z is an evaluation protocol, not part of the provider-side
+construction.
+
+\subsection{Design Choices and Their Validation}
+\label{sec:design-choices}
+Each frozen design choice of ECLIPSE is either validated by a
+preregistered ablation or is structural to the problem;
+Table~\ref{tab:design} maps them. Two choices deliberately do
+\emph{not} carry weight: the iteration budget (gains saturate
+at 15 iterations) and the deletion-set selection rule (a
+uniformly random set with a fresh audit instance replicates),
+which is why neither is defended.
+
+\begin{table}[t]
+\caption{Frozen design choices of ECLIPSE and where each is
+validated. ``Load-bearing'' = removing or changing the choice
+eliminates the capability in the cited measurement.}
+\label{tab:design}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{24mm}p{14mm}p{30mm}}
+\toprule
+Choice & Setting & Validated by \\
+\midrule
+Contrastive structure & two-term Eq.~(\ref{eq:ce-objective}) & plain/one-sided $+0.05$--$0.08$ vs.\ $+0.14$--$+0.20$ (\S\ref{sec:ablations}) \\
+Contrast weight $\lambda$ & $0.5$ & sweep optimum; $\lambda{=}2$ kills; only $\lambda{=}0.5$ CI-positive on $3/3$ signal starts (S24) \\ 
+In-loop exact feasibility & full $s(\theta)$ per step & anytime termination (Rem.~\ref{rem:anytime}); pinned finals (Def.~\ref{def:pinned}) \\
+Construction pool $N_c$ & 300 records & gradient variant collapses at $N_c{=}30$ (independent eval., S24) \\
+Evaluation resolution & 200 non-members & frozen size; readings replicate at this resolution (S24) \\
+Readout calibration & per-record $z$ & working-point readout vs.\ raw scores (Table~\ref{tab:zreadout}) \\
+\midrule
+\multicolumn{3}{l}{Not defended: iteration budget (saturates at 15);} \\
+\multicolumn{3}{l}{deletion-set selection rule (random set replicates, 4/6 CI-positive).} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Evaluation}\label{sec:eval}
+This section evaluates the joint event that a constructed
+model passes its audit and increases membership readability.
+In the primary scoring execution, eleven of the twelve CE/GR
+finals pass, and all eleven accepted finals sit exactly at the
+acceptance threshold, pinned through the utility metric; the
+expansion probes then separate acceptance from signal delivery
+across reference families, classes, scales, and calibration
+assumptions, and include non-passing finals (the primary GR
+e4-s2 endpoint and one dog-class start). The evaluation
+proceeds in three acts that answer the three research
+questions: \emph{Act 1} establishes feasibility and the
+delivered signal, probing robustness by ablations, a
+design-space sweep, and an alternative wash construction;
+\emph{Act 2} explains why the audit tolerates the encoding,
+from the decode gap through the dispersion measurement to the
+two-part mechanism---admissibility and the utility
+allowance---that gates delivery; \emph{Act 3} evaluates the
+auditor's countermeasures instrument by instrument.
+
+\subsection{Experimental Setup}
+\textbf{Datasets and models.} All experiments use CIFAR-10
+($n{=}50{,}000$) with the standard
+split; the primary architecture is ResNet-18, replicated on
+MobileNetV2 and on CIFAR-100. The full shared configuration
+is fixed in
+Supplementary Table S43; per-study deviations are listed
+in the experiment manifests (Supplementary Table S19) and the
+archived preregistration cards. \textbf{Reference families.} A preregistered probe with
+exact-retrain references (15 fresh from-scratch retrains)
+shows acceptance survives there (6/6 finals pinned and
+passing) while the per-record signal does not for either
+construction---first-order gains near zero, second-order
+gains negative (Supplementary Table S23)---so the
+fine-tuning-referenced scope is a measured boundary observed
+for both tested constructions. \textbf{Wash statistics.} Wash-specific
+statistics
+($L$ selection ceiling, $W$ wash elevation, $G = W - L$,
+$\gamma$) are defined with the supplementary wash tables;
+$I_1$ is Definition~\ref{def:i1}.
+
+\textbf{Determinism.} Base models $\theta_0$ and honest retrains
+$\theta_R^{(s)}$ use the identical recipe of
+Supplementary Table S43 under full deterministic seeding
+(the retrains on $D \setminus F$). Audit metrics are computed
+in the records' canonical (unaugmented) form, matching the
+training input representation. Unless stated, ensembles have
+three retraining seeds; the retrial study uses six.
+
+\textbf{Protocol pools.} All data draws are within the deleted class, frozen before
+each run: construction pool $N_c$ (300 records),
+seventh-statistic set $N_a$ (100), threshold-calibration set
+$N_{\rm aux}$ (100), and evaluation set $N_{\rm eval}$ (200)
+are mutually disjoint. The primary $A_6$ split is six fit,
+twelve calibration, and twelve held-out honest models at
+$\alpha{=}0.20$; all three are one-epoch fine-tunes from
+$\theta_0$ on the retained set. The encoding optimizer's
+frozen hyperparameters are in Supplementary Table S43
+($LR_0{=}10^{-3}$ in Algorithm~\ref{alg:fdce}).
+Both materiality tiers ($I_1 \ge 0.10$ / $\ge 0.20$) are
+preregistered with three-state verdict rules.
+
+
+\textbf{Uncertainty.} We report target-record resampling
+sensitivity intervals (2{,}000 resamples, same indices for base
+and final, each model paired with its own non-member scores).
+We do not claim coverage of non-member sampling, retraining, or
+cross-request variability. Results are from a single preregistered
+execution per configuration unless otherwise stated. The
+intervals are within-execution statements, conditional on the
+trained models, audit instance, and non-member sets; they do
+not estimate end-to-end execution or retraining variance.
+The observed cross-execution scoring differences (base
+evaluations $\le 0.011$, Supplementary Table S6 note;
+encoded-model downstream evaluations up to $0.014$,
+Supplementary Table S18) are differences, not a variance
+bound, and the intervals do not cover them; the record also
+includes a larger, unreconciled discrepancy (an e4-s1 base AUC
+of $0.545$ in the strong-probe run against $0.498$--$0.505$
+elsewhere, Supplementary Table S27), which we report rather
+than bound. Two of the nine encoding gains (e3-s4 $+0.027$,
+n-s2 $+0.028$) are only about twice that noise, so their
+individual positivity carries execution-level uncertainty;
+the seven gate-clearing gains ($+0.102$ to $+0.246$) all sit
+far beyond it.
+\subsection{Act 1: Feasibility and Delivered Signal}
+This act answers RQ1: does the encoding pass while carrying
+readable per-record signal, and how far does that claim reach?
+
+\subsubsection{Effectiveness of ECLIPSE: Label-Blind Results}
+Scoring direction fixed in advance
+($r_\theta = -\|\nabla_x\ell\|$, equivalently low-loss;
+\S\ref{sec:decode-gap} shows output channels are
+close on these finals). Thresholds for working points are frozen
+on the auxiliary set ($N_{\rm aux}$, 100 records); we report
+the actual TPR and actual FPR measured on $N_{\rm eval}$;
+uncertainty statements follow the Setup convention.
+
+\begin{table}[t]
+\caption{Encoding results: label-blind AUC (base $\to$
+encoded), target-record resampling sensitivity intervals of
+the gain (member-index resampling only; training-seed and
+non-member sampling variability are not covered). All finals
+pass the frozen audit. Two deletion requests, two pools,
+nine starts, first-order method.}
+\label{tab:encoding-main}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccc}
+\toprule
+Start & base & encoded & interval \\
+\midrule
+$F$: e3-s1 & 0.547 & 0.703 & $[0.072, 0.251]$ \\
+$F$: e3-s3 & 0.535 & 0.781 & $[0.160, 0.333]$ \\
+$F$: e3-s4 & 0.517 & 0.544 & $[0.003, 0.055]$ \\
+$F$: e4-s0 & 0.493 & 0.632 & $[0.073, 0.217]$ \\
+$F$: e4-s1 & 0.505 & 0.607 & $[0.010, 0.189]$ \\
+$F$: e4-s2 & 0.505 & 0.664 & $[0.087, 0.236]$ \\
+$F'$: n-s1 & 0.596 & 0.737 & $[0.072, 0.217]$ \\
+$F'$: n-s2 & 0.582 & 0.610 & $[0.001, 0.066]$ \\
+$F'$: n-s3 & 0.650 & 0.790 & $[0.065, 0.215]$ \\
+\midrule
+\multicolumn{3}{l}{9/9 intervals exclude zero; 7/9 clear $0.05$
+gate} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:encoding-main}: nine of nine runs across two
+deletion requests show independent label-blind gains with
+per-run sensitivity intervals excluding zero; seven of nine
+clear a $0.05$ working gate (gate on the point-estimate gain;
+under the stricter interval-lower-bound reading, six of
+nine)---we report both counts. The nested structure (six
+starts under $F$, three under $F'$) is not a
+$2{\times}2{\times}9$ cross; the new request provides one
+preregistered task-level replication. Start selection: the
+six $F$-pool starts were fixed in the preregistered protocol
+before label-blind evaluation (weak-start readings retained,
+not replaced; the designation record is with the experiment
+manifests, Supplementary Table S19). All nine starts share
+the original $\theta_0$ training run and the frozen record
+sets; the two requests use their own audit instances (the
+$F'$ instance has $\hat q{=}2.831$), so the starts span two
+request-specific audits while sharing the remaining
+infrastructure. The complete per-start listing is in
+Supplementary Table S3.
+
+\subsubsection{Impact: The Acceptance--Readout Gap}
+\label{sec:zreadout}
+The audit--decoder coexistence (Section~\ref{sec:decode-gap})
+uses the audit's own $m_5$; here we report the readout's
+operating points (protocol in Section~\ref{sec:calz}).
+
+\begin{table}[t]
+\caption{The acceptance--readout gap, per final:
+reference-calibrated $z$-neggrad TPR at the nominal $5\%$
+threshold (thresholds frozen on the auxiliary set), actual
+FPR on the evaluation set (paired base$\to$final for both TPR
+and FPR), and audit status ($\hat
+q{=}5.245$). All eleven passing finals sit at the acceptance
+value exactly, through the utility metric ($m_1{=}0.7814$);
+GR e4-s2 sits one accuracy-grid step outside. Readings pair
+with the primary scoring execution; three grid-boundary
+finals are device-dependent in $A_6$ status (Supplementary
+Table S12).}
+\label{tab:zreadout}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lcccc}
+\toprule
+Final & TPR b$\to$f & FPR b$\to$f & audit \\
+\midrule
+CE e3-s1 & 0.10$\to$0.33 & .115$\to$0.115 & $=\hat q$ \\
+GR e3-s1 & 0.10$\to$0.43 & .115$\to$0.130 & $=\hat q$ \\
+CE e3-s3 & 0.03$\to$0.23 & .100$\to$0.085 & $=\hat q$ \\
+GR e3-s3 & 0.03$\to$0.10 & .100$\to$0.095 & $=\hat q$ \\
+CE e3-s4 & 0.13$\to$0.07 & .070$\to$0.045 & $=\hat q$ \\
+GR e3-s4 & 0.13$\to$0.07 & .070$\to$0.075 & $=\hat q$ \\
+CE e4-s0 & 0.03$\to$0.23 & .065$\to$0.080 & $=\hat q$ \\
+GR e4-s0 & 0.03$\to$0.17 & .065$\to$0.100 & $=\hat q$ \\
+CE e4-s1 & 0.07$\to$0.13 & .035$\to$0.040 & $=\hat q$ \\
+GR e4-s1 & 0.07$\to$0.17 & .035$\to$0.070 & $=\hat q$ \\
+CE e4-s2 & 0.03$\to$0.23 & .070$\to$0.095 & $=\hat q$ \\
+GR e4-s2 & 0.03$\to$\textbf{0.60} & .070$\to$0.070 & 5.258 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:zreadout} is the paper's central exhibit.
+Nine of the eleven passing finals improve from honest-baseline
+levels ($0.03$--$0.13$) to $0.10$--$0.43$ at actual FPRs of
+$0.040$--$0.130$; the strongest (GR e3-s1) reaches TPR
+$0.43$ at an actual FPR of $13.0\%$, where TPR resolution is
+one record in $30$ ($0.43{=}13/30$, exact 95\% interval
+$[0.26, 0.63]$; the boundary final's $0.60{=}18/30$,
+$[0.41, 0.77]$). The median passing final reads $0.17$---the
+maximum is a best case over twelve inspected endpoints, not a
+typical attack. All eleven sit at the acceptance value exactly
+($s_6{=}\hat q$), pinned through $m_1$ (all record
+$m_1{=}0.7814$; Section~\ref{sec:pinning}); the twelfth
+(GR e4-s2, $m_1{=}0.7813$, $s_6{=}5.258$) sits one grid step
+outside and carries the strongest reading of all: TPR
+$0.60$, and $0.47$ at the nominal $1\%$ threshold (actual
+FPR $3.0\%$). Two passing finals (e3-s4, both families) show
+no improvement; at the start level, five of six starts show
+at least one improving passing final. What the table proves
+is the gap itself: a model that satisfies every audited
+aggregate to the letter can still carry per-record membership
+signals readable at working-point thresholds. The full
+per-final detail, including audit scores and a
+boundary-mechanism recomputation, is in Supplementary Table
+S7.
+The boundary-pinned mechanism has a direct robustness reading
+(zero-training recomputation on the cached scores): because
+every passing final sits at exactly $s_6{=}\hat q$, a $1\%$
+threshold tightening ($0.99\hat q$) rejects all eleven
+passing finals while leaving held-out honest acceptance
+unchanged ($8/12$; at $0.95\hat q$ honest acceptance drops to
+$7/12$). But tightening is not a stable defense: re-running
+the encoder \emph{under} the tightened threshold
+(preregistered, three starts per level) converges just below
+it ($s_6{=}5.182$ at $0.99\hat q$, $4.981$ at $0.95\hat q$)
+and the signal survives on two of three starts per level
+(point gains $+0.14$ to $+0.16$, CI lower bounds $+0.021$ to
+$+0.038$; Supplementary Table S22). Threshold tightening
+moves the race; it does not end it.
+
+\emph{Architecture replication.} Under a freshly calibrated
+$A_6$ instance on MobileNetV2 (30 archived honest references,
+preregistered gates), all six encoded finals pass, four of
+six label-blind AUC intervals exclude zero (up to
+$0.509\to0.627$), and $z$-TPR@5\% improves on five of six
+finals (maximum $0.23$ at an actual FPR of $7.5\%$; ResNet-18
+tops at $0.43$; Supplementary Table S8)---the gap, and the
+audit's blindness to it, are architecture-stable.
+
+\emph{Dataset boundary, measured.} On CIFAR-100 (class pool
+of 500 with adapted same-class sets drawn train-side), all
+six encoded finals pass the fresh audit
+instance---acceptance is dataset-stable---but the calibrated
+readout gain does not replicate ($z$-TPR@5\% improves at most
+$+0.07$ against a $0.20$ gate, and only three of six raw-AUC
+intervals exclude zero; Supplementary Table S10); the raw
+channel is additionally confounded by deletion-set selection
+(honest bases already separate the selected records at AUC
+$0.895$--$0.995$). A pool-geometry discriminator supports the
+attribution: CIFAR-10 with the pool cut to 500 reproduces the
+same dissociation (raw gains up to $0.56\to0.87$, calibrated
+gain zero on every final; Supplementary Table S14); the
+adaptation bundles several changes.
+
+\emph{Class dependence, measured.} Across three further
+deletion classes (frog, dog, airplane; 24 fresh honest
+fine-tunes and a fresh $A_6$ instance each), acceptance is
+class-stable while the per-record signal is not: frog
+replicates strongly (4/6 starts CI-positive, gains $+0.10$
+to $+0.24$), dog is partial (1/6), and airplane shows the
+acceptance--signal separation (6/6 finals pass, no
+CI-positive gain)---the same signature as the CIFAR-100
+boundary, confirmed on independent audit instances (frog
+6/6 CI-positive, airplane 0/6 again). The frog finals carry
+ranking-level but not working-point signal ($z$-TPR
+increments at most $+0.07$, washed after one epoch of benign
+fine-tuning), so the Tier-2 readout is cat-specific among
+the classes tested; a MobileNetV2 $\times$ dog crossing
+attenuates but does not erase the signal. Within the
+fine-tuning-reference family the class-specific thresholds
+differ (frog $\hat q{=}16.8$ vs dog/airplane $4.5$);
+separately calibrated quantiles do not by themselves
+establish which class has wider physical tolerance, so we
+record the transfer result without that inference. The
+positive domain of the per-record claim is measured on 2/4
+classes rather than assumed (Supplementary Table S23).
+
+\emph{Scale boundary.} The encoding is demonstrated at
+$k{=}30$ ($0.06\%$ of training data). At $k{=}100$ the
+preregistered label-blind experiment (six starts) produced
+no CI-positive gain ($+0.01$ to $+0.03$ straddling zero). At
+$k{=}300$ an exploratory run found no calibrated-readout
+replication ($z$-readout AUC $0.44$--$0.51$; raw ranking
+unmeasured), and under an independently recalibrated
+$k{=}300$ audit ($\hat q{=}5.503$ from 18 fresh honest
+references) three encodings again pin and pass with no
+signal delivery ($z$-TPR median $0.02$ vs honest $0.03$;
+Supplementary Tables S16, S23, S35)---the boundary is not an
+artifact of threshold reuse.
+
+A controlled contrast bounds what the readout detects: three
+natural non-compliance constructions (undertrained
+unlearning, incorrect learning rate, partial deletion) show
+member-level increments at or below $+1.2$ pp (against a
+$+10$ pp gate), and the incorrect-lr variant's 99.9\%
+model-level detection rate is matched by a 100\% rate on
+decoy-only control pools---the readout detects a
+\emph{model-level} signature for this family, not a
+record-level membership signal. The encoding's gradient
+updates also shift non-monitored classes (dog-class median
+$z$-shift $-1.85\sigma$, ship $-0.79\sigma$)---a detection
+opportunity for the auditor, not a per-record signal.
+
+
+\subsubsection{Scope and Boundaries of the Demonstrated Harm}
+\label{sec:working-points}
+Two readouts, two conclusions. Under the fixed decoder
+(thresholds frozen on the auxiliary set at nominal 5\% FPR;
+actual FPR $0.020$--$0.060$), TPR@5\% is $\le 0.10$: a
+label-blind outside party realizes \emph{ranking-level}
+membership inference, not confident individual attribution
+(a $0.10$ TPR at $0.05$ nominal FPR with a $1\%$ membership
+prior gives a ${\sim}2\%$ positive predictive value). The
+reference-calibrated readout is stronger (TPR up to $0.43$
+among passing finals, $0.60$ boundary-adjacent; PPV about
+$3\%$ at the same prior) but conditional on
+reference-ensemble access. Low-FPR identification of
+individual records is not established by either reading;
+what is established is the gap itself---models that pass
+every audited statistic carry readable per-record signals
+(consolidated harm matrix: Supplementary Table S17). A
+persistence probe closes the scope: after one epoch of
+benign fine-tuning on retained data, the median paired
+retention of the $z$-TPR gain is $0.0$ (range $-2.5$ to
+$1.0$; three epochs, $0.14$; Supplementary Table S9)---the
+demonstrated readability is a property of the returned
+artifact at the audit interface, not a persistent watermark
+under continued training.
+
+\emph{Sequential requests, probed on two pairs.} A second
+deletion request $F_2$ (disjoint, same class) arriving at a
+passing encoded final was probed end to end on two
+independent request pairs. All three signatures replicate
+on both: every stale model is accepted under the fresh
+request-2 audit (pair 1's stalest scores $6.25$ against
+$\hat q{=}6.53$)---sequential protection inherits the
+reference-operator's tolerance; honest processing of $F_2$
+reduces the first request's signal ($z$-TPR $0.17\to
+0.00$--$0.03$ on pair 1, $0.47\to 0.07$--$0.23$ on pair
+2); and the gap does not compound---on pair 1 the second
+encoding re-delivers on $F_2$ ($0.00\to0.23$) with $F_1$
+near baseline, while on pair 2 the passing second encoding
+delivers no working-point gain on $F_2$
+(start-dependence, as in the primary experiments). The gap
+is per-request, not cumulative (Supplementary Tables S11,
+S31).
+
+Deleted-vs-retained AUC (raw negative-loss, $F$ vs the
+3000-record retained sub-sample) improves on the strongest
+gradient-variant starts ($0.27\to0.60$ on e3-s3,
+$0.17\to0.60$ on e4-s0; per-start table in Supplementary
+Table S21). $F$-vs-retained and $F$-vs-never-trained are
+different inference tasks; we report both without aggregating
+across them.
+
+
+\subsubsection{Ablations}\label{sec:ablations}
+\textbf{Protocol requirements, established empirically.}
+Construction-set diversity ($N_c{=}300$, required by the
+gradient variant; CE replicates at 30) and evaluation
+resolution ($200$ non-members) are protocol requirements,
+not tunables: at $N_c{=}30$ the gradient variant collapses
+under independent evaluation ($0.49$--$0.59$;
+$30$-vs-$30$ swings ${\pm}2\sigma$). No universal minimum is
+established; the small-pool failure belongs to the gradient
+protocol we tested. A preregistered ablation of the frozen
+encoder choices (Supplementary Table S24) locates which of
+them are load-bearing: the contrastive weight
+$\lambda{=}0.5$ is critical and sits at the sweep optimum
+($\lambda{=}2$ kills the attack; only $\lambda{=}0.5$
+delivers CI-positive gains on all three signal starts), the
+construction-pool size and iteration budget are not (CE
+replicates down to $N_c{=}30$; 15 iterations saturate), and
+the deletion-set selection rule does not gate the attack (a
+uniformly random 30-record deletion set with its own fresh
+audit instance replicates at 4/6 CI-positive).
+
+
+\paragraph*{Construction ablation}
+Same starts, budget, and audit; all arms evaluated by the same
+label-blind protocol (construction-set evaluation; the
+independent-evaluation gains of
+Table~\ref{tab:encoding-main} span $+0.03$ to $+0.25$).
+Contrastive first-order CE (Eq.~%
+\ref{eq:ce-objective}) reaches $+0.14$--$+0.20$ (best start);
+plain $F$-CE is weaker; one-sided gradient objectives
+($F$-only $+0.05$--$0.08$; $N_c$-only ${\approx}0$) show the
+joint separation is what transfers; class-bias grids are
+near-null. The contrastive structure, not a particular loss
+form, is what carries the capability.
+
+
+\subsubsection{Design-Space Observation under Intersection Constraints}
+A five-alternative exploration was run under a stricter
+acceptance object than either the marginal or the
+single-instance joint rule: a \emph{multi-instance
+intersection constraint} from $K{=}10$ bootstrap audit
+instances, where a candidate is accepted only if its
+conformity ratio is within threshold on all $K$ instances
+simultaneously. Under this constraint, among six
+systematically tested constructions only the double-backward
+gradient objective produced CI-positive label-blind gains
+(design starts $4/6$, prospective $3/6$, MobileNetV2 $2/6$);
+the five first-order alternatives (CE-loss regularization,
+leading-eigenvector control, adaptive signal--robustness
+weighting, layer-selective gradients, cross-class encoding
+via non-monitored logits) produced accepted finals on most
+starts ($4$--$6$ of $6$) but no CI-positive start. This is an
+observation under one constraint family, not a necessity
+claim, and two of our own measurements bound it: under the
+single-instance joint rule $A_8$, five of six
+marginally-constructed first-order CE finals are accepted
+(bootstrap-fragile; Supplementary Table S12), and a
+first-order CE encoder optimizing directly under $A_8$ passes
+on every tested start ($12/12$)---non-inferior where it
+fires, start-dependent where it does not (preregistered;
+Supplementary Table S12). We offer no geometric law behind
+the intersection result.
+
+The signal capability is start-dependent (${\sim}50\%$ of
+honest starts produce signal-carrying finals), and no
+geometric criterion we tested predicts which starts succeed;
+under a \emph{conditional i.i.d.} projection a provider
+attempting $N$ starts reaches $1-(1-0.5)^N$ ($>96\%$ at
+$N{=}6$), with wide inherited uncertainty (exact 95\%
+interval $[0.26, 0.74]$) and possible cross-start
+correlation; the pooled per-start rate is $9/18$ CI-positive
+(Supplementary Table S15), while the canonical CE attack's
+own starts (Table~\ref{tab:encoding-main}) are $9/9$. The
+encoding trajectory is non-monotonic, so start selection
+requires full encoding runs rather than cheap early probes.
+
+
+
+\needspace{3\baselineskip}
+\subsubsection{The Mean-Objective Wash: Region Geometry and
+Recovery-Score Controls}\label{sec:wash}
+\begin{definition}[Normalized forget-margin recovery]\label{def:i1}
+For a returned model $\theta'$ with paired honest reference
+$\theta_R$ (the same unit's retrain that $\theta'$ was derived from),
+\begin{equation}
+\label{eq:i1}
+I_1(\theta') = \frac{\mathrm{fm}(\theta') - \mathrm{fm}(\theta_R)}
+{\mathrm{fm}(\theta_0) - \mathrm{fm}(\theta_R)},
+\end{equation}
+where
+$\mathrm{fm}$ is the mean correct-class logit margin on $F$. The
+denominator (the paired deletion delta) is positive in every unit we
+report. $I_1$ is a normalized behavioral differential---a recovery of
+the forget-margin delta---not a measure of information content or
+privacy harm; in particular it is also computable for honest models
+via cross-seed comparison, which is exactly the honest-seed-luck
+control of the controls paragraph below. A wash is feasible iff
+$\theta' \in \mathcal{A}$; the preregistered engineering tiers
+(\emph{material} at $I_1 \ge 0.10$, \emph{strong} at $I_1 \ge 0.20$)
+refer to this proxy only.
+\end{definition}
+The region the encoding exploits was mapped with a simpler
+object, the \emph{mean-objective wash}, which maximizes the
+normalized forget-margin recovery $I_1$ under the banded audit. Rollback is
+excluded on every tested path ($0/240$ interpolation points
+across twelve units and three scales; greedy per-layer
+rollback best $I_1 = -0.03$; Supplementary Table S20), so the
+audit is not vacuous. The interior admits unit maxima
+$I_1^* = 0.179$--$0.326$ at $k{=}30$ and $0.142$--$0.214$ at
+$k{=}300$, first-step dominated (Supplementary Tables S1--S2),
+replicates on CIFAR-100, and is unchanged by stronger audit
+statistics (RBF-MMD, an MLP-based MIA, per-sample
+extreme-value tests) or by removing any single metric---the
+binding constraint behaves like the region's width, not the
+particular statistics (Supplementary Table S21). Banding the
+forget-margin directly shows the elevation cap depends on
+which band shape the auditor chooses: a one-sided empirical
+cap rejects five of six fine-tuned washes and $37/62$
+cheap-manipulation points where a symmetric band barely
+touches them (Supplementary Table S40). Finally, the controls
+reinterpret recovery scores: at exact-retrain references,
+matched-budget selection accounts for all but
+$0.000$--$0.078$ of the recovered margin across five six-seed
+units (all below the $0.10$ gate), a one-scalar logit-scale
+control is equally deflating, and the single gate-clearing
+ft-referenced gain ($+0.158$) fails the frozen
+cross-ensemble rule---margin-recovery readings without these
+controls answer questions that honest processing already
+resolves. Approximate-operator references widen the region
+for the same reason ($I_1^*$ to $0.50$/$0.40$ at the two
+scales).
+\label{sec:fmband}\label{sec:selection-control}
+
+
+\subsection{Act 2: Why the Audit Tolerates the Encoding}
+This act answers RQ2: it locates the room the audit grants,
+measures where the encoder's budget goes, and separates
+admissibility from the allowance.
+
+\subsubsection{Why the Audit Does Not Detect the Encoding}
+\label{sec:decode-gap}
+The dispersion argument of \S\ref{sec:region}
+predicts the audit has room; this subsection measures where
+the encoder's budget actually goes. On the six
+gradient-variant finals, member-vs-fresh AUC under
+$-\ell$, margin, confidence, and $-\|\nabla_x\ell\|$ are close:
+maximum inter-channel difference 0.016 (strongest final:
+$0.810/0.813/0.810/0.818$; per-final detail in Supplementary
+Table S5). This proximity does not
+prove information equivalence across scorers, nor does it
+automatically describe the nine CE finals. The encoding is
+an \emph{output-space} phenomenon on these finals.
+
+\begin{table}[t]
+\caption{Audit--decoder gap: per-final paired values. Base =
+audit-passing honest start; Final = encoded model (gradient
+variant). $A_{\rm down}$ = downstream $-\|\nabla_x\ell\|$ AUC vs.\ 200
+fresh non-members; $m_5$ = audit's membership statistic;
+$z_5$ = $|m_5 - c_5|/\sigma_5$ (final). Five finals sit at
+the $A_6$ acceptance value ($s_6{=}\hat q{=}5.245$, pinned
+through the utility component); e4-s2 measures
+$s_6{=}5.258$, marginally above (\S\ref{sec:zreadout}).}
+\label{tab:mb-paired}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lcccccc}
+\toprule
+ & \multicolumn{2}{c}{$A_{\rm down}$} & \multicolumn{2}{c}{$m_5$} &
+$z_5$ & $s_6$ \\
+Start & base & fin & base & fin & fin & fin \\
+\midrule
+e3-s1 & .547 & .714 & .661 & .737 & 0.19 & $=\hat q$ \\
+e3-s3 & .535 & .562 & .719 & .607 & 2.14 & $=\hat q$ \\
+e3-s4 & .517 & .543 & .734 & .604 & 2.19 & $=\hat q$ \\
+e4-s0 & .493 & .631 & .820 & .611 & 2.08 & $=\hat q$ \\
+e4-s1 & .505 & .626 & .784 & .755 & 0.08 & $=\hat q$ \\
+e4-s2 & .505 & .818 & .814 & .731 & 0.28 & 5.258 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:mb-paired} shows the coexistence: downstream
+ranking rises ($+0.03$ to $+0.31$) while the audit's $m_5$
+deviation stays at most $2.19$ MAD against a $5.245$
+threshold, with $m_5$ \emph{decreasing} on five of six finals (the exception is e3-s1, whose $m_5$ rises from $0.661$ to $0.737$). The joint score of e4-s2 crosses the threshold through the utility component $m_1$, not $m_5$ (Section~\ref{sec:zreadout}). Note: Table~\ref{tab:mb-paired} reports the gradient-variant finals; the nine CE finals of Table~\ref{tab:encoding-main} are a different set, and this analysis does not automatically describe them (the CE-final counterpart measurements are in Supplementary Table S18).
+The gap is compatible with two dampers:
+(i) a scorer/pool mismatch (logistic probe on two features
+against a mixed-class retain pool vs.\ raw loss ranking
+against same-class fresh non-members), and (ii) the tolerance
+width itself. The study reports the coexistence on these six
+paired observations. Both suggested dampers are now measured
+rather than open: the pool half is separated (the calibrated
+signal is stronger on the audit's own retained pool than on
+fresh records, Supplementary Table S37), and halving the
+forget-side tolerance width retains about $78\%$ of the
+delivered gain (the forget arm at $\kappa{=}0.5$:
+$0.121/0.155$; Supplementary Table S38), so the width
+contributes but does not dominate. A general AUC-to-MAD
+mapping remains open.
+The per-metric acceptance rule, not overall displacement,
+decides acceptance.
+
+
+\subsubsection{The dispersion measurement}
+\label{sec:dispmeas}
+Quantitatively (Table~\ref{tab:calibration}), the honest ensemble's
+dispersion divided by the full-data band is $4.78/1.91/2.84$ for the
+forget-loss metric at $k = 30/300/1000$ (small-sample statistics:
+three honest seeds per scale; the non-monotone $1.91\to2.84$
+movement is within what three-seed maxima produce, and the
+qualitative pattern---forget-side inflation with test-side
+flatness---is what the 40-retrain archival control supports;
+see the mechanism paragraph below for the $n{=}6$
+confirmation),
+while the KS metric
+lies above 1 at $k{=}30$ and marginally at $k{=}300$ ($1.05$), the MIA
+metric only at $k{=}30$, and test-side accuracy dispersion
+stays inside the band at all $k$ (a 40-retrain archival study
+confirms test-side dispersion is flat in $k$). The pattern is
+informative: aggregate fit statistics on the deleted records are
+where constraint release bites hardest, separability statistics
+less so, and untouched-population statistics not at all. The
+calibration lesson is metric-selective and
+scale-coupled: \emph{forget-fit statistics must be re-calibrated
+at each deletion scale}. The ensemble band we use throughout is
+the minimal correction and covers every honest model in the
+calibration ensemble by construction; it is a sample statistic, not
+a coverage guarantee---a deployed audit should fix a target
+false-positive rate and verify coverage on fresh honest outputs,
+and per-scale re-estimation is one sound way, not the only
+defensible one, to get there.
+
+The inflation is not an artefact of ensemble size or of one
+class: at $n{=}6$ retrains the ratios become $7.5/2.1/3.9$ with
+the signature unchanged (Supplementary Table S34), and the
+class exhibit measures $1.5\times$, $2.7\times$, and
+$18.2\times$ on frog, dog, and airplane with flat test-side
+ratios (Supplementary Table S33). The phenomenon therefore
+holds at three levels---exact linear-model mechanism,
+scale-robust measurement, replication across the tested
+classes---while, as \S\ref{sec:allowance} shows, it is not
+what the encoder spends.
+
+
+\subsubsection{What gates delivery: admissibility and budget}
+\label{sec:allowance}
+
+Two mechanisms, not one, decide whether an encoding can be
+delivered: the region is \emph{centred on the reference
+operator's forget-fit} (which decides whose history is
+admissible), and within the admissible family the
+\emph{utility allowance}---the slack the accuracy-side bands
+($m_1$, $m_2$) leave below honest accuracy---sets how much
+signal can be bought. A dose-response separates them.
+
+\emph{Admissibility: under a retrain-calibrated audit, both
+F-aware profiles are inadmissible.} Under that audit the bands are narrow
+on every component (accuracy $\pm0.73$ points, forget-set loss
+$\pm0.69$ around a centre of $0.82$, forget margin $\pm0.91$
+around $3.28$; $\hat q{=}5.638$). Two candidate starts fall
+outside, on different components. The original model $\theta_0$
+is in band on accuracy ($z_1=-0.9$) and outside on the
+statistics that record the deletion---forget-set loss $0.10$
+against a centre of $0.82$ ($z_3=-5.8$) and forget margin
+$5.33$ ($z_6=+12.8$, $2.3\times$ the band). The one-epoch
+fine-tune start is outside on accuracy ($z_1=-55$) and on the
+margin in the opposite direction ($z_6=-14$) while staying in
+band on the loss ($z_3=+1.4$). Both candidate profiles are
+therefore rejected, on different components, at comparable
+distance on the margin (per-component z-profile in
+Supplementary Table S41).
+
+Reference family and start ancestry are collinear here---a
+retrain reference implies a start that never saw $F$, a
+fine-tune reference implies one that did---so the retrain-side
+closure cannot be attributed to either alone. What can be said
+is that it closes twice: neither tested start that saw $F$ is
+admissible under such an audit, and the admitted retrain
+starts deliver no positive signal under the tested
+constructions (Section~\ref{sec:eval}). Their $0.73$-point
+accuracy half-width lies below the dose-response study's
+tested range, so that study does not independently explain
+the retrain-side failure. We report the two closings jointly
+rather than as a single identified cause---not an identified
+operator-family effect.
+
+\emph{Budget: what the encoder spends once admitted.} Inside
+the fine-tune-referenced family the finals sit on the lower
+edge of the accuracy component exactly: $m_1 = 0.7814$ against
+$c_1 = 0.8231$ and $\sigma_1 = 0.00795$ gives
+$z_1 = -5.245 = -\hat q$. The dose-response scales one
+family's half-widths at a time: acceptance holds iff
+\begin{equation}
+\label{eq:dose}
+|m_i(\theta) - c_i| \le
+\kappa_{\mathrm{fam}(i)}\,\hat q_\alpha\,\sigma_i
+\quad\text{for all } i,
+\end{equation}
+where $\kappa_{\mathrm{fam}(i)}{=}\kappa_U$ for the accuracy
+components $i\in\{1,2\}$ and $\kappa_F$ otherwise, with
+$(\kappa_U,\kappa_F)=(\kappa,1)$ in the utility arm and
+$(1,\kappa)$ in the forget-side arm. This moves the mean
+delivered gain monotonically over a
+six-fold range (one start decreases slightly between
+$\kappa{=}2$ and 3, $0.247\to0.236$):
+$0.084 \to 0.125 \to 0.154 \to 0.188 \to 0.225 \to 0.253$ for
+$\kappa \in \{0.5, 0.75, 1, 1.5, 2, 3\}$ (per-start values and
+per-cell feasibility in Supplementary Table S38; at
+$\kappa{=}0.5$ and $0.75$ the tightened audit no longer admits
+two of the three starts, so those two points are single-start
+probes). Scaling only the forget-side half-widths
+($m_3$--$m_6$) leaves the mean at $0.154$--$0.155$ for
+$\kappa \ge 0.75$, with every start within $0.002$ of its own
+$\kappa{=}1$ value; at $\kappa{=}0.5$ the mean falls to $0.121$
+as one start collapses (to $0.060$) and a second drifts by
+$0.009$. Within an admissible family, then, the deletion-inflated forget-side
+tolerance is not the resource the channel consumes---a
+negative result the dispersion story had excluded.
+
+The allowance orders delivery \emph{within} the working family
+($4.2$ accuracy points) and is \emph{not sufficient}: the
+k=100 instance ($4.45$ points), airplane ($7.5$) and dog
+($8.1$) all lie above the working allowance and deliver nothing
+or one start (Supplementary Tables S36, S39). Admissibility and the allowance together close the retrain
+family; neither orders the class or the scale axis, which
+therefore remain empirical boundaries rather than predicted
+ones.
+
+The readout is not an artifact of the comparison population
+either: on the audit's own retained pool the calibrated signal
+is stronger than on fresh records (median paired $z$-gain
+$0.312$, cluster-bootstrap $95\%$ CI $[0.137, 0.377]$, against
+$0.151$ $[0.033, 0.297]$; Supplementary Table S37), so the gap
+is not eliminated by aligning the comparison population; how
+much of it belongs to the instrument's shape, as opposed to
+other readout-design choices, is not isolated here.
+
+\begin{table}[t]
+\caption{Calibration measurement (ResNet-18). Top: honest
+unlearned-ensemble dispersion (three seeds per scale) divided
+by the full-data retraining band (six retrains), per metric and
+deletion size ($>$\,1 means the naive band under-covers the honest
+ensemble). Middle: honest false-positive rate under the naive band.
+Bottom: archival test-side control (40 full retrains at
+$k \in \{0,500,2500,5000\}$; accuracy dispersion flat in $k$).}
+\label{tab:calibration}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Dispersion ratio vs.\ full-data band & $k{=}30$ & $k{=}300$ & $k{=}1000$ \\
+\midrule
+$m_3$ forget loss      & \textbf{4.78} & \textbf{1.91} & \textbf{2.84} \\
+$m_4$ KS distance      & 1.58 & 1.05 & 0.79 \\
+$m_5$ MIA AUC          & 1.02 & 0.56 & 0.29 \\
+forget margin          & 1.24 & 0.40 & 0.32 \\
+$m_1$ overall accuracy & 0.20 & 0.20 & 0.67 \\
+\midrule
+Honest rejections under naive band & $3/3$ & $2/3$ & $1/3$ \\
+\midrule
+\multicolumn{4}{l}{Test-side control: acc.\ std $0.0025 \to 0.0017$
+(flat in $k$).}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Inside the region, what binds differs by protocol: under
+$A_5$ the forget-side metrics bind (MIA probe $m_5$ rides at
+ratio $1.0$ to its band, forget-loss $0.92$--$0.95$, KS
+$0.98$; the wash readings of Section~\ref{sec:wash}), while
+under the $A_6$ encoding audit the binding component is
+instead the utility metric (\S\ref{sec:zreadout}); neither
+transfers as the other's mechanism.
+
+\subsubsection{What the Audit Certifies: Calibration Evidence}\label{sec:approx-op}
+Independent calibration (a fresh six-model max-deviation
+band applied to a new ensemble) rejects $5/6$ honest
+retrains: at deployable budgets the audit's binding
+constraint is honest coverage, not attack resistance.
+
+\emph{Fixed-request split (the guaranteed experiment).} On the
+finetuning family (30 archived honest models on one request),
+a fixed disjoint split designated before scoring (fit: 6,
+calibrate: 12, test: 12) gives an honest rejection rate of
+$4/12$ at $\alpha = 0.20$ (Clopper--Pearson 95\% CI
+$0.10$--$0.65$) and $0/12$ at $\alpha = 0.10$. This is the
+\emph{conditional} rate of one frozen audit; the conformal
+guarantee is a \emph{marginal} statement over calibration
+randomness, so the single result neither proves nor disproves
+it. Resource accounting: max-deviation bands at the same
+$6$-model budget reject $7/12$; matched-total-budget
+max-deviation (18 references) rejects $2/12$. The honest
+attribution: most of the coverage gain comes from using more
+reference models; at matched budget the conformal rule is not
+pointwise better---its contribution is the declared target
+with a validity guarantee (re-split and rotation counts are in
+the artifacts). \emph{Attacks under the same frozen rule}:
+$5/21$ archived checkpoints rejected at $0.20$ (all three
+calibration-aware washes among them; built against earlier
+band audits, so not a full adaptive test), $0/21$ at
+$0.10$. Honest and attack columns have different denominators
+and generation processes; no detection comparison is implied.
+The three rules side by side are in Supplementary Table S44.
+
+
+
+\emph{Cross-request sensitivity (empirical stress test, no
+guarantee claimed).} A pooled variant (centers from each
+request's own retrains, scales pooled across the other
+requests---adaptive and self-centered, hence outside the split
+guarantee) applied to the original draw plus three
+preregistered fresh draws rejects $1/12$, $2/3$, $0/3$, and
+$0/3$ respectively (equal-weighted $0.19$; pooled $3/21$),
+against $60/63$ for single-draw max-deviation bands under the
+same shift: limited transfer in aggregate, heterogeneous
+across draws. Accepting a model under this audit bounds false
+rejection of honest outputs; it does not certify that any
+accepted model has correctly unlearned.
+
+
+
+Two formal objects anchor the empirical sections: the coverage
+guarantee of the split-conformal audit, and the design-space
+observation that bounds which encoding constructions carry signal
+under multi-instance intersection constraints.
+
+\subsubsection{Split-Conformal Calibration and Its Guarantee}
+\label{sec:m3}
+The coverage failure of honest ensembles
+(Section~\ref{sec:approx-op}) is a calibration problem,
+and calibration problems have standard tools. We calibrate the
+banded audit with split conformal prediction
+\cite{vovk2005algorithmic, angelopoulos2021gentle}.
+
+\emph{The guaranteed procedure.} All
+statements of guarantee in this paper attach to the fixed-request
+split version and to nothing else:
+disjoint honest sets $H_{\rm fit} \perp H_{\rm cal} \perp
+H_{\rm test}$ on one request family; centers \emph{and} scales
+frozen from $H_{\rm fit}$ alone; threshold $\hat q_\alpha$ from
+$H_{\rm cal}$ alone ($\lceil (n_{\rm cal}{+}1)(1{-}\alpha) \rceil$-th
+order statistic, infinite out of range, ties by order, $\sigma_i$
+guarded at $10^{-12}$); accept iff
+\begin{equation}
+\label{eq:conf}
+s(\theta) \le \hat q_\alpha.
+\end{equation}
+For a single scored output exchangeable with the calibration
+scores given $H_{\rm fit}$, the marginal false-rejection
+probability is at most $\alpha$---the standard split-conformal
+statement, its probability over $(H_{\rm cal}, \theta_{\rm new})$
+jointly. The unit of the guarantee is one scored output; rotated
+splits and leave-one-ensemble rotations share calibration data and
+are reported descriptively. The acceptance region of this procedure
+is a \emph{third} object---its per-metric half-widths are
+$\sigma_i \hat q_\alpha$, in general different from both the
+symmetric max-deviation band and the one-sided empirical cap of
+\S\ref{sec:fmband}; the three must not be merged into one defense.
+
+
+
+\subsection{Act 3: Defense Evaluation}
+\label{sec:mitigation}
+This act answers RQ3. We evaluate four audit-side
+instruments---the aligned seventh
+statistic ($A_7$), the joint covariance rule ($A_8$), the
+aggregate z-detector, and a stronger membership probe---with
+threshold tightening as a fifth variant. The joint rule and
+threshold tightening are measured against both frozen
+constructions and preregistered adaptive re-optimization arms;
+the aligned statistic is tested through re-optimization of the
+unchanged objective and two objective redesigns; the
+z-detector through a composite-constraint arm. The measured
+benefit against a frozen construction need not persist under
+re-optimization---except at $A_7$ and the z-detector, where
+the compression survives every tested evasion tier.
+
+\begin{table}[t]
+\caption{A directly aligned statistic compresses the attack
+under re-optimization. Paired runs: from the same three start
+checkpoints and fixed record sets, the unchanged first-order CE
+objective is optimized \emph{separately} under the $A_6$ and
+the recalibrated $A_7$ audits; the table compares the two
+resulting final models under the same evaluation and readout
+(base AUC values from a separate base-execution; cross-run
+difference $\le 0.011$, Supplementary Table S6 note). In this
+subsection, \emph{re-optimization} (unchanged objective re-run
+under a new rule) and \emph{objective redesign} are distinct;
+this experiment is the former.}
+\label{tab:mitigation-paired}
+\centering
+\small
+\begin{tabular}{lcccc}
+\toprule
+ & base & gain$_{A_6}$ & gain$_{A_7}$ & pass$_{A_7}$ \\
+\midrule
+e4-s0 & 0.494 & +0.140 & +0.045 & \checkmark \\
+e4-s1 & 0.498 & +0.150 & +0.038 & \checkmark \\
+e4-s2 & 0.504 & +0.121 & +0.050 & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph*{The aligned seventh statistic ($A_7$).}
+Table~\ref{tab:mitigation-paired} shows the paired compression:
+adding $d(\theta)=\mathbb{E}_{N_a}\|\nabla_x\ell\| -
+\mathbb{E}_F\|\nabla_x\ell\|$ (frozen on independent fit
+models) to the joint score and recalibrating ($\hat q{=}6.30$)
+drops the CE encoding gain from $+0.12$--$+0.15$ to
+$+0.04$--$+0.05$ per start---the attack survives at roughly a
+third of its strength. On the same batch of 12 honest models,
+the seven-metric audit accepts $9$ where the base audit accepts
+$8$ ($n{=}12$; one-model difference, no coverage claim;
+artifact \texttt{gate-g3-20261007T141513}; paired gains in
+Table~\ref{tab:mitigation-paired}, artifact
+\texttt{mc-20261007T231754}). The
+cost is compute: the gradient statistic requires per-record
+backward passes. These gains are point estimates per start;
+member-resampling intervals are not attached (the paired
+per-start reductions of $0.07$--$0.11$ are far larger than the
+cross-run base difference of at most $0.011$ disclosed in
+Supplementary Table S6, but no interval column is computed).
+This is a measured partial mitigation, not a
+proven security--coverage frontier.
+
+\paragraph*{Objective redesign at $A_7$.} Two redesigned objectives---an anti-statistic penalty that
+neutralizes the seventh statistic directly, and the
+second-order gradient-norm objective---were optimized under
+the same recalibrated $A_7$ audit (same starts, record sets,
+and evaluation; preregistered gates, Supplementary Table S26).
+Neither recovers a CI-positive signal: the penalty arm is
+compressed outright ($+0.007$ to $+0.016$), and the
+second-order arm reaches $+0.040$ to $+0.062$ with every
+interval crossing zero. The $A_7$ compression thus survives
+both tested evasion tiers; broader redesign families remain
+untested.
+
+\paragraph*{A stronger membership probe.} Replacing the two-feature
+logistic $m_5$ with an MLP probe on five output features (loss,
+margin, entropy, true logit, top-other; all black-box-plus-losses
+accessible) and recalibrating the audit on the same fit6/cal12/
+test12 honest models yields a rule with identical honest
+acceptance ($8/12$) that \emph{rejects all nine rescored primary
+finals} (the six CE and three gradient-variant checkpoints;
+their scores sit at the old threshold values, above
+the recalibrated $5.220$---a threshold roughly $0.5\%$ below
+the original, which alone rejects utility-pinned finals, so
+the experiment establishes rejection by the upgraded rule
+rather than detection gained from the MLP component. A fresh
+encoding run
+\emph{under} the stronger rule re-pins and delivers again:
+CI-positive gains on three of three starts ($+0.162$, $+0.129$,
+$+0.141$; all passing; Supplementary Table S27). The race
+pattern of the rule-based defenses thus recurs when the
+instrument and its calibration move together.
+
+\paragraph*{The joint acceptance rule ($A_8$).}
+\label{sec:a8}
+The marginal suite scores each statistic against its own band.
+A joint rule instead scores the six-metric vector against the
+honest ensemble's covariance:
+\begin{equation}
+\label{eq:a8}
+s_J(\theta) = \bigl(m(\theta)-c\bigr)^{\top}
+\hat\Sigma^{-1}\bigl(m(\theta)-c\bigr),
+\end{equation}
+with $\hat\Sigma$ a shrunk
+covariance of the fit ensemble ($\rho{=}0.5$, frozen before any
+attack readout) and the threshold the conformal quantile of the
+calibration ensemble's $s_J$ scores at the same $\alpha{=}0.20$.
+The comparison is zero-training and uses the identical
+fit/cal/test split as $A_6$.
+
+\begin{table}[t]
+\caption{Marginal ($A_6$) vs joint ($A_8$) acceptance at matched
+$\alpha{=}0.20$ and identical reference split. The joint rule
+accepts strictly more honest models and rejects the six
+marginally-constructed gradient finals. The $A_6$ column is
+from the primary scoring execution; three grid-boundary
+finals are device-dependent (per-final record in
+Supplementary Table S12).}
+\label{tab:a8}
+\centering
+\small
+\begin{tabular}{lccc}
+\toprule
+Rule & Honest (12) & Finals (12) & GR family (6) \\
+\midrule
+$A_6$ marginal max & $8$ & $11$ accepted & $5$ accepted \\
+$A_8$ joint (cov.) & $12$ & $5$ accepted & $0$ accepted \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:a8}: the joint rule accepts all twelve held-out
+honest models---four of which the marginal rule rejects,
+because their deviations are correlated, exactly the direction
+a Mahalanobis form discounts---while rejecting all six
+gradient-variant finals and one CE final at scores well beyond
+the threshold ($s_J$ 17--25 against $\hat q_J{=}16.5$; five
+CE finals pass at 12--14). The mechanism is the standard one
+(honest co-movement lives in the top covariance directions,
+the encoders' deviation pattern does not), and shrinkage
+sensitivity confirms it directionally (at $\rho{=}0.75$
+rejection falls to $5/12$, at $\rho{=}0.25$ it rises to
+$10/12$, honest coverage $12/12$ throughout); the result is
+one audit instance, twelve finals, and a frozen shrinkage
+constant---a mechanism demonstration, not a deployed defense
+(Supplementary Table S12). The closure is not
+family-intrinsic: the anti-statistic and second-order
+redesigns under $A_8$ add no evasion (no CI-positive gain on
+any start, $+0.009$ to $+0.078$, all intervals crossing zero,
+passing on all six runs; Supplementary Tables S12, S32),
+whereas a first-order CE encoder passes $A_8$ on every tested
+start ($12/12$ preregistered; CI-positive on $5/6$ design and
+$2/6$ prospective starts) and the gradient-objective arm
+passes with the strongest readout measured in this work (AUC
+$0.85$ design, $0.82$ prospective; Supplementary Table S12).
+The joint rule and threshold tightening each admit evasion by
+re-optimized encoders; at $A_7$ the unchanged-objective
+re-optimization remains compressed. A bootstrap caveat
+travels with the joint rule: re-estimating $\hat\Sigma$ from
+resampled honest sets (200 draws) leaves the gradient-family
+rejection in 63\% of draws but flips the CE column between
+all-pass and all-reject---at six-reference estimation the
+calibration is reference-draw sensitive, and every conclusion
+above is conditional on the primary instance (Supplementary
+Table S12).
+
+
+
+\paragraph*{The aggregate z-detector.}
+\label{sec:audit-stat-implications}
+The $z$-signal is specific to adversarially encoded residuals:
+none of the three non-compliance constructions produces a
+member-level signal, so a calibrated per-record statistic
+separates deliberate encoding from sloppy unlearning on the
+tested variants. The measured aggregate form---a one-sided
+top-15 $z$-mean over $F$---detects 10 of 12 encoded finals
+while firing on none of six non-compliance models (H0 control
+1/2); a confirmatory run on MobileNetV2 finals detects 6 of 6. The one-sided variant was chosen after the frozen two-sided
+gate failed (post-hoc); the MobileNetV2 run is the
+confirmatory anchor. On a held-out honest evaluation (12
+fresh ft models per architecture, excluded from all
+selection) the frozen rule fires 2/12 on both: a held-out false-positive
+rate of 17\% (exact 95\% CI $[2\%, 48\%]$)---a point estimate
+above the 5\% design level with an interval that contains
+it, so the data neither validate a 5\% operating point nor
+establish a violation; the detector remains a pilot, and the
+two-sided variant has no power
+(1/12)---member-direction aggregation carries the signal, and
+the honest tail structure is the binding constraint. The
+cross-class spillover (\S\ref{sec:zreadout}) adds that
+monitoring should extend beyond the deleted class
+(Supplementary Table S13). An adaptive arm against the
+detector is now measured: encodings optimized under the
+composite constraint (pass $A_6$ and keep the top-15
+z-mean below the detector threshold) satisfy both rules on
+all three tested starts, but deliver no CI-positive gain
+($+0.047$ to $+0.077$, every interval crossing zero;
+Supplementary Table S29)---the detector's constraint
+suppresses signal delivery even where feasibility is
+achievable, placing it alongside $A_7$ as
+compression-robust against the tested evasion tier.
+
+\paragraph*{Other tested defenses.} The one-sided fm cap
+closes the mean-objective wash on CIFAR-10 but leaks on
+CIFAR-100 (\S\ref{sec:fmband}); multi-subsample re-evaluation
+catches $2/6$ washes; retained-probe randomization did not
+block the tested encodings, consistent with utility being
+the binding component; and under trace-free retrain
+references with a six-of-six threshold, mean-difference and
+pairwise objectives stall at $0.52$--$0.64$ (single
+configuration; a references-vs-threshold confound is
+unseparated).
+
+\section{Discussion}\label{sec:discussion}
+
+\subsection{What This Paper Established}
+The introduction asked whether a dishonest provider can pass
+every audit statistic while encoding per-record membership
+signals. The answer is yes, under measured conditions
+(Tables~\ref{tab:encoding-main}--\ref{tab:zreadout}): nine
+of nine label-blind gains, no flag from the audit's own
+membership statistic, and per-record TPR $0.43$ among
+passing finals under the reference-calibrated readout. The
+tolerance has a two-part
+account---two joint closures whose causal reading (reference
+family vs.\ start ancestry) the design leaves confounded, and
+within the admitted fine-tune family a delivery bought with
+the utility allowance and invariant to the forget-side width
+(\S\ref{sec:allowance}). Whether
+the auditor can fight back is answered conditionally: the
+aligned seventh statistic and the aggregate z-detector hold
+through every tested evasion tier, while the joint rule and
+threshold tightening are each evaded by re-optimized encoders
+(Section~\ref{sec:eval}).
+
+\textbf{Why delivered strength depends on the tested audit.}
+The primary accepted finals reach the lower $m_1$ band edge,
+showing that this component constrains the observed
+optimization trajectories. Within the tested instance,
+widening the utility-side bands increases mean delivered
+gain, whereas varying the forget-side bands over the
+reported near-baseline range changes it little. These
+measurements identify a conditional trade-off, not an
+optimality bound: other encoders may improve signal at the
+same allowance. The retrain-referenced negative remains
+confounded with start ancestry, and changes to the allowance
+must also be evaluated against honest acceptance.
+
+\subsection{Relation to Prior Work}
+\textbf{Agreements.} Aggregate acceptance and per-record
+erasure being different axes is consistent with disagreeing
+benchmark metrics~\cite{dorna2025openunlearning} and
+per-example leakage~\cite{hayes2024inexact}; the per-scale
+recalibration requirement aligns
+with~\cite{goel2022adversarial}.
+\textbf{Tensions.} Our rollback-exclusion result is stronger
+than the implicit assumption in some audit designs that lazy
+unlearning is a threat worth characterizing: on our grid,
+every rollback path violates all five metrics simultaneously.
+Our selection-control finding---matched-budget honest
+selection accounts for all but $0.000$--$0.078$ of margin
+recovery at exact-retrain references---suggests some reported
+recovery scores overstate attack capability for want of this
+control. We name no invalidated prior result (the relevant
+work operates under different verification interfaces), but
+the methodological point stands: a recovery score without a
+selection-at-matched-budget control is uninterpretable.
+
+\textbf{Non-contradictions.} Zhang et
+al.~\cite{zhang2024fragile} showed that dishonest providers
+can bypass replay-based verification. Their attack surface
+(replay/backdoor protocols) and ours (banded behavioral
+statistics) are different computational objects; both can
+coexist in a single deployment.
+
+\subsection{Limitations and Scope}\label{sec:limitations}
+Each limitation is paired with the conclusion whose scope it
+affects.
+
+\emph{Single principal deleted class.} The principal
+experiment targets one CIFAR-10 class (cat); the class
+probes (frog, dog, airplane; Supplementary Table S23)
+measure how far its conclusions transfer---label-blind
+replication on frog, partial on dog, no positive interval
+on airplane, and no working-point reproduction on any other
+class. Neither half of the mechanism orders the classes
+(airplane has a larger overall-accuracy half-width than the
+working family and delivers nothing), so class dependence
+remains an
+empirical boundary rather than a predicted one
+(\S\ref{sec:allowance}).
+
+\emph{Classifier scale only.} Results cover CIFAR-10/100 with
+ResNet-18 and MobileNetV2; no LLM-scale audit is tested,
+bounding \emph{every quantitative claim}; the mechanism
+argument (tolerance must cover honest dispersion) is
+audit-family-independent, but LLM-scale feasibility of the
+encoding channel is unverified.
+
+\emph{Provider-known calibration.} The main experiments
+grant the provider the audit's calibration; under
+independently estimated calibration, the five-draw evidence
+shows 12/15 finals pass the true audit, 8/15 carry strictly
+positive gains, and 5/15 satisfy both, with joint success in
+3/5 draws (two further gains are borderline under the
+declared rule; Supplementary Tables S22, S28). This bounds the
+\emph{deployability claim} to draw-level heterogeneity
+rather than a systematic barrier.
+
+\emph{Ranking-level Tier-1 harm.} The deployable label-blind
+harm is ranking-level (AUC gains; TPR $\le 0.10$ under the
+fixed decoder, Section~\ref{sec:eval}). Tier-2 reference
+access strengthens readability at the measured operating
+points, but reliable low-FPR identification is not established
+by either reading---bounding the attack's \emph{practical
+severity}.
+
+\emph{Reference-infrastructure handling.} The Tier-2 readout
+makes a passing model per-record readable; for the auditor
+(which knows the deleted set) it adds nothing, so the
+consequence is custody: the reference ensemble is a readout
+key for parties without membership knowledge.
+
+\emph{Persistence boundary.} The per-record readout does not
+survive one epoch of benign fine-tuning (median retention
+$0.0$, Section~\ref{sec:eval}): the readability belongs to
+the returned artifact, not to a persistent watermark.
+
+\emph{Fixed weak MIA probe.} The audit's $m_5$ uses a
+two-feature logistic probe; the stronger-probe
+re-measurement (\S\ref{sec:mitigation}, Supplementary
+Table S30) rejects the frozen finals while adaptive encoding
+survives and the Tier-2 readout still delivers (2/3 starts,
+TPR up to $0.20$).
+
+\subsection{Concrete Directions}\label{sec:open}
+\emph{(1)~Harm-statistic banding.} The aligned seventh
+statistic compressed the attack by two-thirds (honest
+acceptance 9/12 vs.\ 8/12, $n{=}12$); the next step is an
+\emph{optimal} aligned statistic, whose binding direction
+coincides with the encoding's contrast
+direction---a convex-optimization question over the reference
+ensemble's covariance.
+
+\emph{(2)~Cross-request audit design.} The sequential-request
+probe showed that sequential protection inherits the
+reference-operator's tolerance; a cross-request audit must
+either accept this inheritance or budget fresh calibration
+per request---a quantifiable trade-off.
+
+\emph{(3)~LLM-scale probe.} The protocol transfers as an
+experimental design: (i)~train a reference ensemble on
+a small corpus-level deletion; (ii)~measure forget-side
+dispersion relative to full-data bands; (iii)~where the
+inflation factor is above $2\times$, treat the audit as worth
+investigating---a screening threshold for where to spend a
+costly probe, not a trigger that expects encoding to succeed
+(at classifier scale $k{=}100$ shows $2.5\times$ inflation
+with no deliverable signal; Supplementary Table S36).
+
+
+\section{Conclusion and Future Work}\label{sec:conclusion}
+This paper proposed ECLIPSE, to our knowledge the first
+construction of deliberate per-record membership encoding
+that passes a live, conformally calibrated multi-metric
+deletion audit. FIDE constructs the encoded models and
+boundary pinning characterizes the accepted endpoints:
+label-blind scoring establishes the ranking gains (nine of
+nine starts), and the reference-equipped CAL-Z protocol the
+working points (per-record TPR $0.43$ among passing finals
+at Tier 2).
+
+The mechanism account is two-part and bounded (Section~VI):
+admissibility closes the retrain family, the utility allowance
+governs delivery within the admitted family, and neither
+orders the class or scale axes. The audit's defenses
+split by instrument: the aligned seventh statistic and the
+aggregate z-detector hold through every tested evasion tier,
+while the joint rule and threshold tightening are each evaded
+by re-optimized encoders---an arms race that moves with the
+rule rather than ending it.
+
+The measurement discipline introduced here---matched-budget
+selection controls, logit-scale controls,
+dispersion-calibrated bands, and preregistered adaptive
+counter-arms---is itself a contribution: it is what
+distinguishes a delivered per-record signal from
+margin-recovery readings that honest processing already
+produces. For practitioners the lesson is direct: the
+certificate should state its coverage scope, its
+calibration-knowledge assumptions, and what it excludes.
+Acceptance is not erasure: what an audit aggregates
+determines what it can be deceived about. Future work
+follows the directions of Section~\ref{sec:open}: an optimal
+aligned harm statistic, cross-request audit design, and the
+LLM-scale probe.
+
+
+\bibliographystyle{IEEEtran}
+
+\IEEEtriggeratref{16}
+\IEEEtriggercmd{\enlargethispage{7\baselineskip}}
+
+\bibliography{refs}
+
+\end{document}

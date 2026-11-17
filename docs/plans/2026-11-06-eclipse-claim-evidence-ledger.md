@@ -1,5 +1,7 @@
 # ECLIPSE 主稿 Claim–Evidence Ledger
 
+**2026-11-15 重构同步（结构映射，零数字/零主张变更）**：main.tex 由 8 节重排为 7 节——旧 §V"Why the Audit Tolerates"撤销独立章：V-A 结构性分析（Prop 1 + 接受域几何）并入新 IV Methodology 的 "The Structural Resource" 小节；V-B~V-F 测量证据并入新 V Evaluation 的 Act 2；旧 §VI 更名 V Evaluation 并按三幕重组（Setup → Act 1 RQ1 可行与交付 → Act 2 RQ2 容忍机制 → Act 3 RQ3 防御）；旧 VII/VI → VI Discussion / VII Conclusion（结论加厚至三段）。本 ledger 各 claim 的证据位置同步：sec:theory → sec:region（IV）或 V-Act2 各小节；sec:eval 内小节标签（sec:zreadout/sec:mitigation/sec:wash 等）全部保留未改名。母稿 = `main.tex.pre-restructure-20261115.bak`（md5 b3c6cb13）+ `supplementary.md.pre-restructure-20261115.bak`（md5 e2870548）。Supplementary 同日重组：S1–S41 编号不变、按新章节分五组（A 协议配置 / B 区域与 wash / C 可行与迁移 / D 容忍机制 / E 防御），正文移入三表 = S42 协议版本（原 Table III）/ S43 区域与 wash 配置（原 Table VIII）/ S44 三规则冻结测试集（原 Table X）；S4（被 S21 取代）与 S25（正文未引用）原地标注保留；S41 已补正文引用（可纳性段）。
+
 **基线**：main.tex @ git e92fdd9（母稿冻结副本 `main.tex.master-20261106.bak`，md5 9fe802e2）
 **用途**：Phase 1 冷读评审的 raw-evidence 附件；Phase 3 数字回归的对照底册；paper-builder 构建步骤 4 的 traceability 载体。
 **证据等级**：`DEF`=定义　`PROOF`=证明（条件如注）　`GEN`=生成性检查（零训练重算/重评分）　`EXEC`=实测执行　`SENS`=敏感性/描述性测量　`EXPL`=探索性（未预注册）　`PROJ`=带声明的投影/外推

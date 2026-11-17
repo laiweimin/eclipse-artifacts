@@ -18,6 +18,7 @@ preregistration cards with frozen gates, and the per-run verdict records.
 | `python/s0j_ae/`, `python/run_s0*.py` | Shared analysis dependencies of the runners |
 | `python/requirements.txt` | Pinned environment |
 | `python/PYTHON-CODEBASE-GUIDE.md` | Codebase guide, incl. the documented modifications to the third-party baseline |
+| `manuscript/` | The submitted manuscript source (`main.tex`) and the supplementary tables (`supplementary.md`, S1-S45 grouped by section), synced to the submission version |
 | `docs/plans/` | 32 preregistration cards and research plans. Each card freezes gates before execution and records the run directories produced |
 | `research_outputs/uw/` | The run-record layer: 1,900 record files across 311 run directories, including all 253 `verdict.json` files |
 | `THIRD_PARTY_LICENSES/` | Upstream MIT license and README for the derived baseline code |
